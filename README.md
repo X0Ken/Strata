@@ -19,12 +19,13 @@ DCU 通过源码手动构建；下方上游桌面安装包和一键安装器尚�
 
 前两列各三次中位数、128 输出 token、无 prompt 缓存复用；最后一列为三种固定请求各两次中位数的范围，输出预算 256 token。
 MTP=3 表示**最多三个草稿 token、验证窗口 4**。重复文本草稿接受率约 97%–100%，Python/英文说明/中文说明约 74%/63%/57%，速度随内容变化。
-与本轮同日旧版对照，无 MTP 在四种输入长度上提升约 **19%–22%**；MTP 的重复文本速度约为新无 MTP 配置的两倍。
+与本轮同日旧版对照，无 MTP 在四种输入长度上提升约 **19%–22%**；并行规划 MTP 的重复文本速度约为新无 MTP 配置的 **2.3 倍**。
 Strata 兼容打包存在部分 BF16 舍入，和 llama.cpp 对照不能视为位级相同模型的纯调度消融。
 
 原生插针定位到多余的专家计划发布等待和中间行拷贝：同样 696 次层执行中，等待内核从 2088 次降到 696 次，总启动次数从 32187 次降到 25227 次。
 优化为 opt-in，推荐的无 MTP 开关为 `STRATA_DCU_GPU_PLAN=1 STRATA_DCU_FUSE_COMBINE=1 STRATA_DCU_MMVQ_ROWS=4`，8 workers、显存预留 2048 MiB。
-MTP 使用 `--mtp <rt> --spec 4 --mtp-max-t 4 --spec-min-p 0 --suffix-draft 0 --lookup-chain 0`；串行设备规划对 MTP 未显示稳定额外收益，普通执行路径同样已验证。
+MTP 使用 `--mtp <rt> --spec 4 --mtp-max-t 4 --spec-min-p 0 --suffix-draft 0 --lookup-chain 0`，并在上述设备规划、融合、多行 GEMV 开关上增加 `STRATA_DCU_PAR_PLAN=1`。
+本次并行规划比串行规划 MTP 的生成中位数再提升约 8%–12%；普通执行路径同样已验证。
 
 无 MTP 和 MTP 各通过 21 项功能检查、重复及重启检查、12 组定长跑分和 6 组代码/语言请求，HTTP 均包含 3635 token 输入测试。
 两卡共 40 次选定 CTest 执行通过。追加的并行规划开关 `STRATA_DCU_PAR_PLAN=1` 通过 512 组整数计划逐位检查；
