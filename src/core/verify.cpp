@@ -257,10 +257,12 @@ bool batch_self_commits(const int* rows, int S) { return g_batch_self_commit && 
 // gfx1030 (RX 6800, Windows, 42.5 -> 56.4 t/s).  STRATA_SH_STREAM overrides either default: `=1` forks, `=0` does not.
 // Strix Halo (gfx1151, unified memory) is the exception: the fork pays there (+1.8% UD-IQ4_XS, +6.7% UD-Q4_K_XL decode
 // at 8K, ids identical), so the gfx1151 arch table sets STRATA_SH_STREAM=1.  Read on first use, after that table ran.
+// Native DTK has the same event cost: 2x Z100L, UD-Q3_K_XL, exact routes, no drafts: fork off 16.5-17.5 t/s,
+// on ~10.2 t/s in the initial paired sweep. Keep the runtime native; only the scheduling default is shared with HIP.
 bool sh_stream_on() {
     static const bool on = [] {
         if (const char* v = std::getenv("STRATA_SH_STREAM")) return v[0] != '0';
-#if defined(STRATA_USE_HIP)
+#if defined(STRATA_USE_HIP) || defined(STRATA_USE_DCU)
         return false;
 #else
         return true;

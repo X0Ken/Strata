@@ -26,7 +26,12 @@ def main():
     parser.add_argument("--out", required=True)
     parser.add_argument("--gpus", default="1,2")
     parser.add_argument("--functional-only", action="store_true")
+    parser.add_argument("--pcie-frac", type=float, default=0)
+    parser.add_argument("--workers", type=int, default=8)
+    parser.add_argument("--aux-cpus", default="off")
     options = parser.parse_args()
+    if not 0 <= options.pcie_frac <= 1 or options.workers < 1:
+        parser.error("pcie-frac must be in [0,1] and workers must be positive")
     out = pathlib.Path(options.out).resolve()
     out.mkdir(parents=True, exist_ok=True)
     tokenizer = Tokenizer.from_gguf(options.gguf)
@@ -64,8 +69,9 @@ def main():
         previous = None
         for run in [1, 2]:
             args = ["--pack", str(pathlib.Path(options.pack).resolve()), "--native", str(pathlib.Path(options.gguf).resolve()),
-                    "--max-context", "4096", "--prefill", "128", "--pool-workers", "8", "--spec", "2",
-                    "--suffix-draft", "0", "--prompt-cache", "0", "--adapt-every", "0", "--pcie-frac", "0",
+                    "--max-context", "4096", "--prefill", "128", "--pool-workers", str(options.workers), "--spec", "2",
+                    "--suffix-draft", "0", "--prompt-cache", "0", "--adapt-every", "0", "--pcie-frac", str(options.pcie_frac),
+                    "--aux-cpus", options.aux_cpus,
                     "--stop-eos", "--eos-ids", ",".join(str(token) for token in eos_ids),
                     "--expert-profile", str(ROOT / "data/expert-profile.bin"),
                     "--resident-budget-gib", "24", "--expert-cache", "auto", "--serve"]
@@ -156,6 +162,8 @@ def main():
                     record({"kind": "performance", "gpus": cards, "repeat": item["repeat"],
                             "prompt_tokens": len(item["ids"]), "output_tokens": len(tokens),
                             "input_sha256": hashlib.sha256(json.dumps(item["ids"]).encode()).hexdigest(),
+                            "output_sha256": hashlib.sha256(json.dumps(tokens).encode()).hexdigest(),
+                            "answer_preview": tokenizer.decode(tokens)[:256],
                             "ttft_seconds": first, "elapsed_seconds": time.monotonic() - start,
                             "timings": timing, "engine": engine.last})
                     if len(tokens) != 128 or not timing or timing["cache_n"] != 0:
