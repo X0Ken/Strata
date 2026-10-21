@@ -1,3 +1,7 @@
+> **Hygon Z100L / 海光 DCU fork:** 原生 DTK 25.04 + rocBLAS 后端已在单卡、双卡验证。
+> 构建、限制及当前实测性能见 [DCU 文档](docs/DCU.md)，原始数据见
+> [Z100L 测试记录](bench/results/2026-10-21-hygon-z100l/)。DCU 请手动构建；下面的上游安装包尚未适配 DCU。
+
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="apps/host/public/brand/strata-lockup-dark.svg">

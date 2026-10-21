@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-21",
+  "strata_commit": "bbff78956a08ce218e84b8d44fe2adee2acfe901",
+  "upstream_base": "9de04cd4",
+  "ggml_commit": "3cf03257f219afbe7334045ff7c6a06ac68c627d",
+  "llama_code_commit": "63071d45",
+  "os": "Ubuntu 22.04.1 LTS",
+  "kernel": "5.15.0-43-generic",
+  "virtualization": "KVM",
+  "cpu": "Hygon C86 7380, 16 vCPU, AVX2",
+  "mem_total_kib": 65855840,
+  "swap_bytes": 0,
+  "gpus": [
+    {
+      "model": "Hygon Z100L",
+      "arch": "gfx906",
+      "wave_size": 64,
+      "vram_mib": 32752
+    },
+    {
+      "model": "Hygon Z100L",
+      "arch": "gfx906",
+      "wave_size": 64,
+      "vram_mib": 32752
+    }
+  ],
+  "driver": "6.2.31",
+  "dtk": "25.04",
+  "clang": "15",
+  "cmake": "3.31.6",
+  "model": "unsloth/Qwen3.8-Flash-Next-GGUF UD-Q3_K_XL",
+  "model_revision": "766911a6b7369840a91dbcd95f9f997acaab6cd6",
+  "pack": "iq_pack.py --compat-bf16; 460 converted tensors, 196 rounded; max abs error 0.0144",
+  "cmake_options": {
+    "STRATA_ENABLE_DCU": true,
+    "STRATA_ENABLE_CUDA": false,
+    "STRATA_ENABLE_HIP": false,
+    "STRATA_HIP_GFX906": false,
+    "STRATA_PORTABLE": true,
+    "STRATA_BUILD_TESTS": true,
+    "STRATA_MMQ_TQ_OVERLAY": false,
+    "CMAKE_HIP_ARCHITECTURES": "gfx906"
+  },
+  "runtime_libraries": [
+    "/usr/local/hygon/dtk-25.04/hip/lib/libgalaxyhip.so.5.2.25085.1211-205b0686",
+    "/usr/local/hygon/dtk-25.04/lib/librocblas.so.4.1"
+  ],
+  "llama_args": "-ngl all -ncmoe 4 -ot per_layer_token_embd=CPU -sm layer -ts 1,1 -c 4096 -b 512 -ub 128 -fa on -t 8 -np 1 --jinja",
+  "measurement": "3 repeats per input length, 128 output tokens, cache_n=0, identical input IDs; Strata IPC TTFT, llama HTTP SSE TTFT; loading excluded"
+}
