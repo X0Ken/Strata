@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import os
 import pathlib
 import re
 import sys
@@ -68,12 +69,14 @@ def main():
                     "--stop-eos", "--eos-ids", ",".join(str(token) for token in eos_ids),
                     "--expert-profile", str(ROOT / "data/expert-profile.bin"),
                     "--resident-budget-gib", "24", "--expert-cache", "auto", "--serve"]
+            args += ["--vram-reserve-mib", "4096"]
             if cards == 2:
                 args += ["--layer-split", "24", "--split-device", "1"]
             print("START_ENGINE", cards, run, flush=True)
             loading_started = time.monotonic()
+            child_env = dict(os.environ, HIP_VISIBLE_DEVICES="0" if cards == 1 else "0,1", STRATA_ROUTE_TAIL_SKIP="0")
             engine = StrataEngine(str(pathlib.Path(options.engine).resolve()), args, cwd=str(ROOT),
-                                  log=str(out / f"engine-{cards}gpu-{run}.log"))
+                                  log=str(out / f"engine-{cards}gpu-{run}.log"), env=child_env)
             print("ENGINE_READY", cards, run, flush=True)
             maps = pathlib.Path(f"/proc/{engine.proc.pid}/maps").read_text()
             libraries = sorted({line.split()[-1] for line in maps.splitlines()
@@ -83,6 +86,7 @@ def main():
                 raise RuntimeError("unexpected AMD or NVIDIA math/runtime library in DCU process")
             record({"kind": "configuration", "gpus": cards, "run": run, "args": args,
                     "startup_seconds": time.monotonic() - loading_started, "libraries": libraries,
+                    "environment": {key: child_env[key] for key in ["HIP_VISIBLE_DEVICES", "STRATA_ROUTE_TAIL_SKIP"]},
                     "engine_info": engine.info})
             resource_stop = threading.Event()
             resources = {"kind": "resources", "gpus": cards, "run": run, "rss_peak_bytes": 0,
