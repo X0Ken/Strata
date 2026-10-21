@@ -1,0 +1,8 @@
+{
+  "source_commit": "51108284f8d7b1531215ee7688dcf58c05f9b9d3",
+  "baseline_commit": "ebe417d8961aafa277b8defc2654dac26da477a8",
+  "files": {
+    "src/kernels/cuda/verify_kernels.cu": "3897ead31a28d74780bc29561cb0bb50e25a371143604ee1980407f69d4e625e",
+    "tests/dcu/resident_plan.cpp": "7606a348345d6baece6b3379a3b57d1ac2ce882cb51ae61bd104a5613f0715e3"
+  }
+}

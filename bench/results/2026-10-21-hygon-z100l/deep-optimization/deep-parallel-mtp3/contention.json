@@ -1,0 +1,23 @@
+{
+  "contended": true,
+  "observed_at": "2026-10-21 16:14:51",
+  "external_probes": [
+    {
+      "pid": 47255,
+      "cmdline": "python3 -u /probe/runtime.py "
+    },
+    {
+      "pid": 47723,
+      "cmdline": "python3 -u /probe/runtime.py "
+    },
+    {
+      "pid": 48311,
+      "cmdline": "python3 -u /probe/runtime.py "
+    },
+    {
+      "pid": 52428,
+      "cmdline": "python3 -u /probe/runtime.py "
+    }
+  ],
+  "reason": "External GPU probes reappeared during MTP startup; READY reported vram_free_mib=0."
+}

@@ -1,0 +1,51 @@
+{
+  "old": {
+    "span_ms": 992.652316,
+    "kernel_calls": 32187,
+    "kernel_sum_ms": 885.018736,
+    "wait": {
+      "calls": 2088,
+      "sum_ms": 388.590612
+    },
+    "combine": {
+      "calls": 696,
+      "sum_ms": 3.241588
+    },
+    "copy_rows": {
+      "calls": 696,
+      "sum_ms": 6.6331039999999994
+    },
+    "mmvq": {
+      "calls": 4379,
+      "sum_ms": 158.75808
+    },
+    "cross_device_overlap_ms": 0.0
+  },
+  "optimized": {
+    "span_ms": 784.53798,
+    "kernel_calls": 25227,
+    "kernel_sum_ms": 702.042372,
+    "wait": {
+      "calls": 696,
+      "sum_ms": 226.378336
+    },
+    "combine": {
+      "calls": 696,
+      "sum_ms": 7.102228
+    },
+    "copy_rows": {
+      "calls": 0,
+      "sum_ms": 0
+    },
+    "mmvq": {
+      "calls": 4379,
+      "sum_ms": 145.44848
+    },
+    "cross_device_overlap_ms": 0.0
+  },
+  "notes": [
+    "Both captured slices contain 696 MoE layer combines. Trace timings include profiling overhead and are not the unprofiled model score.",
+    "Cache reserve and Q8 row count also differ; this is the complete configuration comparison, not an isolated fusion speedup.",
+    "Mapped reads inside kernels are not counted as COPY operations."
+  ]
+}

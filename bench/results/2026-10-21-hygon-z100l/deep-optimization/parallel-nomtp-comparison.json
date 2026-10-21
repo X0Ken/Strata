@@ -1,0 +1,122 @@
+[
+  {
+    "kind": "performance",
+    "prompt_tokens": 128,
+    "workload": null,
+    "repeat": 1,
+    "input_match": true,
+    "output_match": true,
+    "serial_tps": 21.3,
+    "parallel_tps": 20.8
+  },
+  {
+    "kind": "performance",
+    "prompt_tokens": 2048,
+    "workload": null,
+    "repeat": 1,
+    "input_match": true,
+    "output_match": true,
+    "serial_tps": 20.9,
+    "parallel_tps": 21.4
+  },
+  {
+    "kind": "performance",
+    "prompt_tokens": 128,
+    "workload": null,
+    "repeat": 2,
+    "input_match": true,
+    "output_match": true,
+    "serial_tps": 21.0,
+    "parallel_tps": 21.4
+  },
+  {
+    "kind": "performance",
+    "prompt_tokens": 2048,
+    "workload": null,
+    "repeat": 2,
+    "input_match": true,
+    "output_match": true,
+    "serial_tps": 21.3,
+    "parallel_tps": 21.3
+  },
+  {
+    "kind": "performance",
+    "prompt_tokens": 128,
+    "workload": null,
+    "repeat": 3,
+    "input_match": true,
+    "output_match": true,
+    "serial_tps": 21.2,
+    "parallel_tps": 20.9
+  },
+  {
+    "kind": "performance",
+    "prompt_tokens": 2048,
+    "workload": null,
+    "repeat": 3,
+    "input_match": true,
+    "output_match": true,
+    "serial_tps": 20.2,
+    "parallel_tps": 21.0
+  },
+  {
+    "kind": "chat_performance",
+    "prompt_tokens": 43,
+    "workload": "python",
+    "repeat": 1,
+    "input_match": true,
+    "output_match": true,
+    "serial_tps": 21.5,
+    "parallel_tps": 22.1
+  },
+  {
+    "kind": "chat_performance",
+    "prompt_tokens": 38,
+    "workload": "explanation",
+    "repeat": 1,
+    "input_match": true,
+    "output_match": true,
+    "serial_tps": 21.9,
+    "parallel_tps": 22.1
+  },
+  {
+    "kind": "chat_performance",
+    "prompt_tokens": 35,
+    "workload": "chinese",
+    "repeat": 1,
+    "input_match": true,
+    "output_match": true,
+    "serial_tps": 21.6,
+    "parallel_tps": 21.8
+  },
+  {
+    "kind": "chat_performance",
+    "prompt_tokens": 43,
+    "workload": "python",
+    "repeat": 2,
+    "input_match": true,
+    "output_match": true,
+    "serial_tps": 21.7,
+    "parallel_tps": 22.0
+  },
+  {
+    "kind": "chat_performance",
+    "prompt_tokens": 38,
+    "workload": "explanation",
+    "repeat": 2,
+    "input_match": true,
+    "output_match": true,
+    "serial_tps": 21.9,
+    "parallel_tps": 22.1
+  },
+  {
+    "kind": "chat_performance",
+    "prompt_tokens": 35,
+    "workload": "chinese",
+    "repeat": 2,
+    "input_match": true,
+    "output_match": true,
+    "serial_tps": 21.8,
+    "parallel_tps": 22.2
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "excluded": [
+    "deep-cache-2560-w12-r4",
+    "deep-cache-2048-w8-r4-fuse1",
+    "deep-cache-2560-w8-r4-fuse0",
+    "deep-parallel-mtp3"
+  ],
+  "reason": "Other Kubernetes containers continuously executed PyTorch FP16 GEMM during these samples. Do not attribute their slowdown to worker count or reserve.",
+  "observed_at": "2026-10-21 15:02:41",
+  "probe_script": "/probe/runtime.py"
+}

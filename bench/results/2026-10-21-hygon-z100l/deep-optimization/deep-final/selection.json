@@ -1,0 +1,169 @@
+{
+  "selected": {
+    "name": "deep-cache-2048-w8-r4-fuse1-clean-2",
+    "median": 21.15,
+    "scores": [
+      21.0,
+      21.4,
+      21.3,
+      21.0
+    ],
+    "fuse": 1,
+    "rows": 4,
+    "reserve": 2048,
+    "workers": 8,
+    "free_mib": 1517
+  },
+  "candidates": [
+    {
+      "name": "deep-fuse-0-rows-1",
+      "median": 18.05,
+      "scores": [
+        17.4,
+        18.5,
+        17.6,
+        18.7
+      ],
+      "fuse": 0,
+      "rows": 1,
+      "reserve": 4096,
+      "workers": 8,
+      "free_mib": 3559
+    },
+    {
+      "name": "deep-fuse-1-rows-1",
+      "median": 18.200000000000003,
+      "scores": [
+        18.7,
+        18.3,
+        18.1,
+        16.8
+      ],
+      "fuse": 1,
+      "rows": 1,
+      "reserve": 4096,
+      "workers": 8,
+      "free_mib": 3559
+    },
+    {
+      "name": "deep-fuse-1-rows-2",
+      "median": 19.25,
+      "scores": [
+        19.3,
+        19.3,
+        18.4,
+        19.2
+      ],
+      "fuse": 1,
+      "rows": 2,
+      "reserve": 4096,
+      "workers": 8,
+      "free_mib": 3559
+    },
+    {
+      "name": "deep-fuse-1-rows-4",
+      "median": 19.6,
+      "scores": [
+        19.6,
+        19.6,
+        17.0,
+        19.7
+      ],
+      "fuse": 1,
+      "rows": 4,
+      "reserve": 4096,
+      "workers": 8,
+      "free_mib": 3559
+    },
+    {
+      "name": "deep-cache-2048-w8-r4-fuse0-clean-1",
+      "median": 20.5,
+      "scores": [
+        20.8,
+        20.4,
+        20.6,
+        20.3
+      ],
+      "fuse": 0,
+      "rows": 4,
+      "reserve": 2048,
+      "workers": 8,
+      "free_mib": 1517
+    },
+    {
+      "name": "deep-cache-2048-w8-r4-fuse1-clean-2",
+      "median": 21.15,
+      "scores": [
+        21.0,
+        21.4,
+        21.3,
+        21.0
+      ],
+      "fuse": 1,
+      "rows": 4,
+      "reserve": 2048,
+      "workers": 8,
+      "free_mib": 1517
+    },
+    {
+      "name": "deep-cache-2560-w12-r4-fuse1-clean-2",
+      "median": 18.9,
+      "scores": [
+        20.8,
+        18.3,
+        19.5,
+        17.2
+      ],
+      "fuse": 1,
+      "rows": 4,
+      "reserve": 2560,
+      "workers": 12,
+      "free_mib": 2029
+    },
+    {
+      "name": "deep-cache-2560-w4-r4",
+      "median": 19.4,
+      "scores": [
+        19.8,
+        19.4,
+        19.4,
+        19.4
+      ],
+      "fuse": 1,
+      "rows": 4,
+      "reserve": 2560,
+      "workers": 4,
+      "free_mib": 2029
+    },
+    {
+      "name": "deep-cache-2560-w8-r4",
+      "median": 20.7,
+      "scores": [
+        21.0,
+        20.2,
+        20.7,
+        20.7
+      ],
+      "fuse": 1,
+      "rows": 4,
+      "reserve": 2560,
+      "workers": 8,
+      "free_mib": 2029
+    },
+    {
+      "name": "deep-cache-3072-w8-r4",
+      "median": 19.85,
+      "scores": [
+        20.4,
+        16.4,
+        19.3,
+        20.4
+      ],
+      "fuse": 1,
+      "rows": 4,
+      "reserve": 3072,
+      "workers": 8,
+      "free_mib": 2539
+    }
+  ]
+}

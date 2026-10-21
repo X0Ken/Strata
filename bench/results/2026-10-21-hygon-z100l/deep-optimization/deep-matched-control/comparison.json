@@ -1,0 +1,122 @@
+[
+  {
+    "kind": "performance",
+    "prompt_tokens": 128,
+    "workload": null,
+    "repeat": 1,
+    "input_match": true,
+    "output_match": true,
+    "control_tps": 19.5,
+    "optimized_tps": 21.3
+  },
+  {
+    "kind": "performance",
+    "prompt_tokens": 2048,
+    "workload": null,
+    "repeat": 1,
+    "input_match": true,
+    "output_match": true,
+    "control_tps": 19.2,
+    "optimized_tps": 20.9
+  },
+  {
+    "kind": "performance",
+    "prompt_tokens": 128,
+    "workload": null,
+    "repeat": 2,
+    "input_match": true,
+    "output_match": true,
+    "control_tps": 19.3,
+    "optimized_tps": 21.0
+  },
+  {
+    "kind": "performance",
+    "prompt_tokens": 2048,
+    "workload": null,
+    "repeat": 2,
+    "input_match": true,
+    "output_match": true,
+    "control_tps": 19.1,
+    "optimized_tps": 21.3
+  },
+  {
+    "kind": "performance",
+    "prompt_tokens": 128,
+    "workload": null,
+    "repeat": 3,
+    "input_match": true,
+    "output_match": true,
+    "control_tps": 19.3,
+    "optimized_tps": 21.2
+  },
+  {
+    "kind": "performance",
+    "prompt_tokens": 2048,
+    "workload": null,
+    "repeat": 3,
+    "input_match": true,
+    "output_match": true,
+    "control_tps": 18.7,
+    "optimized_tps": 20.2
+  },
+  {
+    "kind": "chat_performance",
+    "prompt_tokens": 43,
+    "workload": "python",
+    "repeat": 1,
+    "input_match": true,
+    "output_match": true,
+    "control_tps": 19.2,
+    "optimized_tps": 21.5
+  },
+  {
+    "kind": "chat_performance",
+    "prompt_tokens": 38,
+    "workload": "explanation",
+    "repeat": 1,
+    "input_match": true,
+    "output_match": true,
+    "control_tps": 19.6,
+    "optimized_tps": 21.9
+  },
+  {
+    "kind": "chat_performance",
+    "prompt_tokens": 35,
+    "workload": "chinese",
+    "repeat": 1,
+    "input_match": true,
+    "output_match": true,
+    "control_tps": 19.5,
+    "optimized_tps": 21.6
+  },
+  {
+    "kind": "chat_performance",
+    "prompt_tokens": 43,
+    "workload": "python",
+    "repeat": 2,
+    "input_match": true,
+    "output_match": true,
+    "control_tps": 19.5,
+    "optimized_tps": 21.7
+  },
+  {
+    "kind": "chat_performance",
+    "prompt_tokens": 38,
+    "workload": "explanation",
+    "repeat": 2,
+    "input_match": true,
+    "output_match": true,
+    "control_tps": 20.1,
+    "optimized_tps": 21.9
+  },
+  {
+    "kind": "chat_performance",
+    "prompt_tokens": 35,
+    "workload": "chinese",
+    "repeat": 2,
+    "input_match": true,
+    "output_match": true,
+    "control_tps": 19.6,
+    "optimized_tps": 21.8
+  }
+]

@@ -1,0 +1,2176 @@
+{
+  "native_trace": {
+    "span_ms": 992.652316,
+    "kernel_calls": 32187,
+    "kernel_sum_ms": 885.018736,
+    "kernel_union_ms": 885.015316,
+    "device_union_ms": {
+      "1": 455.195204,
+      "0": 429.820112
+    },
+    "kernels": [
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::wait_flag_ge_kernel(unsigned int const volatile*, unsigned int)",
+        "calls": 1008,
+        "sum_ms": 203.384464
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::wait_flag_ge_kernel(unsigned int const volatile*, unsigned int)",
+        "calls": 1080,
+        "sum_ms": 185.206148
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::native_mmvq_wave_kernel<strata::kernels::(anonymous namespace)::SmallTraits<strata::kernels::(anonymous namespace)::Q80Block, 8>, 1, 1>(strata::kernels::(anonymous namespace)::SmallTraits<strata::kernels::(anonymous namespace)::Q80Block, 8>::Block const*, strata::kernels::(anonymous namespace)::Q81Block const*, float*, int, int)",
+        "calls": 2250,
+        "sum_ms": 70.164184
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::native_mmvq_wave_kernel<strata::kernels::(anonymous namespace)::SmallTraits<strata::kernels::(anonymous namespace)::Q80Block, 8>, 1, 1>(strata::kernels::(anonymous namespace)::SmallTraits<strata::kernels::(anonymous namespace)::Q80Block, 8>::Block const*, strata::kernels::(anonymous namespace)::Q81Block const*, float*, int, int)",
+        "calls": 2114,
+        "sum_ms": 66.882904
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::bf16_f32_mmvf_kernel<256>(float const*, unsigned short const*, float*, int)",
+        "calls": 900,
+        "sum_ms": 24.734644
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::bf16_f32_mmvf_kernel<256>(float const*, unsigned short const*, float*, int)",
+        "calls": 854,
+        "sum_ms": 23.300744
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::native_gu_lds_kernel<18, 1, true>(unsigned long long const*, int const*, int const*, int const*, block_q8_1 const*, strata::kernels::NativeExpertLayout, float*, float*)",
+        "calls": 720,
+        "sum_ms": 22.515796
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::native_mmvq_wave_kernel<strata::kernels::(anonymous namespace)::Q6KTraits, 1, 1>(strata::kernels::(anonymous namespace)::Q6KTraits::Block const*, strata::kernels::(anonymous namespace)::Q81Block const*, float*, int, int)",
+        "calls": 15,
+        "sum_ms": 21.710992
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::native_gu_lds_kernel<18, 1, true>(unsigned long long const*, int const*, int const*, int const*, block_q8_1 const*, strata::kernels::NativeExpertLayout, float*, float*)",
+        "calls": 644,
+        "sum_ms": 18.755308
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::gr_up_fast_kernel(strata::kernels::(anonymous namespace)::GrMulti)",
+        "calls": 735,
+        "sum_ms": 17.090992
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::gr_up_fast_kernel(strata::kernels::(anonymous namespace)::GrMulti)",
+        "calls": 672,
+        "sum_ms": 15.5134
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::gr_down_staged_kernel<1, true>(strata::kernels::(anonymous namespace)::GrMulti)",
+        "calls": 735,
+        "sum_ms": 14.889748
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::gr_down_staged_kernel<1, true>(strata::kernels::(anonymous namespace)::GrMulti)",
+        "calls": 672,
+        "sum_ms": 13.593408
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::native_down_lds_kernel<20>(unsigned long long const*, int const*, int const*, int const*, block_q8_1 const*, strata::kernels::NativeExpertLayout, float*)",
+        "calls": 630,
+        "sum_ms": 13.2398
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::native_down_lds_kernel<20>(unsigned long long const*, int const*, int const*, int const*, block_q8_1 const*, strata::kernels::NativeExpertLayout, float*)",
+        "calls": 616,
+        "sum_ms": 12.227176
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::route(float const*, int*, float*)",
+        "calls": 360,
+        "sum_ms": 9.439824
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::route(float const*, int*, float*)",
+        "calls": 336,
+        "sum_ms": 8.548128
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::gr_norm_split_kernel(strata::kernels::(anonymous namespace)::GrMulti)",
+        "calls": 735,
+        "sum_ms": 7.93742
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::attn_chunk_kernel<0, false, false, false>(float const*, strata::kernels::QsaAttnPools, int const*, int const*, int, int, float, float*, float*, float*, int, int, long long)",
+        "calls": 90,
+        "sum_ms": 7.424772
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::gr_norm_split_kernel(strata::kernels::(anonymous namespace)::GrMulti)",
+        "calls": 672,
+        "sum_ms": 7.19486
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::attn_chunk_kernel<0, false, false, false>(float const*, strata::kernels::QsaAttnPools, int const*, int const*, int, int, float, float*, float*, float*, int, int, long long)",
+        "calls": 84,
+        "sum_ms": 6.926536
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::gdn_step_norm_multi_kernel<false, false>(float*, float const*, int, float const*, float const*, float const*, float const*, float, float*, int, int, int, int const*, int, strata::kernels::(anonymous namespace)::GdnQ81*, strata::kernels::GdnGroups)",
+        "calls": 270,
+        "sum_ms": 5.749104
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::quantize_q8_1_kernel(float const*, block_q8_1*, long long)",
+        "calls": 1080,
+        "sum_ms": 5.698872
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::gdn_step_norm_multi_kernel<false, false>(float*, float const*, int, float const*, float const*, float const*, float const*, float, float*, int, int, int, int const*, int, strata::kernels::(anonymous namespace)::GdnQ81*, strata::kernels::GdnGroups)",
+        "calls": 252,
+        "sum_ms": 5.344472
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::native_quantize_q8_1_kernel(float const*, strata::kernels::(anonymous namespace)::Q81Block*, int)",
+        "calls": 1095,
+        "sum_ms": 5.273428
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::quantize_q8_1_kernel(float const*, block_q8_1*, long long)",
+        "calls": 1008,
+        "sum_ms": 5.041576
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::native_quantize_q8_1_kernel(float const*, strata::kernels::(anonymous namespace)::Q81Block*, int)",
+        "calls": 1022,
+        "sum_ms": 4.90928
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::gdn_ab_multi_kernel<1, true>(float const*, unsigned short const*, unsigned short const*, float const*, float const*, float*, float*, int, int, int)",
+        "calls": 270,
+        "sum_ms": 3.81824
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::swiglu_entries_kernel(float const*, float const*, float*, long long)",
+        "calls": 720,
+        "sum_ms": 3.781424
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::sampler_greedy_kernel(float const*, int, int const*, int, strata::kernels::SamplerParams, int, int, int*)",
+        "calls": 30,
+        "sum_ms": 3.63534
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::copy_rows_from_mapped_kernel(HIP_vector_type<float, 4u>*, HIP_vector_type<float, 4u> const volatile*, long, int const*, int const*, unsigned int const volatile*, unsigned int)",
+        "calls": 336,
+        "sum_ms": 3.574548
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::gdn_ab_multi_kernel<1, true>(float const*, unsigned short const*, unsigned short const*, float const*, float const*, float*, float*, int, int, int)",
+        "calls": 252,
+        "sum_ms": 3.496956
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::swiglu_entries_kernel(float const*, float const*, float*, long long)",
+        "calls": 672,
+        "sum_ms": 3.318716
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::copy_rows_from_mapped_kernel(HIP_vector_type<float, 4u>*, HIP_vector_type<float, 4u> const volatile*, long, int const*, int const*, unsigned int const volatile*, unsigned int)",
+        "calls": 360,
+        "sum_ms": 3.058556
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::add_hits_kernel(float*, float const*, int const*, int const*, int)",
+        "calls": 360,
+        "sum_ms": 3.007668
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::doorbell_publish_res_kernel(float const*, int const*, int const*, int, int, int, float*, int*, unsigned int*)",
+        "calls": 360,
+        "sum_ms": 2.955816
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::doorbell_publish_res_kernel(float const*, int const*, int const*, int, int, int, float*, int*, unsigned int*)",
+        "calls": 336,
+        "sum_ms": 2.830556
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::copy_i32_from_mapped_kernel(int*, int const volatile*, int)",
+        "calls": 405,
+        "sum_ms": 2.541916
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::native_down_kernel<8>(unsigned long long const*, int const*, int const*, int const*, block_q8_1 const*, strata::kernels::NativeExpertLayout, float*)",
+        "calls": 90,
+        "sum_ms": 2.5384
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::fetch_blobs_kernel(unsigned long long const*, int const*, HIP_vector_type<unsigned int, 4u>*, long long)",
+        "calls": 360,
+        "sum_ms": 2.525268
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::add_hits_kernel(float*, float const*, int const*, int const*, int)",
+        "calls": 336,
+        "sum_ms": 2.47664
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::copy_i32_from_mapped_kernel(int*, int const volatile*, int)",
+        "calls": 378,
+        "sum_ms": 2.371836
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::fetch_blobs_kernel(unsigned long long const*, int const*, HIP_vector_type<unsigned int, 4u>*, long long)",
+        "calls": 336,
+        "sum_ms": 2.063996
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::apply<false>(float const*, float*, int, int, int, float, float, float, float, float, float, int const*, int const*, strata::kernels::RopeTab)",
+        "calls": 270,
+        "sum_ms": 1.83424
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::apply<false>(float const*, float*, int, int, int, float, float, float, float, float, float, int const*, int const*, strata::kernels::RopeTab)",
+        "calls": 252,
+        "sum_ms": 1.716948
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::sigmoid_scale_rows_vec4_kernel(HIP_vector_type<float, 4u>*, float const*, int)",
+        "calls": 360,
+        "sum_ms": 1.713756
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::rebase_ptrs_kernel(unsigned long long*, int const*, unsigned long long, long long)",
+        "calls": 360,
+        "sum_ms": 1.713436
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::combine_k10_vec4(HIP_vector_type<float, 4u> const*, float const*, HIP_vector_type<float, 4u> const*, HIP_vector_type<float, 4u>*, long)",
+        "calls": 360,
+        "sum_ms": 1.705112
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::native_swiglu_quantize_q8_1_kernel(float const*, float const*, strata::kernels::(anonymous namespace)::Q81Block*, int)",
+        "calls": 360,
+        "sum_ms": 1.657912
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::sigmoid_scale_rows_vec4_kernel(HIP_vector_type<float, 4u>*, float const*, int)",
+        "calls": 336,
+        "sum_ms": 1.602876
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::rebase_ptrs_kernel(unsigned long long*, int const*, unsigned long long, long long)",
+        "calls": 336,
+        "sum_ms": 1.59344
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::native_swiglu_quantize_q8_1_kernel(float const*, float const*, strata::kernels::(anonymous namespace)::Q81Block*, int)",
+        "calls": 336,
+        "sum_ms": 1.55264
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::combine_k10_vec4(HIP_vector_type<float, 4u> const*, float const*, HIP_vector_type<float, 4u> const*, HIP_vector_type<float, 4u>*, long)",
+        "calls": 336,
+        "sum_ms": 1.536476
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::native_down_kernel<8>(unsigned long long const*, int const*, int const*, int const*, block_q8_1 const*, strata::kernels::NativeExpertLayout, float*)",
+        "calls": 56,
+        "sum_ms": 1.47072
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::gdn_conv_l2_multi_kernel(float*, float const*, float const*, float*, int, int, float, int, bool)",
+        "calls": 270,
+        "sum_ms": 1.31088
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::norm<256>(float const*, float const*, float*, int, float)",
+        "calls": 270,
+        "sum_ms": 1.21232
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::gdn_conv_l2_multi_kernel(float*, float const*, float const*, float*, int, int, float, int, bool)",
+        "calls": 252,
+        "sum_ms": 1.19392
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::norm<256>(float const*, float const*, float*, int, float)",
+        "calls": 252,
+        "sum_ms": 1.150556
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::copy_from_mapped_kernel(HIP_vector_type<float, 4u>*, HIP_vector_type<float, 4u> const volatile*, long)",
+        "calls": 154,
+        "sum_ms": 1.0112
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::attn_merge_kernel(float const*, float const*, float const*, int, float*, long long)",
+        "calls": 90,
+        "sum_ms": 0.942716
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::attn_merge_kernel(float const*, float const*, float const*, int, float*, long long)",
+        "calls": 84,
+        "sum_ms": 0.860472
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::block_scores_multi_kernel(float const*, float const*, float const*, int const*, int, long, float*, bool, strata::kernels::QsaScoreRows)",
+        "calls": 90,
+        "sum_ms": 0.81776
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::block_scores_multi_kernel(float const*, float const*, float const*, int const*, int, long, float*, bool, strata::kernels::QsaScoreRows)",
+        "calls": 84,
+        "sum_ms": 0.76464
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::append<false>(float const*, int const*, int, int, int, float const*, float, float*, float*, float*, int*, int, float, float, float, float, float, float, int const*, strata::kernels::RopeTab)",
+        "calls": 90,
+        "sum_ms": 0.703196
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::copy_from_mapped_kernel(HIP_vector_type<float, 4u>*, HIP_vector_type<float, 4u> const volatile*, long)",
+        "calls": 135,
+        "sum_ms": 0.70032
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::native_gu_lds_kernel<23, 1, true>(unsigned long long const*, int const*, int const*, int const*, block_q8_1 const*, strata::kernels::NativeExpertLayout, float*, float*)",
+        "calls": 28,
+        "sum_ms": 0.691036
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::append<false>(float const*, int const*, int, int, int, float const*, float, float*, float*, float*, int*, int, float, float, float, float, float, float, int const*, strata::kernels::RopeTab)",
+        "calls": 84,
+        "sum_ms": 0.628636
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::kv_append_kernel(unsigned short*, unsigned short*, int const*, int const*, float const*, float const*, int, int, int, strata::kernels::KvHostPools)",
+        "calls": 90,
+        "sum_ms": 0.582716
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::kv_append_kernel(unsigned short*, unsigned short*, int const*, int const*, float const*, float const*, int, int, int, strata::kernels::KvHostPools)",
+        "calls": 84,
+        "sum_ms": 0.548316
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::gate(float const*, float const*, float*, int, int)",
+        "calls": 90,
+        "sum_ms": 0.49232
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::gate(float const*, float const*, float*, int, int)",
+        "calls": 84,
+        "sum_ms": 0.43568
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::block_topk_reg_kernel<33>(float const*, int const*, long, long, int*)",
+        "calls": 90,
+        "sum_ms": 0.42928
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::block_topk_reg_kernel<33>(float const*, int const*, long, long, int*)",
+        "calls": 84,
+        "sum_ms": 0.40112
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::logits_nonfinite_kernel(float const*, int, int, unsigned int*)",
+        "calls": 15,
+        "sum_ms": 0.32768
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::weighted_rms_norm<1024>(float const*, float const*, float*, int, float)",
+        "calls": 42,
+        "sum_ms": 0.26448
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::post(float const*, float const*, float const*, float*, int, int, float)",
+        "calls": 15,
+        "sum_ms": 0.11392
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::conv_residual_kernel(float const*, float const*, unsigned short const*, float const*, float const*, float*, float*)",
+        "calls": 14,
+        "sum_ms": 0.10144
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::embed_rows_kernel(int, unsigned char const*, unsigned long, int const*, long, float*)",
+        "calls": 14,
+        "sum_ms": 0.09824
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::post(float const*, float const*, float const*, float*, int, int, float)",
+        "calls": 14,
+        "sum_ms": 0.0976
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::history_advance_kernel(float*, float const*)",
+        "calls": 14,
+        "sum_ms": 0.09568
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::broadcast_streams_kernel(float const*, float*, long, int)",
+        "calls": 14,
+        "sum_ms": 0.09536
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::broadcast_kernel(float const*, float const*, float*)",
+        "calls": 14,
+        "sum_ms": 0.09056
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::gate_kernel(float const*, float const*, float*, float)",
+        "calls": 14,
+        "sum_ms": 0.06528
+      }
+    ],
+    "copies": [
+      {
+        "device": 0,
+        "kind": 4597,
+        "bytes_per_copy": 24576,
+        "calls": 84,
+        "sum_ms": 0.388,
+        "total_bytes": 2064384
+      },
+      {
+        "device": 0,
+        "kind": 4597,
+        "bytes_per_copy": 40960,
+        "calls": 14,
+        "sum_ms": 0.06736,
+        "total_bytes": 573440
+      },
+      {
+        "device": 1,
+        "kind": 4597,
+        "bytes_per_copy": 24576,
+        "calls": 90,
+        "sum_ms": 0.42496,
+        "total_bytes": 2211840
+      }
+    ],
+    "apis": [
+      {
+        "name": "hipGraphLaunch",
+        "calls": 29,
+        "sum_ms": 311.733421
+      },
+      {
+        "name": "hipStreamSynchronize",
+        "calls": 45,
+        "sum_ms": 111.391506
+      },
+      {
+        "name": "hipLaunchKernel",
+        "calls": 15,
+        "sum_ms": 1.269642
+      },
+      {
+        "name": "",
+        "calls": 29,
+        "sum_ms": 0.098131
+      },
+      {
+        "name": "hipSetDevice",
+        "calls": 60,
+        "sum_ms": 0.07312
+      },
+      {
+        "name": "hipGetDevice",
+        "calls": 59,
+        "sum_ms": 0.0376
+      },
+      {
+        "name": "__hipPushCallConfiguration",
+        "calls": 15,
+        "sum_ms": 0.03152
+      },
+      {
+        "name": "__hipPopCallConfiguration",
+        "calls": 15,
+        "sum_ms": 0.02554
+      },
+      {
+        "name": "hipGetLastError",
+        "calls": 15,
+        "sum_ms": 0.00798
+      }
+    ],
+    "cross_device_overlap_ms": 0.0
+  },
+  "layers": {
+    "deep-host-baseline": {
+      "decode-0": {
+        "windows": 0,
+        "max_layer_host_calls": 3,
+        "host_service_ms_per_window": 6.9024693333333325,
+        "host_wait_ms_per_window": 25.777852666666675,
+        "gpu_segment_ms_per_window": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "slowest_host_layers": [
+          {
+            "layer": 29,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.5905836666666667,
+            "wait_ms_per_call": 0.4763303333333333
+          },
+          {
+            "layer": 27,
+            "device": 1,
+            "kind": "QSA",
+            "service_ms_per_call": 0.5264306666666666,
+            "wait_ms_per_call": 0.5596803333333333
+          },
+          {
+            "layer": 26,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.5013733333333333,
+            "wait_ms_per_call": 0.5100403333333333
+          },
+          {
+            "layer": 30,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.32359,
+            "wait_ms_per_call": 0.451494
+          },
+          {
+            "layer": 32,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.3084773333333333,
+            "wait_ms_per_call": 0.5545836666666667
+          },
+          {
+            "layer": 18,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.27740333333333334,
+            "wait_ms_per_call": 0.5849543333333334
+          },
+          {
+            "layer": 35,
+            "device": 1,
+            "kind": "QSA",
+            "service_ms_per_call": 0.26976700000000003,
+            "wait_ms_per_call": 0.7298473333333333
+          },
+          {
+            "layer": 28,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.26692333333333335,
+            "wait_ms_per_call": 0.4378303333333333
+          }
+        ]
+      },
+      "decode-1": {
+        "windows": 0,
+        "max_layer_host_calls": 10,
+        "host_service_ms_per_window": 6.456491300000001,
+        "host_wait_ms_per_window": 25.9592734,
+        "gpu_segment_ms_per_window": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "slowest_host_layers": [
+          {
+            "layer": 26,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.4195972,
+            "wait_ms_per_call": 0.4473954
+          },
+          {
+            "layer": 27,
+            "device": 1,
+            "kind": "QSA",
+            "service_ms_per_call": 0.3957353,
+            "wait_ms_per_call": 0.5933052
+          },
+          {
+            "layer": 28,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.38176160000000003,
+            "wait_ms_per_call": 0.45929529999999996
+          },
+          {
+            "layer": 34,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.3465388,
+            "wait_ms_per_call": 0.5050264
+          },
+          {
+            "layer": 3,
+            "device": 0,
+            "kind": "QSA",
+            "service_ms_per_call": 0.3251012,
+            "wait_ms_per_call": 0.7234281
+          },
+          {
+            "layer": 29,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.32424010000000003,
+            "wait_ms_per_call": 0.45357839999999994
+          },
+          {
+            "layer": 20,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.27521209999999996,
+            "wait_ms_per_call": 0.4788103
+          },
+          {
+            "layer": 25,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.2651215,
+            "wait_ms_per_call": 0.4817411
+          }
+        ]
+      },
+      "decode-2": {
+        "windows": 0,
+        "max_layer_host_calls": 128,
+        "host_service_ms_per_window": 15.2652219140625,
+        "host_wait_ms_per_window": 24.673173960937497,
+        "gpu_segment_ms_per_window": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "slowest_host_layers": [
+          {
+            "layer": 28,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.6006422734375,
+            "wait_ms_per_call": 0.47465090625
+          },
+          {
+            "layer": 34,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.572199109375,
+            "wait_ms_per_call": 0.4896198359375
+          },
+          {
+            "layer": 10,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.5647013359375,
+            "wait_ms_per_call": 0.4441660859375
+          },
+          {
+            "layer": 7,
+            "device": 0,
+            "kind": "QSA",
+            "service_ms_per_call": 0.55178871875,
+            "wait_ms_per_call": 0.61128284375
+          },
+          {
+            "layer": 13,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.5263024296875,
+            "wait_ms_per_call": 0.44468059375
+          },
+          {
+            "layer": 21,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.47345734375,
+            "wait_ms_per_call": 0.463550375
+          },
+          {
+            "layer": 12,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.4583031015625,
+            "wait_ms_per_call": 0.45058346875
+          },
+          {
+            "layer": 26,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.45804525,
+            "wait_ms_per_call": 0.4805070625
+          }
+        ]
+      },
+      "decode-3": {
+        "windows": 0,
+        "max_layer_host_calls": 128,
+        "host_service_ms_per_window": 11.5105172421875,
+        "host_wait_ms_per_window": 25.0102470546875,
+        "gpu_segment_ms_per_window": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "slowest_host_layers": [
+          {
+            "layer": 24,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.4849254375,
+            "wait_ms_per_call": 0.000359765625
+          },
+          {
+            "layer": 26,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.455625734375,
+            "wait_ms_per_call": 0.458538734375
+          },
+          {
+            "layer": 34,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.41238965625,
+            "wait_ms_per_call": 0.475396546875
+          },
+          {
+            "layer": 16,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.410005109375,
+            "wait_ms_per_call": 0.437039140625
+          },
+          {
+            "layer": 15,
+            "device": 0,
+            "kind": "QSA",
+            "service_ms_per_call": 0.392417546875,
+            "wait_ms_per_call": 0.6716450546875
+          },
+          {
+            "layer": 25,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.35493809375,
+            "wait_ms_per_call": 0.43845425
+          },
+          {
+            "layer": 31,
+            "device": 1,
+            "kind": "QSA",
+            "service_ms_per_call": 0.33378346875,
+            "wait_ms_per_call": 0.656637984375
+          },
+          {
+            "layer": 30,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.3294156015625,
+            "wait_ms_per_call": 0.545826484375
+          }
+        ]
+      },
+      "prefill-0": {
+        "windows": 0,
+        "max_layer_host_calls": 14,
+        "host_service_ms_per_window": 7.015952142857143,
+        "host_wait_ms_per_window": 29.95254828571428,
+        "gpu_segment_ms_per_window": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "slowest_host_layers": [
+          {
+            "layer": 28,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.301105,
+            "wait_ms_per_call": 0.5716347857142857
+          },
+          {
+            "layer": 24,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.2962952857142857,
+            "wait_ms_per_call": 0.0003328571428571429
+          },
+          {
+            "layer": 14,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.2851972857142857,
+            "wait_ms_per_call": 0.6074120000000001
+          },
+          {
+            "layer": 26,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.2801587142857143,
+            "wait_ms_per_call": 0.5766517857142857
+          },
+          {
+            "layer": 33,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.2719509285714286,
+            "wait_ms_per_call": 0.6521292857142857
+          },
+          {
+            "layer": 10,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.2636880714285714,
+            "wait_ms_per_call": 0.5717746428571429
+          },
+          {
+            "layer": 27,
+            "device": 1,
+            "kind": "QSA",
+            "service_ms_per_call": 0.23402307142857143,
+            "wait_ms_per_call": 0.7052993571428571
+          },
+          {
+            "layer": 9,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.22653571428571428,
+            "wait_ms_per_call": 0.6470283571428571
+          }
+        ]
+      },
+      "prefill-1": {
+        "windows": 0,
+        "max_layer_host_calls": 13,
+        "host_service_ms_per_window": 3.9362307692307703,
+        "host_wait_ms_per_window": 31.58148730769232,
+        "gpu_segment_ms_per_window": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "slowest_host_layers": [
+          {
+            "layer": 3,
+            "device": 0,
+            "kind": "QSA",
+            "service_ms_per_call": 0.3290056923076923,
+            "wait_ms_per_call": 0.8107983846153846
+          },
+          {
+            "layer": 27,
+            "device": 1,
+            "kind": "QSA",
+            "service_ms_per_call": 0.17910692307692308,
+            "wait_ms_per_call": 0.701046
+          },
+          {
+            "layer": 7,
+            "device": 0,
+            "kind": "QSA",
+            "service_ms_per_call": 0.1775816153846154,
+            "wait_ms_per_call": 0.7453137692307692
+          },
+          {
+            "layer": 26,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.17043015384615384,
+            "wait_ms_per_call": 0.6460743846153847
+          },
+          {
+            "layer": 10,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.1297969230769231,
+            "wait_ms_per_call": 0.6480373076923077
+          },
+          {
+            "layer": 5,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.1254223076923077,
+            "wait_ms_per_call": 0.6378442307692308
+          },
+          {
+            "layer": 4,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.11991092307692308,
+            "wait_ms_per_call": 0.5172487692307692
+          },
+          {
+            "layer": 28,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.11365638461538462,
+            "wait_ms_per_call": 0.5730266153846154
+          }
+        ]
+      },
+      "prefill-2": {
+        "windows": 0,
+        "max_layer_host_calls": 0,
+        "host_service_ms_per_window": 0.0,
+        "host_wait_ms_per_window": 0.0,
+        "gpu_segment_ms_per_window": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "slowest_host_layers": [
+          {
+            "layer": 0,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 1,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 2,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 3,
+            "device": 0,
+            "kind": "QSA",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 4,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 5,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 6,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 7,
+            "device": 0,
+            "kind": "QSA",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          }
+        ]
+      },
+      "prefill-3": {
+        "windows": 0,
+        "max_layer_host_calls": 0,
+        "host_service_ms_per_window": 0.0,
+        "host_wait_ms_per_window": 0.0,
+        "gpu_segment_ms_per_window": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "slowest_host_layers": [
+          {
+            "layer": 0,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 1,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 2,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 3,
+            "device": 0,
+            "kind": "QSA",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 4,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 5,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 6,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 7,
+            "device": 0,
+            "kind": "QSA",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          }
+        ]
+      }
+    },
+    "deep-profile-layers": {
+      "decode-0": {
+        "windows": 3,
+        "max_layer_host_calls": 3,
+        "host_service_ms_per_window": 7.052220999999997,
+        "host_wait_ms_per_window": 27.93415166666668,
+        "gpu_segment_ms_per_window": [
+          0.0,
+          3.56528,
+          2.65696,
+          0.23130666666666666,
+          0.5974933333333333,
+          1.7285866666666667,
+          0.8443733333333334,
+          0.13344,
+          0.33904,
+          0.23168,
+          1.8690666666666667,
+          0.16346666666666665,
+          0.02528,
+          0.69456,
+          0.08218666666666667,
+          0.0,
+          3.1176,
+          6.828266666666667,
+          2.1329066666666665,
+          25.5976,
+          5.2381866666666665,
+          0.6592533333333334,
+          0.8569066666666666,
+          2.8841066666666664,
+          1.1140266666666667,
+          0.09834666666666667,
+          1.63264,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "slowest_host_layers": [
+          {
+            "layer": 29,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.59522,
+            "wait_ms_per_call": 0.5494973333333334
+          },
+          {
+            "layer": 26,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.5306609999999999,
+            "wait_ms_per_call": 0.531697
+          },
+          {
+            "layer": 27,
+            "device": 1,
+            "kind": "QSA",
+            "service_ms_per_call": 0.5298103333333334,
+            "wait_ms_per_call": 0.5973970000000001
+          },
+          {
+            "layer": 30,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.2924233333333333,
+            "wait_ms_per_call": 0.45265099999999997
+          },
+          {
+            "layer": 35,
+            "device": 1,
+            "kind": "QSA",
+            "service_ms_per_call": 0.2886433333333333,
+            "wait_ms_per_call": 0.7998973333333333
+          },
+          {
+            "layer": 32,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.28769,
+            "wait_ms_per_call": 0.6154573333333333
+          },
+          {
+            "layer": 13,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.26977999999999996,
+            "wait_ms_per_call": 0.646184
+          },
+          {
+            "layer": 28,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.26423,
+            "wait_ms_per_call": 0.46542700000000004
+          }
+        ]
+      },
+      "decode-1": {
+        "windows": 10,
+        "max_layer_host_calls": 10,
+        "host_service_ms_per_window": 6.6372377,
+        "host_wait_ms_per_window": 28.274072000000007,
+        "gpu_segment_ms_per_window": [
+          0.0,
+          3.481488,
+          2.774592,
+          0.246592,
+          0.601984,
+          1.77992,
+          0.84616,
+          0.134688,
+          0.342816,
+          0.230176,
+          1.875888,
+          0.164784,
+          0.025536,
+          0.72024,
+          0.083664,
+          0.0,
+          3.16144,
+          6.86136,
+          2.168656,
+          26.86072,
+          5.278768,
+          0.668176,
+          0.85696,
+          2.593424,
+          1.102112,
+          0.099056,
+          1.635632,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "slowest_host_layers": [
+          {
+            "layer": 3,
+            "device": 0,
+            "kind": "QSA",
+            "service_ms_per_call": 0.41267060000000005,
+            "wait_ms_per_call": 0.7791253
+          },
+          {
+            "layer": 26,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.4045311,
+            "wait_ms_per_call": 0.5106305
+          },
+          {
+            "layer": 27,
+            "device": 1,
+            "kind": "QSA",
+            "service_ms_per_call": 0.3767213,
+            "wait_ms_per_call": 0.6388796
+          },
+          {
+            "layer": 28,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.3640062,
+            "wait_ms_per_call": 0.48471840000000005
+          },
+          {
+            "layer": 34,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.35964640000000003,
+            "wait_ms_per_call": 0.5371772
+          },
+          {
+            "layer": 29,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.3135393,
+            "wait_ms_per_call": 0.4685283
+          },
+          {
+            "layer": 20,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.2919473,
+            "wait_ms_per_call": 0.5422362
+          },
+          {
+            "layer": 23,
+            "device": 0,
+            "kind": "QSA",
+            "service_ms_per_call": 0.2704801,
+            "wait_ms_per_call": 0.7329375
+          }
+        ]
+      },
+      "decode-2": {
+        "windows": 64,
+        "max_layer_host_calls": 64,
+        "host_service_ms_per_window": 10.990713906249995,
+        "host_wait_ms_per_window": 27.157920796874997,
+        "gpu_segment_ms_per_window": [
+          0.0,
+          3.9047275,
+          2.722305,
+          0.2387275,
+          0.59814,
+          1.79514,
+          0.8456825,
+          0.13496,
+          0.35036,
+          0.233675,
+          1.8633375,
+          0.16104,
+          0.0253375,
+          1.138875,
+          0.082495,
+          0.0,
+          3.1708525,
+          6.8503325,
+          2.16647,
+          27.274355,
+          5.00881,
+          0.6608825,
+          0.8536625,
+          5.4436075,
+          1.1385925,
+          0.0987075,
+          1.626775,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "slowest_host_layers": [
+          {
+            "layer": 7,
+            "device": 0,
+            "kind": "QSA",
+            "service_ms_per_call": 0.523334640625,
+            "wait_ms_per_call": 0.674126671875
+          },
+          {
+            "layer": 13,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.467788546875,
+            "wait_ms_per_call": 0.485408296875
+          },
+          {
+            "layer": 28,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.457687171875,
+            "wait_ms_per_call": 0.533110171875
+          },
+          {
+            "layer": 21,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.445629859375,
+            "wait_ms_per_call": 0.515587015625
+          },
+          {
+            "layer": 34,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.44533434375,
+            "wait_ms_per_call": 0.549433375
+          },
+          {
+            "layer": 10,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.4325655625,
+            "wait_ms_per_call": 0.504692484375
+          },
+          {
+            "layer": 26,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.360138546875,
+            "wait_ms_per_call": 0.523430578125
+          },
+          {
+            "layer": 8,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.349912921875,
+            "wait_ms_per_call": 0.50852153125
+          }
+        ]
+      },
+      "decode-3": {
+        "windows": 64,
+        "max_layer_host_calls": 64,
+        "host_service_ms_per_window": 13.546607265625005,
+        "host_wait_ms_per_window": 26.770145578124996,
+        "gpu_segment_ms_per_window": [
+          0.0,
+          3.903745,
+          2.7038775,
+          0.2385475,
+          0.5996075,
+          1.789485,
+          0.850275,
+          0.13451,
+          0.351095,
+          0.23451,
+          1.853895,
+          0.4521075,
+          0.0256375,
+          1.262185,
+          0.0795925,
+          0.0,
+          3.18194,
+          6.8729575,
+          2.1583275,
+          29.4692375,
+          4.98823,
+          0.626555,
+          0.824435,
+          5.1424775,
+          1.1271025,
+          0.0992325,
+          1.6291475,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "slowest_host_layers": [
+          {
+            "layer": 24,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.551679296875,
+            "wait_ms_per_call": 0.000425625
+          },
+          {
+            "layer": 16,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.48598121875,
+            "wait_ms_per_call": 0.487703828125
+          },
+          {
+            "layer": 15,
+            "device": 0,
+            "kind": "QSA",
+            "service_ms_per_call": 0.448907890625,
+            "wait_ms_per_call": 0.716768703125
+          },
+          {
+            "layer": 26,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.443776609375,
+            "wait_ms_per_call": 0.497333875
+          },
+          {
+            "layer": 28,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.417356578125,
+            "wait_ms_per_call": 0.5162395625
+          },
+          {
+            "layer": 34,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.39809534375,
+            "wait_ms_per_call": 0.51576696875
+          },
+          {
+            "layer": 19,
+            "device": 0,
+            "kind": "QSA",
+            "service_ms_per_call": 0.395044359375,
+            "wait_ms_per_call": 0.715717390625
+          },
+          {
+            "layer": 30,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.386281046875,
+            "wait_ms_per_call": 0.540064828125
+          }
+        ]
+      },
+      "prefill-0": {
+        "windows": 14,
+        "max_layer_host_calls": 14,
+        "host_service_ms_per_window": 6.461460714285714,
+        "host_wait_ms_per_window": 32.65638749999999,
+        "gpu_segment_ms_per_window": [
+          0.0,
+          3.994205714285714,
+          3.3261828571428573,
+          0.2446742857142857,
+          0.6568114285714285,
+          2.092297142857143,
+          0.5742171428571429,
+          0.14457142857142857,
+          0.38878857142857143,
+          0.3021257142857143,
+          1.888377142857143,
+          0.5768457142857143,
+          0.02534857142857143,
+          0.5290857142857143,
+          0.10669714285714285,
+          0.0,
+          2.791725714285714,
+          7.480822857142857,
+          2.589485714285714,
+          25.847325714285713,
+          8.021771428571428,
+          0.6934057142857143,
+          1.134857142857143,
+          1.4607542857142857,
+          1.2282514285714285,
+          0.09769142857142857,
+          1.9005942857142857,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "slowest_host_layers": [
+          {
+            "layer": 24,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.29688821428571427,
+            "wait_ms_per_call": 0.0003885714285714286
+          },
+          {
+            "layer": 28,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.2750087857142857,
+            "wait_ms_per_call": 0.6193297142857144
+          },
+          {
+            "layer": 14,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.2714202857142857,
+            "wait_ms_per_call": 0.6659739285714286
+          },
+          {
+            "layer": 26,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.26172235714285713,
+            "wait_ms_per_call": 0.6184210714285714
+          },
+          {
+            "layer": 10,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.24277157142857142,
+            "wait_ms_per_call": 0.6346805
+          },
+          {
+            "layer": 27,
+            "device": 1,
+            "kind": "QSA",
+            "service_ms_per_call": 0.20876957142857142,
+            "wait_ms_per_call": 0.7738419285714285
+          },
+          {
+            "layer": 9,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.2072567857142857,
+            "wait_ms_per_call": 0.7073276428571429
+          },
+          {
+            "layer": 11,
+            "device": 0,
+            "kind": "QSA",
+            "service_ms_per_call": 0.18790292857142857,
+            "wait_ms_per_call": 0.6683547142857142
+          }
+        ]
+      },
+      "prefill-1": {
+        "windows": 13,
+        "max_layer_host_calls": 13,
+        "host_service_ms_per_window": 3.9861689230769235,
+        "host_wait_ms_per_window": 33.530751538461544,
+        "gpu_segment_ms_per_window": [
+          0.0,
+          3.9733415384615385,
+          3.3104984615384616,
+          0.24396307692307695,
+          0.6561723076923077,
+          2.073969230769231,
+          0.5728,
+          0.14484923076923079,
+          0.38649846153846157,
+          0.30012307692307694,
+          1.8465723076923077,
+          0.1794953846153846,
+          0.025267692307692307,
+          0.4994707692307693,
+          0.09635692307692308,
+          0.0,
+          2.778929230769231,
+          7.478990769230769,
+          2.5059323076923077,
+          25.580972307692306,
+          8.02235076923077,
+          0.6400369230769232,
+          1.0454523076923077,
+          0.8715446153846154,
+          1.0766892307692308,
+          0.09698461538461539,
+          1.9030523076923078,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "slowest_host_layers": [
+          {
+            "layer": 3,
+            "device": 0,
+            "kind": "QSA",
+            "service_ms_per_call": 0.36232192307692307,
+            "wait_ms_per_call": 0.8506646153846155
+          },
+          {
+            "layer": 27,
+            "device": 1,
+            "kind": "QSA",
+            "service_ms_per_call": 0.18917553846153845,
+            "wait_ms_per_call": 0.7542489230769232
+          },
+          {
+            "layer": 26,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.18017246153846156,
+            "wait_ms_per_call": 0.6667513076923076
+          },
+          {
+            "layer": 7,
+            "device": 0,
+            "kind": "QSA",
+            "service_ms_per_call": 0.16882469230769231,
+            "wait_ms_per_call": 0.8045316923076923
+          },
+          {
+            "layer": 0,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.1340769230769231,
+            "wait_ms_per_call": 0.0009153846153846154
+          },
+          {
+            "layer": 28,
+            "device": 1,
+            "kind": "GDN",
+            "service_ms_per_call": 0.12633553846153847,
+            "wait_ms_per_call": 0.6249653076923077
+          },
+          {
+            "layer": 5,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.12579307692307692,
+            "wait_ms_per_call": 0.6830197692307693
+          },
+          {
+            "layer": 4,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.12184615384615385,
+            "wait_ms_per_call": 0.5872219230769231
+          }
+        ]
+      },
+      "prefill-2": {
+        "windows": 0,
+        "max_layer_host_calls": 0,
+        "host_service_ms_per_window": 0.0,
+        "host_wait_ms_per_window": 0.0,
+        "gpu_segment_ms_per_window": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "slowest_host_layers": [
+          {
+            "layer": 0,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 1,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 2,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 3,
+            "device": 0,
+            "kind": "QSA",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 4,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 5,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 6,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 7,
+            "device": 0,
+            "kind": "QSA",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          }
+        ]
+      },
+      "prefill-3": {
+        "windows": 0,
+        "max_layer_host_calls": 0,
+        "host_service_ms_per_window": 0.0,
+        "host_wait_ms_per_window": 0.0,
+        "gpu_segment_ms_per_window": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "slowest_host_layers": [
+          {
+            "layer": 0,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 1,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 2,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 3,
+            "device": 0,
+            "kind": "QSA",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 4,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 5,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 6,
+            "device": 0,
+            "kind": "GDN",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          },
+          {
+            "layer": 7,
+            "device": 0,
+            "kind": "QSA",
+            "service_ms_per_call": 0.0,
+            "wait_ms_per_call": 0.0
+          }
+        ]
+      }
+    }
+  }
+}

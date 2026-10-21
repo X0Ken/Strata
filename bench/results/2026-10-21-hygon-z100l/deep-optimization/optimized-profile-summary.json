@@ -1,0 +1,550 @@
+{
+  "native_trace": {
+    "span_ms": 784.53798,
+    "kernel_calls": 25227,
+    "kernel_sum_ms": 702.042372,
+    "kernel_union_ms": 702.040628,
+    "device_union_ms": {
+      "1": 372.629336,
+      "0": 329.411292
+    },
+    "kernels": [
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::wait_flag_ge_kernel(unsigned int const volatile*, unsigned int)",
+        "calls": 360,
+        "sum_ms": 114.381032
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::wait_flag_ge_kernel(unsigned int const volatile*, unsigned int)",
+        "calls": 336,
+        "sum_ms": 111.997304
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::native_mmvq_wave_kernel<strata::kernels::(anonymous namespace)::SmallTraits<strata::kernels::(anonymous namespace)::Q80Block, 8>, 1, 4>(strata::kernels::(anonymous namespace)::SmallTraits<strata::kernels::(anonymous namespace)::Q80Block, 8>::Block const*, strata::kernels::(anonymous namespace)::Q81Block const*, float*, int, int)",
+        "calls": 2250,
+        "sum_ms": 63.847076
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::native_mmvq_wave_kernel<strata::kernels::(anonymous namespace)::SmallTraits<strata::kernels::(anonymous namespace)::Q80Block, 8>, 1, 4>(strata::kernels::(anonymous namespace)::SmallTraits<strata::kernels::(anonymous namespace)::Q80Block, 8>::Block const*, strata::kernels::(anonymous namespace)::Q81Block const*, float*, int, int)",
+        "calls": 2114,
+        "sum_ms": 59.979688
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::bf16_f32_mmvf_kernel<256>(float const*, unsigned short const*, float*, int)",
+        "calls": 900,
+        "sum_ms": 25.929392
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::bf16_f32_mmvf_kernel<256>(float const*, unsigned short const*, float*, int)",
+        "calls": 854,
+        "sum_ms": 24.80892
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::native_gu_lds_kernel<18, 1, true>(unsigned long long const*, int const*, int const*, int const*, block_q8_1 const*, strata::kernels::NativeExpertLayout, float*, float*)",
+        "calls": 360,
+        "sum_ms": 22.314516
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::native_mmvq_wave_kernel<strata::kernels::(anonymous namespace)::Q6KTraits, 1, 1>(strata::kernels::(anonymous namespace)::Q6KTraits::Block const*, strata::kernels::(anonymous namespace)::Q81Block const*, float*, int, int)",
+        "calls": 15,
+        "sum_ms": 21.621716
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::native_gu_lds_kernel<18, 1, true>(unsigned long long const*, int const*, int const*, int const*, block_q8_1 const*, strata::kernels::NativeExpertLayout, float*, float*)",
+        "calls": 322,
+        "sum_ms": 19.577236
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::gr_up_fast_kernel(strata::kernels::(anonymous namespace)::GrMulti)",
+        "calls": 735,
+        "sum_ms": 17.14874
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::gr_up_fast_kernel(strata::kernels::(anonymous namespace)::GrMulti)",
+        "calls": 672,
+        "sum_ms": 15.554684
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::gr_down_staged_kernel<1, true>(strata::kernels::(anonymous namespace)::GrMulti)",
+        "calls": 735,
+        "sum_ms": 14.89372
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::gr_down_staged_kernel<1, true>(strata::kernels::(anonymous namespace)::GrMulti)",
+        "calls": 672,
+        "sum_ms": 13.623652
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::native_down_lds_kernel<20>(unsigned long long const*, int const*, int const*, int const*, block_q8_1 const*, strata::kernels::NativeExpertLayout, float*)",
+        "calls": 315,
+        "sum_ms": 12.519808
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::native_down_lds_kernel<20>(unsigned long long const*, int const*, int const*, int const*, block_q8_1 const*, strata::kernels::NativeExpertLayout, float*)",
+        "calls": 308,
+        "sum_ms": 12.004456
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::resident_hits_plan_kernel(int const*, int, int, int const*, int, unsigned char const*, unsigned long long const*, long long, int*, long long)",
+        "calls": 360,
+        "sum_ms": 10.027976
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::resident_hits_plan_kernel(int const*, int, int, int const*, int, unsigned char const*, unsigned long long const*, long long, int*, long long)",
+        "calls": 336,
+        "sum_ms": 9.238064
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::route(float const*, int*, float*)",
+        "calls": 360,
+        "sum_ms": 8.881104
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::route(float const*, int*, float*)",
+        "calls": 336,
+        "sum_ms": 8.316304
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::gr_norm_split_kernel(strata::kernels::(anonymous namespace)::GrMulti)",
+        "calls": 735,
+        "sum_ms": 7.869572
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::attn_chunk_kernel<0, false, false, false>(float const*, strata::kernels::QsaAttnPools, int const*, int const*, int, int, float, float*, float*, float*, int, int, long long)",
+        "calls": 90,
+        "sum_ms": 7.418696
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::gr_norm_split_kernel(strata::kernels::(anonymous namespace)::GrMulti)",
+        "calls": 672,
+        "sum_ms": 7.115168
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::attn_chunk_kernel<0, false, false, false>(float const*, strata::kernels::QsaAttnPools, int const*, int const*, int, int, float, float*, float*, float*, int, int, long long)",
+        "calls": 84,
+        "sum_ms": 6.925748
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::gdn_step_norm_multi_kernel<false, false>(float*, float const*, int, float const*, float const*, float const*, float const*, float, float*, int, int, int, int const*, int, strata::kernels::(anonymous namespace)::GdnQ81*, strata::kernels::GdnGroups)",
+        "calls": 270,
+        "sum_ms": 5.782376
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::gdn_step_norm_multi_kernel<false, false>(float*, float const*, int, float const*, float const*, float const*, float const*, float, float*, int, int, int, int const*, int, strata::kernels::(anonymous namespace)::GdnQ81*, strata::kernels::GdnGroups)",
+        "calls": 252,
+        "sum_ms": 5.345108
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::native_quantize_q8_1_kernel(float const*, strata::kernels::(anonymous namespace)::Q81Block*, int)",
+        "calls": 1095,
+        "sum_ms": 5.268464
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::native_quantize_q8_1_kernel(float const*, strata::kernels::(anonymous namespace)::Q81Block*, int)",
+        "calls": 1022,
+        "sum_ms": 4.890712
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::gdn_ab_multi_kernel<1, true>(float const*, unsigned short const*, unsigned short const*, float const*, float const*, float*, float*, int, int, int)",
+        "calls": 270,
+        "sum_ms": 3.803996
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::sampler_greedy_kernel(float const*, int, int const*, int, strata::kernels::SamplerParams, int, int, int*)",
+        "calls": 30,
+        "sum_ms": 3.673916
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::quantize_q8_1_kernel(float const*, block_q8_1*, long long)",
+        "calls": 720,
+        "sum_ms": 3.646544
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::combine_k10_vec4_hits<true>(HIP_vector_type<float, 4u> const*, HIP_vector_type<float, 4u> const*, int const*, int const*, float const*, HIP_vector_type<float, 4u> const*, HIP_vector_type<float, 4u>*, long)",
+        "calls": 360,
+        "sum_ms": 3.629916
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::gdn_ab_multi_kernel<1, true>(float const*, unsigned short const*, unsigned short const*, float const*, float const*, float*, float*, int, int, int)",
+        "calls": 252,
+        "sum_ms": 3.54368
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::combine_k10_vec4_hits<true>(HIP_vector_type<float, 4u> const*, HIP_vector_type<float, 4u> const*, int const*, int const*, float const*, HIP_vector_type<float, 4u> const*, HIP_vector_type<float, 4u>*, long)",
+        "calls": 336,
+        "sum_ms": 3.472312
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::quantize_q8_1_kernel(float const*, block_q8_1*, long long)",
+        "calls": 672,
+        "sum_ms": 3.434872
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::doorbell_publish_res_kernel(float const*, int const*, int const*, int, int, int, float*, int*, unsigned int*)",
+        "calls": 360,
+        "sum_ms": 2.81504
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::doorbell_publish_res_kernel(float const*, int const*, int const*, int, int, int, float*, int*, unsigned int*)",
+        "calls": 336,
+        "sum_ms": 2.714236
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::native_down_kernel<8>(unsigned long long const*, int const*, int const*, int const*, block_q8_1 const*, strata::kernels::NativeExpertLayout, float*)",
+        "calls": 45,
+        "sum_ms": 2.284148
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::swiglu_entries_kernel(float const*, float const*, float*, long long)",
+        "calls": 360,
+        "sum_ms": 1.871516
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::apply<false>(float const*, float*, int, int, int, float, float, float, float, float, float, int const*, int const*, strata::kernels::RopeTab)",
+        "calls": 270,
+        "sum_ms": 1.852156
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::apply<false>(float const*, float*, int, int, int, float, float, float, float, float, float, int const*, int const*, strata::kernels::RopeTab)",
+        "calls": 252,
+        "sum_ms": 1.75728
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::swiglu_entries_kernel(float const*, float const*, float*, long long)",
+        "calls": 336,
+        "sum_ms": 1.749116
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::sigmoid_scale_rows_vec4_kernel(HIP_vector_type<float, 4u>*, float const*, int)",
+        "calls": 360,
+        "sum_ms": 1.729592
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::native_swiglu_quantize_q8_1_kernel(float const*, float const*, strata::kernels::(anonymous namespace)::Q81Block*, int)",
+        "calls": 360,
+        "sum_ms": 1.686556
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::sigmoid_scale_rows_vec4_kernel(HIP_vector_type<float, 4u>*, float const*, int)",
+        "calls": 336,
+        "sum_ms": 1.607196
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::native_swiglu_quantize_q8_1_kernel(float const*, float const*, strata::kernels::(anonymous namespace)::Q81Block*, int)",
+        "calls": 336,
+        "sum_ms": 1.564152
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::native_down_kernel<8>(unsigned long long const*, int const*, int const*, int const*, block_q8_1 const*, strata::kernels::NativeExpertLayout, float*)",
+        "calls": 28,
+        "sum_ms": 1.415676
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::gdn_conv_l2_multi_kernel(float*, float const*, float const*, float*, int, int, float, int, bool)",
+        "calls": 270,
+        "sum_ms": 1.29488
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::gdn_conv_l2_multi_kernel(float*, float const*, float const*, float*, int, int, float, int, bool)",
+        "calls": 252,
+        "sum_ms": 1.216796
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::norm<256>(float const*, float const*, float*, int, float)",
+        "calls": 270,
+        "sum_ms": 1.196
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::norm<256>(float const*, float const*, float*, int, float)",
+        "calls": 252,
+        "sum_ms": 1.10416
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::attn_merge_kernel(float const*, float const*, float const*, int, float*, long long)",
+        "calls": 90,
+        "sum_ms": 0.941596
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::copy_from_mapped_kernel(HIP_vector_type<float, 4u>*, HIP_vector_type<float, 4u> const volatile*, long)",
+        "calls": 154,
+        "sum_ms": 0.897596
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::attn_merge_kernel(float const*, float const*, float const*, int, float*, long long)",
+        "calls": 84,
+        "sum_ms": 0.86544
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::block_scores_multi_kernel(float const*, float const*, float const*, int const*, int, long, float*, bool, strata::kernels::QsaScoreRows)",
+        "calls": 90,
+        "sum_ms": 0.78768
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::block_scores_multi_kernel(float const*, float const*, float const*, int const*, int, long, float*, bool, strata::kernels::QsaScoreRows)",
+        "calls": 84,
+        "sum_ms": 0.733116
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::native_gu_lds_kernel<23, 1, true>(unsigned long long const*, int const*, int const*, int const*, block_q8_1 const*, strata::kernels::NativeExpertLayout, float*, float*)",
+        "calls": 14,
+        "sum_ms": 0.69504
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::copy_from_mapped_kernel(HIP_vector_type<float, 4u>*, HIP_vector_type<float, 4u> const volatile*, long)",
+        "calls": 135,
+        "sum_ms": 0.672636
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::append<false>(float const*, int const*, int, int, int, float const*, float, float*, float*, float*, int*, int, float, float, float, float, float, float, int const*, strata::kernels::RopeTab)",
+        "calls": 90,
+        "sum_ms": 0.6584
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::append<false>(float const*, int const*, int, int, int, float const*, float, float*, float*, float*, int*, int, float, float, float, float, float, float, int const*, strata::kernels::RopeTab)",
+        "calls": 84,
+        "sum_ms": 0.628788
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::kv_append_kernel(unsigned short*, unsigned short*, int const*, int const*, float const*, float const*, int, int, int, strata::kernels::KvHostPools)",
+        "calls": 90,
+        "sum_ms": 0.60032
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::kv_append_kernel(unsigned short*, unsigned short*, int const*, int const*, float const*, float const*, int, int, int, strata::kernels::KvHostPools)",
+        "calls": 84,
+        "sum_ms": 0.54704
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::gate(float const*, float const*, float*, int, int)",
+        "calls": 90,
+        "sum_ms": 0.4728
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::gate(float const*, float const*, float*, int, int)",
+        "calls": 84,
+        "sum_ms": 0.44752
+      },
+      {
+        "device": 1,
+        "name": "void strata::kernels::(anonymous namespace)::block_topk_reg_kernel<33>(float const*, int const*, long, long, int*)",
+        "calls": 90,
+        "sum_ms": 0.429596
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::block_topk_reg_kernel<33>(float const*, int const*, long, long, int*)",
+        "calls": 84,
+        "sum_ms": 0.40112
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::logits_nonfinite_kernel(float const*, int, int, unsigned int*)",
+        "calls": 15,
+        "sum_ms": 0.32448
+      },
+      {
+        "device": 0,
+        "name": "void strata::kernels::(anonymous namespace)::weighted_rms_norm<1024>(float const*, float const*, float*, int, float)",
+        "calls": 42,
+        "sum_ms": 0.2784
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::copy_i32_from_mapped_kernel(int*, int const volatile*, int)",
+        "calls": 42,
+        "sum_ms": 0.2576
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::copy_i32_from_mapped_kernel(int*, int const volatile*, int)",
+        "calls": 45,
+        "sum_ms": 0.24448
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::conv_residual_kernel(float const*, float const*, unsigned short const*, float const*, float const*, float*, float*)",
+        "calls": 14,
+        "sum_ms": 0.11344
+      },
+      {
+        "device": 1,
+        "name": "strata::kernels::(anonymous namespace)::post(float const*, float const*, float const*, float*, int, int, float)",
+        "calls": 15,
+        "sum_ms": 0.10944
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::post(float const*, float const*, float const*, float*, int, int, float)",
+        "calls": 14,
+        "sum_ms": 0.10896
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::history_advance_kernel(float*, float const*)",
+        "calls": 14,
+        "sum_ms": 0.10512
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::broadcast_streams_kernel(float const*, float*, long, int)",
+        "calls": 14,
+        "sum_ms": 0.1048
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::broadcast_kernel(float const*, float const*, float*)",
+        "calls": 14,
+        "sum_ms": 0.10384
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::embed_rows_kernel(int, unsigned char const*, unsigned long, int const*, long, float*)",
+        "calls": 14,
+        "sum_ms": 0.101916
+      },
+      {
+        "device": 0,
+        "name": "strata::kernels::(anonymous namespace)::gate_kernel(float const*, float const*, float*, float)",
+        "calls": 14,
+        "sum_ms": 0.06624
+      }
+    ],
+    "copies": [
+      {
+        "device": 0,
+        "kind": 4597,
+        "bytes_per_copy": 24576,
+        "calls": 84,
+        "sum_ms": 0.366396,
+        "total_bytes": 2064384
+      },
+      {
+        "device": 0,
+        "kind": 4597,
+        "bytes_per_copy": 40960,
+        "calls": 14,
+        "sum_ms": 0.06736,
+        "total_bytes": 573440
+      },
+      {
+        "device": 1,
+        "kind": 4597,
+        "bytes_per_copy": 24576,
+        "calls": 90,
+        "sum_ms": 0.43216,
+        "total_bytes": 2211840
+      }
+    ],
+    "apis": [
+      {
+        "name": "hipGraphLaunch",
+        "calls": 29,
+        "sum_ms": 221.495998
+      },
+      {
+        "name": "hipStreamSynchronize",
+        "calls": 45,
+        "sum_ms": 94.358881
+      },
+      {
+        "name": "hipLaunchKernel",
+        "calls": 15,
+        "sum_ms": 1.354851
+      },
+      {
+        "name": "",
+        "calls": 29,
+        "sum_ms": 0.15669
+      },
+      {
+        "name": "hipSetDevice",
+        "calls": 60,
+        "sum_ms": 0.0633
+      },
+      {
+        "name": "hipGetDevice",
+        "calls": 59,
+        "sum_ms": 0.03594
+      },
+      {
+        "name": "__hipPushCallConfiguration",
+        "calls": 15,
+        "sum_ms": 0.02842
+      },
+      {
+        "name": "__hipPopCallConfiguration",
+        "calls": 15,
+        "sum_ms": 0.01783
+      },
+      {
+        "name": "hipGetLastError",
+        "calls": 15,
+        "sum_ms": 0.00597
+      }
+    ],
+    "cross_device_overlap_ms": 0.0
+  }
+}

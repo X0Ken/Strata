@@ -1,0 +1,4652 @@
+{
+  "source_commit": "f3e63609cf8a879114db1c60c424b8b0280e5752",
+  "mtp_source_commit": "ebe417d8961aafa277b8defc2654dac26da477a8",
+  "parallel_source_commit": "51108284f8d7b1531215ee7688dcf58c05f9b9d3",
+  "cases": [
+    {
+      "directory": "deep-baseline-20261021",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "performance": 3,
+        "trace": 1
+      },
+      "functional_passed": 0,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "4096",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1"
+        ],
+        "pid": 51263,
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 21457,
+          "expert_cache_mib": 46480,
+          "expert_slots_primary": 10883,
+          "expert_cache_primary_mib": 23519,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 3559,
+          "cvec": 0,
+          "arena_mib": 6756,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        }
+      },
+      "performance": [],
+      "chat": []
+    },
+    {
+      "directory": "deep-best-confirm",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "warmup": 1,
+        "performance": 12,
+        "chat_performance": 6
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "2048",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 23347,
+          "expert_cache_mib": 50578,
+          "expert_slots_primary": 11835,
+          "expert_cache_primary_mib": 25569,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 1517,
+          "cvec": 0,
+          "arena_mib": 2657,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          512,
+          1024,
+          2048
+        ],
+        "repeats": 3,
+        "pid": 28015,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1
+        },
+        "optimization_env": {
+          "STRATA_DCU_GPU_PLAN": "1",
+          "STRATA_DCU_FUSE_COMBINE": "1",
+          "STRATA_DCU_MMVQ_ROWS": "4",
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "engine_sha256": "7d7191d2485b0f0730a92ce842bf69a9bd2d6fa26c4e5d4fa5d3c0c30fc0bce6",
+        "gpus": 2,
+        "workers": 8,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default"
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 3,
+          "decode_scores": [
+            21.3,
+            21.0,
+            21.2
+          ],
+          "decode_median": 21.2,
+          "prefill_median": 116.9,
+          "ttft_median": 1.1410755291581154,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 512,
+          "n": 3,
+          "decode_scores": [
+            21.0,
+            21.2,
+            21.3
+          ],
+          "decode_median": 21.2,
+          "prefill_median": 185.0,
+          "ttft_median": 2.8162370547652245,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 1024,
+          "n": 3,
+          "decode_scores": [
+            21.3,
+            21.5,
+            21.1
+          ],
+          "decode_median": 21.3,
+          "prefill_median": 202.0,
+          "ttft_median": 5.117328584194183,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 3,
+          "decode_scores": [
+            20.9,
+            21.3,
+            20.2
+          ],
+          "decode_median": 20.9,
+          "prefill_median": 212.3,
+          "ttft_median": 9.695491328835487,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": [
+        {
+          "workload": "chinese",
+          "n": 2,
+          "decode_scores": [
+            21.6,
+            21.8
+          ],
+          "decode_median": 21.700000000000003,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "81254d1ab7a78687791031f7b3bdb73cf73aabcaf31025e3820a4e8184bee2a8"
+          ]
+        },
+        {
+          "workload": "explanation",
+          "n": 2,
+          "decode_scores": [
+            21.9,
+            21.9
+          ],
+          "decode_median": 21.9,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "b0ee38da55f1211cb8436e346fe252166bc665c673e85a0870cbca3b6ca9d215"
+          ]
+        },
+        {
+          "workload": "python",
+          "n": 2,
+          "decode_scores": [
+            21.5,
+            21.7
+          ],
+          "decode_median": 21.6,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "acd59b9b42f28dc06ad6ba2af44ff21fb16a8686d769f3ae11f0eb08f7b76179"
+          ]
+        }
+      ]
+    },
+    {
+      "directory": "deep-best-trace",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "warmup": 1,
+        "performance": 2,
+        "trace": 1
+      },
+      "functional_passed": 0,
+      "configuration": {
+        "kind": "configuration",
+        "gpus": 2,
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "2048",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1"
+        ],
+        "pid": 38933,
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 23347,
+          "expert_cache_mib": 50578,
+          "expert_slots_primary": 11835,
+          "expert_cache_primary_mib": 25569,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 1517,
+          "cvec": 0,
+          "arena_mib": 2657,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "engine_sha256": "7d7191d2485b0f0730a92ce842bf69a9bd2d6fa26c4e5d4fa5d3c0c30fc0bce6",
+        "optimization_env": {
+          "STRATA_DCU_GPU_PLAN": "1",
+          "STRATA_DCU_FUSE_COMBINE": "1",
+          "STRATA_DCU_MMVQ_ROWS": "4",
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_SH_STREAM": "0",
+          "STRATA_DECODE_TIMING": "1"
+        }
+      },
+      "performance": [],
+      "chat": []
+    },
+    {
+      "directory": "deep-cache-2048-w8-r4-fuse0-clean-1",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "warmup": 1,
+        "performance": 4
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "2048",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 23347,
+          "expert_cache_mib": 50578,
+          "expert_slots_primary": 11835,
+          "expert_cache_primary_mib": 25569,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 1517,
+          "cvec": 0,
+          "arena_mib": 2657,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 2,
+        "pid": 57243,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1
+        },
+        "optimization_env": {
+          "STRATA_DCU_GPU_PLAN": "1",
+          "STRATA_DCU_FUSE_COMBINE": "0",
+          "STRATA_DCU_MMVQ_ROWS": "4",
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "engine_sha256": "7d7191d2485b0f0730a92ce842bf69a9bd2d6fa26c4e5d4fa5d3c0c30fc0bce6",
+        "gpus": 2,
+        "workers": 8,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default"
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 2,
+          "decode_scores": [
+            20.8,
+            20.6
+          ],
+          "decode_median": 20.700000000000003,
+          "prefill_median": 115.95,
+          "ttft_median": 1.152113400399685,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 2,
+          "decode_scores": [
+            20.4,
+            20.3
+          ],
+          "decode_median": 20.35,
+          "prefill_median": 212.5,
+          "ttft_median": 9.701007138937712,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": []
+    },
+    {
+      "directory": "deep-cache-2048-w8-r4-fuse1",
+      "complete": true,
+      "excluded": true,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "warmup": 1,
+        "performance": 4
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "2048",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 22194,
+          "expert_cache_mib": 48080,
+          "expert_slots_primary": 11253,
+          "expert_cache_primary_mib": 24320,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 1511,
+          "cvec": 0,
+          "arena_mib": 5156,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 2,
+        "pid": 44903,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 18,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1
+        },
+        "optimization_env": {
+          "STRATA_DCU_GPU_PLAN": "1",
+          "STRATA_DCU_FUSE_COMBINE": "1",
+          "STRATA_DCU_MMVQ_ROWS": "4",
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "engine_sha256": "988dfba850f6bbcae5f120fd5698a8d475d0e6d715c04a087906ed6cbf632130",
+        "gpus": 2,
+        "workers": 8,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default"
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 2,
+          "decode_scores": [
+            7.9,
+            5.0
+          ],
+          "decode_median": 6.45,
+          "prefill_median": 59.949999999999996,
+          "ttft_median": 2.3247667253017426,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 2,
+          "decode_scores": [
+            5.6,
+            5.5
+          ],
+          "decode_median": 5.55,
+          "prefill_median": 97.45,
+          "ttft_median": 21.19812435656786,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": []
+    },
+    {
+      "directory": "deep-cache-2048-w8-r4-fuse1-clean-2",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "warmup": 1,
+        "performance": 4
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "2048",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 23347,
+          "expert_cache_mib": 50578,
+          "expert_slots_primary": 11835,
+          "expert_cache_primary_mib": 25569,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 1517,
+          "cvec": 0,
+          "arena_mib": 2657,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 2,
+        "pid": 50522,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1
+        },
+        "optimization_env": {
+          "STRATA_DCU_GPU_PLAN": "1",
+          "STRATA_DCU_FUSE_COMBINE": "1",
+          "STRATA_DCU_MMVQ_ROWS": "4",
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "engine_sha256": "7d7191d2485b0f0730a92ce842bf69a9bd2d6fa26c4e5d4fa5d3c0c30fc0bce6",
+        "gpus": 2,
+        "workers": 8,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default"
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 2,
+          "decode_scores": [
+            21.0,
+            21.3
+          ],
+          "decode_median": 21.15,
+          "prefill_median": 116.65,
+          "ttft_median": 1.144309300929308,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 2,
+          "decode_scores": [
+            21.4,
+            21.0
+          ],
+          "decode_median": 21.2,
+          "prefill_median": 212.8,
+          "ttft_median": 9.685751486569643,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": []
+    },
+    {
+      "directory": "deep-cache-2560-w12-r4",
+      "complete": true,
+      "excluded": true,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "warmup": 1,
+        "performance": 4
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "12",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "2560",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 22516,
+          "expert_cache_mib": 48771,
+          "expert_slots_primary": 11595,
+          "expert_cache_primary_mib": 25054,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 778,
+          "cvec": 0,
+          "arena_mib": 4464,
+          "pool_workers": 12,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 2,
+        "pid": 28533,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1,
+          "9": 1,
+          "10": 1,
+          "11": 1,
+          "12": 1
+        },
+        "optimization_env": {
+          "STRATA_DCU_MMVQ_ROWS": "4",
+          "STRATA_DCU_GPU_PLAN": "1",
+          "STRATA_DCU_FUSE_COMBINE": "1",
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "engine_sha256": "988dfba850f6bbcae5f120fd5698a8d475d0e6d715c04a087906ed6cbf632130",
+        "gpus": 2,
+        "workers": 12,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default"
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 2,
+          "decode_scores": [
+            7.6,
+            7.9
+          ],
+          "decode_median": 7.75,
+          "prefill_median": 58.099999999999994,
+          "ttft_median": 2.368176393210888,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 2,
+          "decode_scores": [
+            8.0,
+            7.7
+          ],
+          "decode_median": 7.85,
+          "prefill_median": 110.6,
+          "ttft_median": 18.64278483390808,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": []
+    },
+    {
+      "directory": "deep-cache-2560-w12-r4-fuse1-clean-2",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "warmup": 1,
+        "performance": 4
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "12",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "2560",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 22875,
+          "expert_cache_mib": 49552,
+          "expert_slots_primary": 11595,
+          "expert_cache_primary_mib": 25054,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 2029,
+          "cvec": 0,
+          "arena_mib": 3684,
+          "pool_workers": 12,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 2,
+        "pid": 43754,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1,
+          "9": 1,
+          "10": 1,
+          "11": 1,
+          "12": 1
+        },
+        "optimization_env": {
+          "STRATA_DCU_GPU_PLAN": "1",
+          "STRATA_DCU_FUSE_COMBINE": "1",
+          "STRATA_DCU_MMVQ_ROWS": "4",
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "engine_sha256": "7d7191d2485b0f0730a92ce842bf69a9bd2d6fa26c4e5d4fa5d3c0c30fc0bce6",
+        "gpus": 2,
+        "workers": 12,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default"
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 2,
+          "decode_scores": [
+            20.8,
+            19.5
+          ],
+          "decode_median": 20.15,
+          "prefill_median": 116.4,
+          "ttft_median": 1.1475991308689117,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 2,
+          "decode_scores": [
+            18.3,
+            17.2
+          ],
+          "decode_median": 17.75,
+          "prefill_median": 211.85,
+          "ttft_median": 9.722542833536863,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": []
+    },
+    {
+      "directory": "deep-cache-2560-w4-r4",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "warmup": 1,
+        "performance": 4
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "4",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "2560",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 22875,
+          "expert_cache_mib": 49552,
+          "expert_slots_primary": 11595,
+          "expert_cache_primary_mib": 25054,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 2029,
+          "cvec": 0,
+          "arena_mib": 3684,
+          "pool_workers": 4,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 2,
+        "pid": 21314,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1
+        },
+        "optimization_env": {
+          "STRATA_DCU_MMVQ_ROWS": "4",
+          "STRATA_DCU_GPU_PLAN": "1",
+          "STRATA_DCU_FUSE_COMBINE": "1",
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "engine_sha256": "988dfba850f6bbcae5f120fd5698a8d475d0e6d715c04a087906ed6cbf632130",
+        "gpus": 2,
+        "workers": 4,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default"
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 2,
+          "decode_scores": [
+            19.8,
+            19.4
+          ],
+          "decode_median": 19.6,
+          "prefill_median": 116.55,
+          "ttft_median": 1.1512273401021957,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 2,
+          "decode_scores": [
+            19.4,
+            19.4
+          ],
+          "decode_median": 19.4,
+          "prefill_median": 212.2,
+          "ttft_median": 9.706225771456957,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": []
+    },
+    {
+      "directory": "deep-cache-2560-w8-r4",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "warmup": 1,
+        "performance": 4
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "2560",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 22875,
+          "expert_cache_mib": 49552,
+          "expert_slots_primary": 11595,
+          "expert_cache_primary_mib": 25054,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 2029,
+          "cvec": 0,
+          "arena_mib": 3684,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 2,
+        "pid": 15080,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1
+        },
+        "optimization_env": {
+          "STRATA_DCU_MMVQ_ROWS": "4",
+          "STRATA_DCU_GPU_PLAN": "1",
+          "STRATA_DCU_FUSE_COMBINE": "1",
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "engine_sha256": "988dfba850f6bbcae5f120fd5698a8d475d0e6d715c04a087906ed6cbf632130",
+        "gpus": 2,
+        "workers": 8,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default"
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 2,
+          "decode_scores": [
+            21.0,
+            20.7
+          ],
+          "decode_median": 20.85,
+          "prefill_median": 116.25,
+          "ttft_median": 1.148994568735361,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 2,
+          "decode_scores": [
+            20.2,
+            20.7
+          ],
+          "decode_median": 20.45,
+          "prefill_median": 211.45,
+          "ttft_median": 9.734413791447878,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": []
+    },
+    {
+      "directory": "deep-cache-2560-w8-r4-fuse0",
+      "complete": false,
+      "excluded": true,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "warmup": 1,
+        "performance": 1
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "2560",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 21556,
+          "expert_cache_mib": 46697,
+          "expert_slots_primary": 10850,
+          "expert_cache_primary_mib": 23449,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 2023,
+          "cvec": 0,
+          "arena_mib": 6539,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 2,
+        "pid": 57322,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 18,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1
+        },
+        "optimization_env": {
+          "STRATA_DCU_GPU_PLAN": "1",
+          "STRATA_DCU_FUSE_COMBINE": "0",
+          "STRATA_DCU_MMVQ_ROWS": "4",
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "engine_sha256": "988dfba850f6bbcae5f120fd5698a8d475d0e6d715c04a087906ed6cbf632130",
+        "gpus": 2,
+        "workers": 8,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default"
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 1,
+          "decode_scores": [
+            5.2
+          ],
+          "decode_median": 5.2,
+          "prefill_median": 49.0,
+          "ttft_median": 2.78708852827549,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": []
+    },
+    {
+      "directory": "deep-cache-3072-w8-r4",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "warmup": 1,
+        "performance": 4
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "3072",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 22400,
+          "expert_cache_mib": 48528,
+          "expert_slots_primary": 11355,
+          "expert_cache_primary_mib": 24542,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 2539,
+          "cvec": 0,
+          "arena_mib": 4709,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 2,
+        "pid": 8091,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1
+        },
+        "optimization_env": {
+          "STRATA_DCU_MMVQ_ROWS": "4",
+          "STRATA_DCU_GPU_PLAN": "1",
+          "STRATA_DCU_FUSE_COMBINE": "1",
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "engine_sha256": "988dfba850f6bbcae5f120fd5698a8d475d0e6d715c04a087906ed6cbf632130",
+        "gpus": 2,
+        "workers": 8,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default"
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 2,
+          "decode_scores": [
+            20.4,
+            19.3
+          ],
+          "decode_median": 19.85,
+          "prefill_median": 115.1,
+          "ttft_median": 1.161284688860178,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 2,
+          "decode_scores": [
+            16.4,
+            20.4
+          ],
+          "decode_median": 18.4,
+          "prefill_median": 211.55,
+          "ttft_median": 9.734152045100927,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": []
+    },
+    {
+      "directory": "deep-final",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 2,
+        "functional": 21,
+        "repeatability": 2,
+        "resources": 2,
+        "performance": 12,
+        "chat_performance": 6
+      },
+      "functional_passed": 21,
+      "configuration": {
+        "kind": "configuration",
+        "gpus": 2,
+        "run": 1,
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "2048",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1"
+        ],
+        "startup_seconds": 123.45671548694372,
+        "libraries": [
+          "/usr/local/hygon/dtk-25.04/hip/lib/libgalaxyhip.so.5.2.25085.1211-205b0686",
+          "/usr/local/hygon/dtk-25.04/lib/librocblas.so.4.1"
+        ],
+        "environment": {
+          "STRATA_DCU_GPU_PLAN": "1",
+          "STRATA_DCU_FUSE_COMBINE": "1",
+          "STRATA_DCU_MMVQ_ROWS": "4",
+          "HIP_VISIBLE_DEVICES": "0,1",
+          "STRATA_ROUTE_TAIL_SKIP": "0"
+        },
+        "engine_sha256": "7d7191d2485b0f0730a92ce842bf69a9bd2d6fa26c4e5d4fa5d3c0c30fc0bce6",
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 23347,
+          "expert_cache_mib": 50578,
+          "expert_slots_primary": 11835,
+          "expert_cache_primary_mib": 25569,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 1517,
+          "cvec": 0,
+          "arena_mib": 2657,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "layout": "layer"
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 3,
+          "decode_scores": [
+            21.1,
+            20.5,
+            21.3
+          ],
+          "decode_median": 21.1,
+          "prefill_median": 116.7,
+          "ttft_median": 1.151906557381153,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 512,
+          "n": 3,
+          "decode_scores": [
+            21.1,
+            20.8,
+            21.4
+          ],
+          "decode_median": 21.1,
+          "prefill_median": 185.9,
+          "ttft_median": 2.8024552762508392,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 1024,
+          "n": 3,
+          "decode_scores": [
+            20.3,
+            20.8,
+            21.3
+          ],
+          "decode_median": 20.8,
+          "prefill_median": 202.9,
+          "ttft_median": 5.097240924835205,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 3,
+          "decode_scores": [
+            21.2,
+            20.9,
+            20.2
+          ],
+          "decode_median": 20.9,
+          "prefill_median": 212.2,
+          "ttft_median": 9.701593980193138,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": [
+        {
+          "workload": "chinese",
+          "n": 2,
+          "decode_scores": [
+            21.4,
+            21.7
+          ],
+          "decode_median": 21.549999999999997,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "81254d1ab7a78687791031f7b3bdb73cf73aabcaf31025e3820a4e8184bee2a8"
+          ]
+        },
+        {
+          "workload": "explanation",
+          "n": 2,
+          "decode_scores": [
+            21.7,
+            22.0
+          ],
+          "decode_median": 21.85,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "b0ee38da55f1211cb8436e346fe252166bc665c673e85a0870cbca3b6ca9d215"
+          ]
+        },
+        {
+          "workload": "python",
+          "n": 2,
+          "decode_scores": [
+            21.6,
+            21.6
+          ],
+          "decode_median": 21.6,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "acd59b9b42f28dc06ad6ba2af44ff21fb16a8686d769f3ae11f0eb08f7b76179"
+          ]
+        }
+      ]
+    },
+    {
+      "directory": "deep-fuse-0-rows-1",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "performance": 4
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "4096",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 21457,
+          "expert_cache_mib": 46480,
+          "expert_slots_primary": 10883,
+          "expert_cache_primary_mib": 23519,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 3559,
+          "cvec": 0,
+          "arena_mib": 6756,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 2,
+        "pid": 806,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1
+        },
+        "optimization_env": {
+          "STRATA_DCU_MMVQ_ROWS": "1",
+          "STRATA_DCU_GPU_PLAN": "1",
+          "STRATA_DCU_FUSE_COMBINE": "0",
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "engine_sha256": "988dfba850f6bbcae5f120fd5698a8d475d0e6d715c04a087906ed6cbf632130",
+        "gpus": 2,
+        "workers": 8,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default"
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 2,
+          "decode_scores": [
+            17.4,
+            17.6
+          ],
+          "decode_median": 17.5,
+          "prefill_median": 71.5,
+          "ttft_median": 2.968501817435026,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 2,
+          "decode_scores": [
+            18.5,
+            18.7
+          ],
+          "decode_median": 18.6,
+          "prefill_median": 209.55,
+          "ttft_median": 9.831512298434973,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": []
+    },
+    {
+      "directory": "deep-fuse-1-rows-1",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "performance": 4
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "4096",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 21457,
+          "expert_cache_mib": 46480,
+          "expert_slots_primary": 10883,
+          "expert_cache_primary_mib": 23519,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 3559,
+          "cvec": 0,
+          "arena_mib": 6756,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 2,
+        "pid": 44419,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1
+        },
+        "optimization_env": {
+          "STRATA_DCU_MMVQ_ROWS": "1",
+          "STRATA_DCU_GPU_PLAN": "1",
+          "STRATA_DCU_FUSE_COMBINE": "1",
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "engine_sha256": "988dfba850f6bbcae5f120fd5698a8d475d0e6d715c04a087906ed6cbf632130",
+        "gpus": 2,
+        "workers": 8,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default"
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 2,
+          "decode_scores": [
+            18.7,
+            18.1
+          ],
+          "decode_median": 18.4,
+          "prefill_median": 71.05,
+          "ttft_median": 3.049576450139284,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 2,
+          "decode_scores": [
+            18.3,
+            16.8
+          ],
+          "decode_median": 17.55,
+          "prefill_median": 209.8,
+          "ttft_median": 9.83256995677948,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": []
+    },
+    {
+      "directory": "deep-fuse-1-rows-2",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "performance": 4
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "4096",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 21457,
+          "expert_cache_mib": 46480,
+          "expert_slots_primary": 10883,
+          "expert_cache_primary_mib": 23519,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 3559,
+          "cvec": 0,
+          "arena_mib": 6756,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 2,
+        "pid": 51979,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1
+        },
+        "optimization_env": {
+          "STRATA_DCU_MMVQ_ROWS": "2",
+          "STRATA_DCU_GPU_PLAN": "1",
+          "STRATA_DCU_FUSE_COMBINE": "1",
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "engine_sha256": "988dfba850f6bbcae5f120fd5698a8d475d0e6d715c04a087906ed6cbf632130",
+        "gpus": 2,
+        "workers": 8,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default"
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 2,
+          "decode_scores": [
+            19.3,
+            18.4
+          ],
+          "decode_median": 18.85,
+          "prefill_median": 71.15,
+          "ttft_median": 3.062900949269533,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 2,
+          "decode_scores": [
+            19.3,
+            19.2
+          ],
+          "decode_median": 19.25,
+          "prefill_median": 209.85,
+          "ttft_median": 9.817277744412422,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": []
+    },
+    {
+      "directory": "deep-fuse-1-rows-4",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "performance": 4
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "4096",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 21457,
+          "expert_cache_mib": 46480,
+          "expert_slots_primary": 10883,
+          "expert_cache_primary_mib": 23519,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 3559,
+          "cvec": 0,
+          "arena_mib": 6756,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 2,
+        "pid": 58988,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1
+        },
+        "optimization_env": {
+          "STRATA_DCU_MMVQ_ROWS": "4",
+          "STRATA_DCU_GPU_PLAN": "1",
+          "STRATA_DCU_FUSE_COMBINE": "1",
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "engine_sha256": "988dfba850f6bbcae5f120fd5698a8d475d0e6d715c04a087906ed6cbf632130",
+        "gpus": 2,
+        "workers": 8,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default"
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 2,
+          "decode_scores": [
+            19.6,
+            17.0
+          ],
+          "decode_median": 18.3,
+          "prefill_median": 71.1,
+          "ttft_median": 3.050397574901581,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 2,
+          "decode_scores": [
+            19.6,
+            19.7
+          ],
+          "decode_median": 19.65,
+          "prefill_median": 210.4,
+          "ttft_median": 9.803055591881275,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": []
+    },
+    {
+      "directory": "deep-gpuplan-0",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "performance": 4
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "4096",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 21457,
+          "expert_cache_mib": 46480,
+          "expert_slots_primary": 10883,
+          "expert_cache_primary_mib": 23519,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 3559,
+          "cvec": 0,
+          "arena_mib": 6756,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 2,
+        "pid": 26920,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1
+        },
+        "gpus": 2,
+        "workers": 8,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default"
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 2,
+          "decode_scores": [
+            17.6,
+            17.6
+          ],
+          "decode_median": 17.6,
+          "prefill_median": 71.3,
+          "ttft_median": 3.034642707556486,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 2,
+          "decode_scores": [
+            17.6,
+            17.9
+          ],
+          "decode_median": 17.75,
+          "prefill_median": 211.05,
+          "ttft_median": 9.766940239816904,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": []
+    },
+    {
+      "directory": "deep-gpuplan-1",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "performance": 4
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "4096",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 21457,
+          "expert_cache_mib": 46480,
+          "expert_slots_primary": 10883,
+          "expert_cache_primary_mib": 23519,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 3559,
+          "cvec": 0,
+          "arena_mib": 6756,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 2,
+        "pid": 19999,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1
+        },
+        "gpus": 2,
+        "workers": 8,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default"
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 2,
+          "decode_scores": [
+            18.6,
+            18.3
+          ],
+          "decode_median": 18.450000000000003,
+          "prefill_median": 71.8,
+          "ttft_median": 2.934505671262741,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 2,
+          "decode_scores": [
+            18.5,
+            18.6
+          ],
+          "decode_median": 18.55,
+          "prefill_median": 210.4,
+          "ttft_median": 9.795046020299196,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": []
+    },
+    {
+      "directory": "deep-host-baseline",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "performance": 2
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "4096",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 21457,
+          "expert_cache_mib": 46480,
+          "expert_slots_primary": 10883,
+          "expert_cache_primary_mib": 23519,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 3559,
+          "cvec": 0,
+          "arena_mib": 6756,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 1,
+        "pid": 1228,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1
+        },
+        "gpus": 2,
+        "workers": 8,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default"
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 1,
+          "decode_scores": [
+            16.6
+          ],
+          "decode_median": 16.6,
+          "prefill_median": 26.2,
+          "ttft_median": 4.943866446614265,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 1,
+          "decode_scores": [
+            17.5
+          ],
+          "decode_median": 17.5,
+          "prefill_median": 210.8,
+          "ttft_median": 9.779156513512135,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": []
+    },
+    {
+      "directory": "deep-matched-control",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "warmup": 1,
+        "performance": 6,
+        "chat_performance": 6
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "2048",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 23347,
+          "expert_cache_mib": 50578,
+          "expert_slots_primary": 11835,
+          "expert_cache_primary_mib": 25569,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 1517,
+          "cvec": 0,
+          "arena_mib": 2657,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 3,
+        "pid": 24358,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1
+        },
+        "optimization_env": {
+          "STRATA_DCU_GPU_PLAN": "0",
+          "STRATA_DCU_FUSE_COMBINE": "0",
+          "STRATA_DCU_MMVQ_ROWS": "4",
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "engine_sha256": "7d7191d2485b0f0730a92ce842bf69a9bd2d6fa26c4e5d4fa5d3c0c30fc0bce6",
+        "gpus": 2,
+        "workers": 8,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default",
+        "mtp": false,
+        "max_drafts": 0,
+        "draft_acceptance": null
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 3,
+          "decode_scores": [
+            19.5,
+            19.3,
+            19.3
+          ],
+          "decode_median": 19.3,
+          "prefill_median": 117.0,
+          "ttft_median": 1.1455953195691109,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 3,
+          "decode_scores": [
+            19.2,
+            19.1,
+            18.7
+          ],
+          "decode_median": 19.1,
+          "prefill_median": 212.9,
+          "ttft_median": 9.690028436481953,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": [
+        {
+          "workload": "chinese",
+          "n": 2,
+          "decode_scores": [
+            19.5,
+            19.6
+          ],
+          "decode_median": 19.55,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "81254d1ab7a78687791031f7b3bdb73cf73aabcaf31025e3820a4e8184bee2a8"
+          ]
+        },
+        {
+          "workload": "explanation",
+          "n": 2,
+          "decode_scores": [
+            19.6,
+            20.1
+          ],
+          "decode_median": 19.85,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "b0ee38da55f1211cb8436e346fe252166bc665c673e85a0870cbca3b6ca9d215"
+          ]
+        },
+        {
+          "workload": "python",
+          "n": 2,
+          "decode_scores": [
+            19.2,
+            19.5
+          ],
+          "decode_median": 19.35,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "acd59b9b42f28dc06ad6ba2af44ff21fb16a8686d769f3ae11f0eb08f7b76179"
+          ]
+        }
+      ]
+    },
+    {
+      "directory": "deep-mtp3-compat",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "warmup": 1,
+        "performance": 6,
+        "chat_performance": 6
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "4",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "2048",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off",
+          "--mtp",
+          "/root/code/strata-dcu/mtp-rt-de4b8e4d",
+          "--mtp-max-t",
+          "4",
+          "--spec-min-p",
+          "0",
+          "--lookup-chain",
+          "0"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 22982,
+          "expert_cache_mib": 49775,
+          "expert_slots_primary": 11835,
+          "expert_cache_primary_mib": 25569,
+          "spec": 4,
+          "mtp_max": 4,
+          "lookup": 0,
+          "vram_free_mib": 1505,
+          "cvec": 0,
+          "arena_mib": 3461,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 3,
+        "pid": 60446,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1
+        },
+        "optimization_env": {
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_DCU_MMVQ_ROWS": "4",
+          "STRATA_DCU_GPU_PLAN": "0",
+          "STRATA_DCU_FUSE_COMBINE": "0",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "engine_sha256": "4b6bb98600de85c26d7425fdf3c4ced52775e540c917b9014e52278bda1d9f59",
+        "gpus": 2,
+        "workers": 8,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default",
+        "mtp": true,
+        "max_drafts": 3,
+        "draft_acceptance": null
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 3,
+          "decode_scores": [
+            45.3,
+            46.2,
+            45.3
+          ],
+          "decode_median": 45.3,
+          "prefill_median": 112.5,
+          "ttft_median": 1.1887435540556908,
+          "offered": 297,
+          "accepted": 288,
+          "acceptance": 0.9696969696969697,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 3,
+          "decode_scores": [
+            44.9,
+            45.2,
+            44.7
+          ],
+          "decode_median": 44.9,
+          "prefill_median": 201.6,
+          "ttft_median": 10.210535444319248,
+          "offered": 291,
+          "accepted": 288,
+          "acceptance": 0.9896907216494846,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": [
+        {
+          "workload": "chinese",
+          "n": 2,
+          "decode_scores": [
+            33.7,
+            34.2
+          ],
+          "decode_median": 33.95,
+          "offered": 564,
+          "accepted": 322,
+          "acceptance": 0.5709219858156028,
+          "output_sha256": [
+            "1605bc161875a9622b05750fb020ca3f2250cb6e8228b7bf7ccf52e05cdd601f"
+          ]
+        },
+        {
+          "workload": "explanation",
+          "n": 2,
+          "decode_scores": [
+            36.2,
+            36.6
+          ],
+          "decode_median": 36.400000000000006,
+          "offered": 534,
+          "accepted": 338,
+          "acceptance": 0.6329588014981273,
+          "output_sha256": [
+            "430a369bd9d51303e497512b1d7eada81059e89a055e27cd943af954452bd079"
+          ]
+        },
+        {
+          "workload": "python",
+          "n": 2,
+          "decode_scores": [
+            40.1,
+            40.8
+          ],
+          "decode_median": 40.45,
+          "offered": 474,
+          "accepted": 352,
+          "acceptance": 0.7426160337552743,
+          "output_sha256": [
+            "cca1794db6d0dd189cb407603d0d603a0ddcd038b08ee27cbd2bd91ab67fe0ed"
+          ]
+        }
+      ]
+    },
+    {
+      "directory": "deep-mtp3-final",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 2,
+        "functional": 21,
+        "repeatability": 2,
+        "resources": 2,
+        "performance": 12,
+        "chat_performance": 6
+      },
+      "functional_passed": 21,
+      "configuration": {
+        "kind": "configuration",
+        "gpus": 2,
+        "run": 1,
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "4",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "2048",
+          "--mtp",
+          "/root/code/strata-dcu/mtp-rt-de4b8e4d",
+          "--mtp-max-t",
+          "4",
+          "--spec-min-p",
+          "0",
+          "--lookup-chain",
+          "0",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1"
+        ],
+        "startup_seconds": 133.42416702210903,
+        "libraries": [
+          "/usr/local/hygon/dtk-25.04/hip/lib/libgalaxyhip.so.5.2.25085.1211-205b0686",
+          "/usr/local/hygon/dtk-25.04/lib/librocblas.so.4.1"
+        ],
+        "environment": {
+          "HIP_VISIBLE_DEVICES": "0,1",
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_DCU_MMVQ_ROWS": "4",
+          "STRATA_DCU_GPU_PLAN": "1",
+          "STRATA_DCU_FUSE_COMBINE": "1"
+        },
+        "engine_sha256": "4b6bb98600de85c26d7425fdf3c4ced52775e540c917b9014e52278bda1d9f59",
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 22982,
+          "expert_cache_mib": 49775,
+          "expert_slots_primary": 11835,
+          "expert_cache_primary_mib": 25569,
+          "spec": 4,
+          "mtp_max": 4,
+          "lookup": 0,
+          "vram_free_mib": 1505,
+          "cvec": 0,
+          "arena_mib": 3461,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "mtp": true,
+        "max_drafts": 3,
+        "draft_acceptance": null,
+        "layout": "layer"
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 3,
+          "decode_scores": [
+            43.3,
+            40.6,
+            44.3
+          ],
+          "decode_median": 43.3,
+          "prefill_median": 115.2,
+          "ttft_median": 1.1580620110034943,
+          "offered": 297,
+          "accepted": 288,
+          "acceptance": 0.9696969696969697,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 512,
+          "n": 3,
+          "decode_scores": [
+            40.1,
+            42.6,
+            43.9
+          ],
+          "decode_median": 42.6,
+          "prefill_median": 181.5,
+          "ttft_median": 2.8684839457273483,
+          "offered": 297,
+          "accepted": 288,
+          "acceptance": 0.9696969696969697,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 1024,
+          "n": 3,
+          "decode_scores": [
+            43.9,
+            44.7,
+            44.6
+          ],
+          "decode_median": 44.6,
+          "prefill_median": 198.1,
+          "ttft_median": 5.218238092958927,
+          "offered": 288,
+          "accepted": 288,
+          "acceptance": 1.0,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 3,
+          "decode_scores": [
+            41.5,
+            44.5,
+            44.6
+          ],
+          "decode_median": 44.5,
+          "prefill_median": 207.0,
+          "ttft_median": 9.944567911326885,
+          "offered": 291,
+          "accepted": 288,
+          "acceptance": 0.9896907216494846,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": [
+        {
+          "workload": "chinese",
+          "n": 2,
+          "decode_scores": [
+            34.1,
+            33.9
+          ],
+          "decode_median": 34.0,
+          "offered": 564,
+          "accepted": 322,
+          "acceptance": 0.5709219858156028,
+          "output_sha256": [
+            "1605bc161875a9622b05750fb020ca3f2250cb6e8228b7bf7ccf52e05cdd601f"
+          ]
+        },
+        {
+          "workload": "explanation",
+          "n": 2,
+          "decode_scores": [
+            36.3,
+            36.4
+          ],
+          "decode_median": 36.349999999999994,
+          "offered": 534,
+          "accepted": 338,
+          "acceptance": 0.6329588014981273,
+          "output_sha256": [
+            "430a369bd9d51303e497512b1d7eada81059e89a055e27cd943af954452bd079"
+          ]
+        },
+        {
+          "workload": "python",
+          "n": 2,
+          "decode_scores": [
+            40.4,
+            40.7
+          ],
+          "decode_median": 40.55,
+          "offered": 474,
+          "accepted": 352,
+          "acceptance": 0.7426160337552743,
+          "output_sha256": [
+            "cca1794db6d0dd189cb407603d0d603a0ddcd038b08ee27cbd2bd91ab67fe0ed"
+          ]
+        }
+      ]
+    },
+    {
+      "directory": "deep-old-final",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "warmup": 1,
+        "performance": 12,
+        "chat_performance": 6
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "4096",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 21457,
+          "expert_cache_mib": 46480,
+          "expert_slots_primary": 10883,
+          "expert_cache_primary_mib": 23519,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 3559,
+          "cvec": 0,
+          "arena_mib": 6756,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          512,
+          1024,
+          2048
+        ],
+        "repeats": 3,
+        "pid": 15760,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1
+        },
+        "optimization_env": {
+          "STRATA_DCU_GPU_PLAN": "0",
+          "STRATA_DCU_FUSE_COMBINE": "0",
+          "STRATA_DCU_MMVQ_ROWS": "1",
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "engine_sha256": "b2aa6a034d2a7e0b593487194a311adc63ba12cfeedd8b4c2116d8868d5e21be",
+        "gpus": 2,
+        "workers": 8,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default"
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 3,
+          "decode_scores": [
+            17.6,
+            17.3,
+            16.2
+          ],
+          "decode_median": 17.3,
+          "prefill_median": 116.5,
+          "ttft_median": 1.163376696407795,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 512,
+          "n": 3,
+          "decode_scores": [
+            17.7,
+            16.6,
+            17.4
+          ],
+          "decode_median": 17.4,
+          "prefill_median": 183.5,
+          "ttft_median": 2.864163763821125,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 1024,
+          "n": 3,
+          "decode_scores": [
+            17.5,
+            17.8,
+            17.4
+          ],
+          "decode_median": 17.5,
+          "prefill_median": 201.0,
+          "ttft_median": 5.169380225241184,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 3,
+          "decode_scores": [
+            17.6,
+            17.2,
+            17.3
+          ],
+          "decode_median": 17.3,
+          "prefill_median": 210.4,
+          "ttft_median": 9.800727158784866,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": [
+        {
+          "workload": "chinese",
+          "n": 2,
+          "decode_scores": [
+            18.7,
+            18.4
+          ],
+          "decode_median": 18.549999999999997,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "1605bc161875a9622b05750fb020ca3f2250cb6e8228b7bf7ccf52e05cdd601f"
+          ]
+        },
+        {
+          "workload": "explanation",
+          "n": 2,
+          "decode_scores": [
+            18.7,
+            18.9
+          ],
+          "decode_median": 18.799999999999997,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "b5104dce7ce3f73a84e4d2e72848e8dac261c573f244e73ec16291e85594ac3c"
+          ]
+        },
+        {
+          "workload": "python",
+          "n": 2,
+          "decode_scores": [
+            18.2,
+            18.5
+          ],
+          "decode_median": 18.35,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "acd59b9b42f28dc06ad6ba2af44ff21fb16a8686d769f3ae11f0eb08f7b76179"
+          ]
+        }
+      ]
+    },
+    {
+      "directory": "deep-parallel-mtp3",
+      "complete": false,
+      "excluded": true,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "warmup": 1,
+        "performance": 6
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "4",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "2048",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off",
+          "--mtp",
+          "/root/code/strata-dcu/mtp-rt-de4b8e4d",
+          "--mtp-max-t",
+          "4",
+          "--spec-min-p",
+          "0",
+          "--lookup-chain",
+          "0"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 22982,
+          "expert_cache_mib": 49775,
+          "expert_slots_primary": 11835,
+          "expert_cache_primary_mib": 25569,
+          "spec": 4,
+          "mtp_max": 4,
+          "lookup": 0,
+          "vram_free_mib": 0,
+          "cvec": 0,
+          "arena_mib": 3805,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 3,
+        "pid": 44951,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1
+        },
+        "optimization_env": {
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_DCU_GPU_PLAN": "1",
+          "STRATA_DCU_FUSE_COMBINE": "1",
+          "STRATA_DCU_MMVQ_ROWS": "4",
+          "STRATA_DCU_PAR_PLAN": "1",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "engine_sha256": "4efc49b3ee3b46ea2ce2dc774148e8769ea1977277c5b4438a3937f028c82bf1",
+        "gpus": 2,
+        "workers": 8,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default",
+        "mtp": true,
+        "max_drafts": 3,
+        "draft_acceptance": null
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 3,
+          "decode_scores": [
+            15.8,
+            15.5,
+            14.9
+          ],
+          "decode_median": 15.5,
+          "prefill_median": 66.8,
+          "ttft_median": 2.0481732338666916,
+          "offered": 297,
+          "accepted": 288,
+          "acceptance": 0.9696969696969697,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 3,
+          "decode_scores": [
+            15.0,
+            15.8,
+            16.0
+          ],
+          "decode_median": 15.8,
+          "prefill_median": 111.8,
+          "ttft_median": 18.53983050584793,
+          "offered": 291,
+          "accepted": 288,
+          "acceptance": 0.9896907216494846,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": []
+    },
+    {
+      "directory": "deep-parallel-nomtp",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "warmup": 1,
+        "performance": 6,
+        "chat_performance": 6
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "2048",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 23347,
+          "expert_cache_mib": 50578,
+          "expert_slots_primary": 11835,
+          "expert_cache_primary_mib": 25569,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 1517,
+          "cvec": 0,
+          "arena_mib": 2657,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 3,
+        "pid": 34941,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1
+        },
+        "optimization_env": {
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_DCU_GPU_PLAN": "1",
+          "STRATA_DCU_FUSE_COMBINE": "1",
+          "STRATA_DCU_MMVQ_ROWS": "4",
+          "STRATA_DCU_PAR_PLAN": "1",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "engine_sha256": "4efc49b3ee3b46ea2ce2dc774148e8769ea1977277c5b4438a3937f028c82bf1",
+        "gpus": 2,
+        "workers": 8,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default",
+        "mtp": false,
+        "max_drafts": 0,
+        "draft_acceptance": null
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 3,
+          "decode_scores": [
+            20.8,
+            21.4,
+            20.9
+          ],
+          "decode_median": 20.9,
+          "prefill_median": 116.6,
+          "ttft_median": 1.1465053707361221,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 3,
+          "decode_scores": [
+            21.4,
+            21.3,
+            21.0
+          ],
+          "decode_median": 21.3,
+          "prefill_median": 211.3,
+          "ttft_median": 9.746599309146404,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": [
+        {
+          "workload": "chinese",
+          "n": 2,
+          "decode_scores": [
+            21.8,
+            22.2
+          ],
+          "decode_median": 22.0,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "81254d1ab7a78687791031f7b3bdb73cf73aabcaf31025e3820a4e8184bee2a8"
+          ]
+        },
+        {
+          "workload": "explanation",
+          "n": 2,
+          "decode_scores": [
+            22.1,
+            22.1
+          ],
+          "decode_median": 22.1,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "b0ee38da55f1211cb8436e346fe252166bc665c673e85a0870cbca3b6ca9d215"
+          ]
+        },
+        {
+          "workload": "python",
+          "n": 2,
+          "decode_scores": [
+            22.1,
+            22.0
+          ],
+          "decode_median": 22.05,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "acd59b9b42f28dc06ad6ba2af44ff21fb16a8686d769f3ae11f0eb08f7b76179"
+          ]
+        }
+      ]
+    },
+    {
+      "directory": "deep-profile-layers",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "performance": 2
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "2",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "4096",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 21457,
+          "expert_cache_mib": 46480,
+          "expert_slots_primary": 10883,
+          "expert_cache_primary_mib": 23519,
+          "spec": 2,
+          "mtp_max": 0,
+          "lookup": 0,
+          "vram_free_mib": 3559,
+          "cvec": 0,
+          "arena_mib": 6756,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 1,
+        "pid": 7331,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1
+        },
+        "gpus": 2,
+        "workers": 8,
+        "profile": true,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default"
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 1,
+          "decode_scores": [
+            14.0
+          ],
+          "decode_median": 14.0,
+          "prefill_median": 26.1,
+          "ttft_median": 4.970991253852844,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "1c78a7d4a872ab51721ba87ebb6e63f6d2d4bb8b9f8bbb34519fc423b7ca7aba"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 1,
+          "decode_scores": [
+            13.5
+          ],
+          "decode_median": 13.5,
+          "prefill_median": 210.1,
+          "ttft_median": 9.823494791984558,
+          "offered": 0,
+          "accepted": 0,
+          "acceptance": null,
+          "output_sha256": [
+            "1c78a7d4a872ab51721ba87ebb6e63f6d2d4bb8b9f8bbb34519fc423b7ca7aba"
+          ]
+        }
+      ],
+      "chat": []
+    }
+  ],
+  "exclusions": [
+    "deep-cache-2560-w12-r4",
+    "deep-cache-2048-w8-r4-fuse1",
+    "deep-cache-2560-w8-r4-fuse0",
+    "deep-parallel-mtp3"
+  ],
+  "notes": [
+    "Final scores are deep-final (complete validation), deep-old-final (same-day old binary), deep-best-confirm (second optimized run), and separately named MTP runs. Exploratory samples are not pooled into final medians.",
+    "Initial deep-baseline-20261021 first 16-token warmup is labelled performance in the original record; it is not a scored 128-token run.",
+    "Earlier exploratory warmups counted a None sentinel in output_tokens; all reported performance samples filter None. Final runners filter it for warmups too.",
+    "clean-1 startup OOM directories without completion markers are failed attempts, excluded from scored summaries.",
+    "deep-native-checks microtimings were collected during external load. Use only final deep-combine-micro-*.log for clean microbenchmarks.",
+    "Natural-language prompts have fixed 256-token output budgets, not complete task-quality assessments.",
+    "Quantized MTP drafts use a CJK subset vocabulary. Acceptance and speed apply to this measured configuration only."
+  ],
+  "validation_status": {
+    "non_mtp": "complete",
+    "mtp3": "complete",
+    "parallel_integer_plans": "512 cases passed",
+    "parallel_non_mtp": "complete",
+    "parallel_mtp": "waiting for external GPU probes to exit; first contended attempt excluded"
+  }
+}

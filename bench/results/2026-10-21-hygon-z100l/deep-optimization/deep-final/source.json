@@ -1,0 +1,22 @@
+{
+  "source_commit": "f3e63609cf8a879114db1c60c424b8b0280e5752",
+  "baseline_commit": "1aa1073fc77abeb9cd9b8cb7c4d87dc0cb5b4503",
+  "files": {
+    "cmake/dcu_backend.cmake": "622f83e28f0529b2adbf25dbf6e24baf36adb379e37d234442a33e6506e30802",
+    "include/strata/core/verify.hpp": "abdf7d97899c337b0d8177f2ddd9bfedb2e37f998a46776bb815c9ddfa3d8aa5",
+    "include/strata/kernels/native_moe.hpp": "19b72a6f391e5f1ffce37c03d4dc4a4f159ff5f9b9344e281400c0c3ecb43e64",
+    "include/strata/kernels/verify_kernels.hpp": "96d61291edbba02ca1b6e327d74e3b4ff4025e836f542ec813fe04696d63357b",
+    "src/core/verify.cpp": "fb16ae986612060e9667d4eace98b681f00d24991545de89e2c562de18458bb0",
+    "src/kernels/cuda/native_mmvq.cu": "f750228dfb01c0838e800a76bb51b6d96f2f682874b4fcff7cf15723b5cd7ff2",
+    "src/kernels/cuda/native_moe.cu": "29fcc95a56856c6adff97190ca3c1aa7550b2e1cf2bdc12914a4332e7226d93a",
+    "src/kernels/cuda/verify_kernels.cu": "31eb19396e13ce2dffa3e78481d935063289aa91cac78dc24342e54510f9566d",
+    "src/program/generate.cpp": "e8676be609abb3fe482295ed748c8f631882669ae65035db2a56a48ae3794cdb",
+    "tests/dcu/mapped_combine.cpp": "d97a7aa2c9cd55e1e4eb467ed4c884761bfad96e49122bb6ab8841a1a7c2244a",
+    "tests/dcu/resident_plan.cpp": "f67b097e7ec40af6d03d633a47134c39502c699661e28667557ceb36875ef9a7",
+    "tools/dcu/analyze_profile.py": "6855d5aa3017155fc96120e1131a22e4ca553fd24e47ede13e5fc508e8cec918",
+    "tools/dcu/chat_bench.py": "39cce07d963ff02a5a2e6049204eab03ec976f267a35495a81f8f86d860ad096",
+    "tools/dcu/profile.py": "378f4320d40b3ae2d725b19d1658c11c36231acca7f575276479815910823009",
+    "tools/dcu/tune.py": "a6ca88ad5ddaff454ff5e27814ab6de47760a88ff312ce6bd323372ae8896bc2",
+    "tools/dcu/validate.py": "e1c1d9ecdc25b943eafde8048abf90fb0a0f242c545326a2fe3d69e1e138744f"
+  }
+}

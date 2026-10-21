@@ -1,0 +1,10 @@
+{
+  "source_commit": "ebe417d8961aafa277b8defc2654dac26da477a8",
+  "baseline_commit": "f3e63609",
+  "files": {
+    "src/program/generate.cpp": "fa3b3ea29e74428a30c42167e7aae87f18810172a07b5021fac9d4eaf9c783cb",
+    "tools/dcu/chat_bench.py": "c64d92a7dd012bb071cdf6e54646203ca5a106d65b8c1728ef937b4b5ead3939",
+    "tools/dcu/tune.py": "8fc9eaa534fcab11916825091781087daaf816e95ee68128d9e78af06e967f5b",
+    "tools/dcu/validate.py": "c0eb75c49ed4664d99571a12b76581b996e8048771c12193d7c8faaf68d1a9fd"
+  }
+}
