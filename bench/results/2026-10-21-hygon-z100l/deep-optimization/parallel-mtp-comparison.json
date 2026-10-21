@@ -1,0 +1,134 @@
+[
+  {
+    "kind": "performance",
+    "prompt_tokens": 128,
+    "workload": null,
+    "repeat": 1,
+    "input_match": true,
+    "output_match": true,
+    "drafts_match": true,
+    "serial_tps": 43.3,
+    "parallel_tps": 48.5
+  },
+  {
+    "kind": "performance",
+    "prompt_tokens": 2048,
+    "workload": null,
+    "repeat": 1,
+    "input_match": true,
+    "output_match": true,
+    "drafts_match": true,
+    "serial_tps": 41.5,
+    "parallel_tps": 48.4
+  },
+  {
+    "kind": "performance",
+    "prompt_tokens": 128,
+    "workload": null,
+    "repeat": 2,
+    "input_match": true,
+    "output_match": true,
+    "drafts_match": true,
+    "serial_tps": 40.6,
+    "parallel_tps": 43.5
+  },
+  {
+    "kind": "performance",
+    "prompt_tokens": 2048,
+    "workload": null,
+    "repeat": 2,
+    "input_match": true,
+    "output_match": true,
+    "drafts_match": true,
+    "serial_tps": 44.5,
+    "parallel_tps": 45.5
+  },
+  {
+    "kind": "performance",
+    "prompt_tokens": 128,
+    "workload": null,
+    "repeat": 3,
+    "input_match": true,
+    "output_match": true,
+    "drafts_match": true,
+    "serial_tps": 44.3,
+    "parallel_tps": 48.8
+  },
+  {
+    "kind": "performance",
+    "prompt_tokens": 2048,
+    "workload": null,
+    "repeat": 3,
+    "input_match": true,
+    "output_match": true,
+    "drafts_match": true,
+    "serial_tps": 44.6,
+    "parallel_tps": 48.3
+  },
+  {
+    "kind": "chat_performance",
+    "prompt_tokens": 43,
+    "workload": "python",
+    "repeat": 1,
+    "input_match": true,
+    "output_match": true,
+    "drafts_match": true,
+    "serial_tps": 40.4,
+    "parallel_tps": 43.9
+  },
+  {
+    "kind": "chat_performance",
+    "prompt_tokens": 38,
+    "workload": "explanation",
+    "repeat": 1,
+    "input_match": true,
+    "output_match": true,
+    "drafts_match": true,
+    "serial_tps": 36.3,
+    "parallel_tps": 39.3
+  },
+  {
+    "kind": "chat_performance",
+    "prompt_tokens": 35,
+    "workload": "chinese",
+    "repeat": 1,
+    "input_match": true,
+    "output_match": true,
+    "drafts_match": true,
+    "serial_tps": 34.1,
+    "parallel_tps": 36.6
+  },
+  {
+    "kind": "chat_performance",
+    "prompt_tokens": 43,
+    "workload": "python",
+    "repeat": 2,
+    "input_match": true,
+    "output_match": true,
+    "drafts_match": true,
+    "serial_tps": 40.7,
+    "parallel_tps": 44.3
+  },
+  {
+    "kind": "chat_performance",
+    "prompt_tokens": 38,
+    "workload": "explanation",
+    "repeat": 2,
+    "input_match": true,
+    "output_match": true,
+    "drafts_match": true,
+    "serial_tps": 36.4,
+    "parallel_tps": 39.7
+  },
+  {
+    "kind": "chat_performance",
+    "prompt_tokens": 35,
+    "workload": "chinese",
+    "repeat": 2,
+    "input_match": true,
+    "output_match": true,
+    "drafts_match": true,
+    "serial_tps": 33.9,
+    "parallel_tps": 37.2
+  }
+]

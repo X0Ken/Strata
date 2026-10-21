@@ -4265,6 +4265,227 @@
       "chat": []
     },
     {
+      "directory": "deep-parallel-mtp3-clean-1",
+      "complete": true,
+      "excluded": false,
+      "kinds": {
+        "configuration": 1,
+        "functional": 2,
+        "warmup": 1,
+        "performance": 6,
+        "chat_performance": 6
+      },
+      "functional_passed": 2,
+      "configuration": {
+        "kind": "configuration",
+        "args": [
+          "--pack",
+          "/root/code/strata-dcu/pack-ud-q3",
+          "--native",
+          "/root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf",
+          "--max-context",
+          "4096",
+          "--prefill",
+          "128",
+          "--pool-workers",
+          "8",
+          "--spec",
+          "4",
+          "--suffix-draft",
+          "0",
+          "--prompt-cache",
+          "0",
+          "--adapt-every",
+          "0",
+          "--pcie-frac",
+          "0",
+          "--aux-cpus",
+          "off",
+          "--stop-eos",
+          "--eos-ids",
+          "248044,248046",
+          "--expert-profile",
+          "/root/code/strata-dcu/src/data/expert-profile.bin",
+          "--resident-budget-gib",
+          "24",
+          "--expert-cache",
+          "auto",
+          "--serve",
+          "--vram-reserve-mib",
+          "2048",
+          "--layer-split",
+          "24",
+          "--split-device",
+          "1",
+          "--aux-cpus",
+          "off",
+          "--mtp",
+          "/root/code/strata-dcu/mtp-rt-de4b8e4d",
+          "--mtp-max-t",
+          "4",
+          "--spec-min-p",
+          "0",
+          "--lookup-chain",
+          "0"
+        ],
+        "engine_info": {
+          "version": "0.1.46.3",
+          "logit_bias": 1,
+          "context": 4096,
+          "kv": "fp16",
+          "kv_resident": 0,
+          "expert_slots": 22982,
+          "expert_cache_mib": 49775,
+          "expert_slots_primary": 11835,
+          "expert_cache_primary_mib": 25569,
+          "spec": 4,
+          "mtp_max": 4,
+          "lookup": 0,
+          "vram_free_mib": 1505,
+          "cvec": 0,
+          "arena_mib": 3461,
+          "pool_workers": 8,
+          "pcie_frac": "0.00",
+          "spec_min_p": "0.00",
+          "conversation_cache_mib": 0,
+          "conversation_cache_slots": 4,
+          "conversation_cache_min_free_mib": 2560,
+          "conversation_cache_min_tokens": 0,
+          "tail_role_token": -1,
+          "vram_elastic": 0,
+          "prefill_cap": 128,
+          "prefill_stages": 2,
+          "stream_all_min": 1024,
+          "prefill_pipe": 0,
+          "engine": "0.1.46.3"
+        },
+        "fractions": [
+          0.0
+        ],
+        "lengths": [
+          128,
+          2048
+        ],
+        "repeats": 3,
+        "pid": 56262,
+        "cpu_affinity": {
+          "0": 67,
+          "0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15": 27,
+          "1": 1,
+          "2": 1,
+          "3": 1,
+          "4": 1,
+          "5": 1,
+          "6": 1,
+          "7": 1,
+          "8": 1
+        },
+        "optimization_env": {
+          "STRATA_ROUTE_TAIL_SKIP": "0",
+          "STRATA_DCU_GPU_PLAN": "1",
+          "STRATA_DCU_FUSE_COMBINE": "1",
+          "STRATA_DCU_MMVQ_ROWS": "4",
+          "STRATA_DCU_PAR_PLAN": "1",
+          "STRATA_DECODE_TIMING": "1"
+        },
+        "engine_sha256": "4efc49b3ee3b46ea2ce2dc774148e8769ea1977277c5b4438a3937f028c82bf1",
+        "gpus": 2,
+        "workers": 8,
+        "profile": false,
+        "aux_cpus": "off",
+        "mode": "layer",
+        "shared_stream": "default",
+        "mtp": true,
+        "max_drafts": 3,
+        "draft_acceptance": null
+      },
+      "performance": [
+        {
+          "prompt_tokens": 128,
+          "n": 3,
+          "decode_scores": [
+            48.5,
+            43.5,
+            48.8
+          ],
+          "decode_median": 48.5,
+          "prefill_median": 113.9,
+          "ttft_median": 1.180108830332756,
+          "offered": 297,
+          "accepted": 288,
+          "acceptance": 0.9696969696969697,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        },
+        {
+          "prompt_tokens": 2048,
+          "n": 3,
+          "decode_scores": [
+            48.4,
+            45.5,
+            48.3
+          ],
+          "decode_median": 48.3,
+          "prefill_median": 202.3,
+          "ttft_median": 10.171395368874073,
+          "offered": 291,
+          "accepted": 288,
+          "acceptance": 0.9896907216494846,
+          "output_sha256": [
+            "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee"
+          ]
+        }
+      ],
+      "chat": [
+        {
+          "workload": "chinese",
+          "n": 2,
+          "decode_scores": [
+            36.6,
+            37.2
+          ],
+          "decode_median": 36.900000000000006,
+          "offered": 564,
+          "accepted": 322,
+          "acceptance": 0.5709219858156028,
+          "output_sha256": [
+            "1605bc161875a9622b05750fb020ca3f2250cb6e8228b7bf7ccf52e05cdd601f"
+          ]
+        },
+        {
+          "workload": "explanation",
+          "n": 2,
+          "decode_scores": [
+            39.3,
+            39.7
+          ],
+          "decode_median": 39.5,
+          "offered": 534,
+          "accepted": 338,
+          "acceptance": 0.6329588014981273,
+          "output_sha256": [
+            "430a369bd9d51303e497512b1d7eada81059e89a055e27cd943af954452bd079"
+          ]
+        },
+        {
+          "workload": "python",
+          "n": 2,
+          "decode_scores": [
+            43.9,
+            44.3
+          ],
+          "decode_median": 44.099999999999994,
+          "offered": 474,
+          "accepted": 352,
+          "acceptance": 0.7426160337552743,
+          "output_sha256": [
+            "cca1794db6d0dd189cb407603d0d603a0ddcd038b08ee27cbd2bd91ab67fe0ed"
+          ]
+        }
+      ]
+    },
+    {
       "directory": "deep-parallel-nomtp",
       "complete": true,
       "excluded": false,
@@ -4647,6 +4868,6 @@
     "mtp3": "complete",
     "parallel_integer_plans": "512 cases passed",
     "parallel_non_mtp": "complete",
-    "parallel_mtp": "waiting for external GPU probes to exit; first contended attempt excluded"
+    "parallel_mtp": "complete after external probes exited; 12 output/draft matches and 3 HTTP checks passed"
   }
 }
