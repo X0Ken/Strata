@@ -26,6 +26,7 @@ def main():
     parser.add_argument("--out", required=True)
     parser.add_argument("--gpus", default="1,2")
     parser.add_argument("--functional-only", action="store_true")
+    parser.add_argument("--layout", choices=["layer", "peer", "helper"], default="layer")
     parser.add_argument("--pcie-frac", type=float, default=0)
     parser.add_argument("--workers", type=int, default=8)
     parser.add_argument("--aux-cpus", default="off")
@@ -59,6 +60,7 @@ def main():
     (out / "benchmark-inputs.json").write_text(json.dumps(inputs))
 
     def record(data):
+        data["layout"] = options.layout if data.get("gpus") == 2 else "single"
         with (out / "requests.jsonl").open("a") as destination:
             destination.write(json.dumps(data, ensure_ascii=False) + "\n")
         print(json.dumps(data, ensure_ascii=False), flush=True)
@@ -77,7 +79,12 @@ def main():
                     "--resident-budget-gib", "24", "--expert-cache", "auto", "--serve"]
             args += ["--vram-reserve-mib", "4096"]
             if cards == 2:
-                args += ["--layer-split", "24", "--split-device", "1"]
+                if options.layout == "layer":
+                    args += ["--layer-split", "24", "--split-device", "1"]
+                elif options.layout == "peer":
+                    args += ["--peer-device", "1", "--peer-reserve-mib", "4096"]
+                else:
+                    args += ["--expert-cache-device1", "12000", "--remote-expert-opt"]
             print("START_ENGINE", cards, run, flush=True)
             loading_started = time.monotonic()
             child_env = dict(os.environ, HIP_VISIBLE_DEVICES="0" if cards == 1 else "0,1", STRATA_ROUTE_TAIL_SKIP="0")
