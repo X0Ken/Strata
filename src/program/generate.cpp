@@ -8806,11 +8806,12 @@ int main(int argc, char** argv) {
         if (dcu_gpu_plan) {
             const char* fs_env = std::getenv("STRATA_FS_SLOTS");
             const char* tail_env = std::getenv("STRATA_ROUTE_TAIL_SKIP");
-            if (!native_pack || use_mtp || o.batch > 0 || pipe || o.adapt_every != 0 || o.pcie_frac != 0 ||
+            if (!native_pack || use_mtp || o.suffix_draft > 0 || o.lookup_chain > 0 ||
+                o.batch > 0 || pipe || o.adapt_every != 0 || o.pcie_frac != 0 ||
                 o.peer_device >= 0 || o.expert_cache_remote[0] > 0 ||
                 (fs_env && std::atoi(fs_env) != 0) || (tail_env && std::atoi(tail_env) != 0)) {
                 std::fprintf(stderr, "STRATA_DCU_GPU_PLAN requires a native pack, no drafts/batch/adaptation/helpers, "
-                                     "--pcie-frac 0 and full expert routes\n");
+                                     "--suffix-draft 0 --lookup-chain 0 --pcie-frac 0 and full expert routes\n");
                 return 2;
             }
             for (int st = 0; st < n_stages; ++st) stage_ver(st).set_dcu_resident_overlap(true);
