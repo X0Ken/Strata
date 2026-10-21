@@ -2240,7 +2240,7 @@ __global__ void to_bf16_kernel(const float* __restrict__ x, uint16_t* __restrict
 // lo16 and w_up tiles staged in LDS), and each lane already holds the 4 streams' values of its (token, column) - the
 // mix (x_c = R * rs * w, sum of x_c * sigmoid(gated_c), / 4) runs in registers, in gr_mix_r_kernel's order.  The
 // GEMM sums K in another order than hipBLASLt: rounding-level, hence opt-in and quality-gated.
-#if defined(__HIPCC__)
+#if defined(__HIPCC__) && !defined(STRATA_GPU_WAVE64)
 typedef __bf16 um_b16 __attribute__((ext_vector_type(16)));
 typedef float um_f8 __attribute__((ext_vector_type(8)));
 __device__ __forceinline__ um_f8 um_wmma(um_b16 a, um_b16 b, um_f8 c) {
@@ -2522,7 +2522,9 @@ void gr_mix_r(const float* R, const float* rs, const float* w_norm, const float*
 }
 bool gr_upmix(const uint16_t* lo16, const uint16_t* w_up, const float* R, const float* rs, const float* w_norm,
               float* mixed, uint16_t* mixed16, uint16_t* mixed_h, int64_t T, void* stream) {
-#if defined(__HIPCC__)
+#if defined(STRATA_GPU_WAVE64)
+    return false;
+#elif defined(__HIPCC__)
     static const bool gfx11 = [] {
         int dev = 0;
         cudaDeviceProp p;

@@ -5,7 +5,7 @@
 #include "strata/core/geometry.hpp"
 #include "strata/kernels/kv_q8.hpp"
 #include "strata/kernels/kv_q4.hpp"
-#if defined(STRATA_HIP_GFX906)
+#if defined(STRATA_GPU_WAVE64)
 #include "strata/kernels/gfx_arch.hpp"
 #endif
 
@@ -463,7 +463,7 @@ bool attn_v3_on() {
 // no DPP it is the Daily's (be4cf1c) attn_chunk_kernel line for line - the same reduce12 scores, the same cell-major
 // probabilities and the same four-cell value fold - except that `spt` shares `sq`'s storage here (no arithmetic
 // change).  Without the variable nothing selects it on a card at or above sm_75.
-#if defined(STRATA_EXPERIMENTAL_SM60) || !defined(__HIPCC__) || !defined(STRATA_HIP_GFX906)
+#if defined(STRATA_EXPERIMENTAL_SM60) || !defined(__HIPCC__) || !defined(STRATA_GPU_WAVE64)
 #define STRATA_ATTN_PRE75_BUILT 1
 #endif
 #if defined(STRATA_ATTN_PRE75_BUILT)
@@ -801,7 +801,7 @@ __global__ void __launch_bounds__(HD) attn_merge_v2_kernel(const float* __restri
     attn[(size_t) h * HD + d] = L > 0.0f ? acc / L : 0.0f;
 }
 
-#if defined(STRATA_HIP_GFX906)
+#if defined(STRATA_GPU_WAVE64)
 // The compat backend can target other architectures. Check the calling thread's current device,
 // caching only its last ordinal so a layer split or another thread cannot reuse the wrong answer.
 bool query_swizzle_gfx906_device() {
@@ -962,7 +962,7 @@ void launch_chunks_batch(const float* q, const QsaAttnPools& pools, const int32_
 #endif
     // S25: STRATA_ATTN_LANECELL=1 - the score phase one cell per thread (bit-identical scores, no shuffle reductions)
     const bool lane_cell = kernel < 0 && lane_cell_attn();
-#if defined(STRATA_HIP_GFX906)
+#if defined(STRATA_GPU_WAVE64)
     static const bool query_swizzle = [] {
         const char* v = std::getenv("STRATA_GFX906_ATTN_QUERY_SWIZZLE"); return v && v[0] == '1';
     }();
@@ -984,7 +984,7 @@ void launch_chunks_batch(const float* q, const QsaAttnPools& pools, const int32_
         else STRATA_ATTN_LC(0);
     } else
 #undef STRATA_ATTN_LC
-#if defined(STRATA_HIP_GFX906)
+#if defined(STRATA_GPU_WAVE64)
     // Opt-in INT8 batched attention: prefill, verification and MTP (including n_q=1).
     // Other pool formats and lane-cell scoring keep their paths; qsa_decode_attn_step is unchanged.
     // A k8v4 model's MTP drafter uses INT8 pools and can therefore take this path.
@@ -1090,7 +1090,7 @@ bool qsa_decode_attn_slots(const float* q, const QsaAttnSlotPools& pools, const 
 #if defined(STRATA_ATTN_PRE75_BUILT)
     if (!lane_cell && pre75_attn()) return false;
 #endif
-#if defined(STRATA_HIP_GFX906)
+#if defined(STRATA_GPU_WAVE64)
     static const bool query_swizzle = [] {
         const char* v = std::getenv("STRATA_GFX906_ATTN_QUERY_SWIZZLE"); return v && v[0] == '1';
     }();
@@ -1153,7 +1153,7 @@ void qsa_decode_attn_batch_rows(const float* q, const QsaAttnPoolsRows& rows, co
 #if defined(STRATA_ATTN_PRE75_BUILT)
     per_row = per_row || pre75_attn();
 #endif
-#if defined(STRATA_HIP_GFX906)
+#if defined(STRATA_GPU_WAVE64)
     per_row = true;
 #endif
     if (per_row) {

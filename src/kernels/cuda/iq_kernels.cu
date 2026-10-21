@@ -53,7 +53,7 @@ __device__ __forceinline__ uint32_t unpack_ksigns(const uint8_t v) {
     return s * 0x01010101;
 }
 __device__ __forceinline__ int2 get_int_from_table_16(const int& q4, const int8_t* table) {
-#if defined(STRATA_HIP_GFX906)
+#if defined(STRATA_GPU_WAVE64)
     // AMD: llama.cpp's HIP lookup (vecdotq.cuh) - v_perm_b32 takes 3-bit byte indices, so the low and high halves
     // of the table are looked up and the index MSB picks between them: 4 perms per 8 values.
     const uint32_t* v32 = reinterpret_cast<const uint32_t*>(table);
@@ -2260,7 +2260,7 @@ __global__ void __launch_bounds__(256, MINB) expdec_gu_kernel(const unsigned lon
                                                                             float* __restrict__ gate, float* __restrict__ up, int rb) {
     const int ng = *n_groups;
     if (blockIdx.y >= ng) return;
-    __shared__ alignas(16) int4 s_u[ED_NC * 2 * ED_XB];
+    alignas(16) __shared__ int4 s_u[ED_NC * 2 * ED_XB];
     __shared__ float s_ds[ED_NC * ED_XB];
     STRATA_SHARED_ALIGN16_U32(s_grid_buf, EdGrid<TG>::words);
     const int tid = threadIdx.x;
@@ -2447,7 +2447,7 @@ __global__ void __launch_bounds__(256, STRATA_EXPDEC_MINB) expdec_down_kernel(co
     if (blockIdx.y >= ng) return;
     constexpr int LANES = TD == 20 ? 8 : 16;
     constexpr int RPP = (256 / LANES) * R;   // rows per pass
-    __shared__ alignas(16) int4 s_u[ED_NC * 2 * ED_HB];
+    alignas(16) __shared__ int4 s_u[ED_NC * 2 * ED_HB];
     __shared__ float s_ds[ED_NC * ED_HB];
     const int tid = threadIdx.x;
     const int sw = tid / LANES, t = tid % LANES;
@@ -4078,12 +4078,12 @@ size_t native_expert_scratch_bytes(int64_t cap, int64_t n_ff) {
 
 // The AMD layouts below (STRATA_EXP_MODE) also build for CUDA: Volta takes mode 8 by default (exp_mode), every
 // other CUDA card keeps mode 0, the CUDA layout above.
-#if defined(STRATA_HIP_GFX906) || !defined(__HIPCC__)
+#if defined(STRATA_GPU_WAVE64) || !defined(__HIPCC__)
 #define STRATA_EXP_LAYOUTS 1
 #else
 #define STRATA_EXP_LAYOUTS 0
 #endif
-#if defined(STRATA_HIP_GFX906)
+#if defined(STRATA_GPU_WAVE64)
 constexpr int kExpModeDefault = 7;
 constexpr int kExpFallback = 2;   // modes 5-8 on a format without an LDS kernel: R2
 constexpr bool kExpLds16 = false; // IQ2_XXS gate/up: R2 as measured on gfx906
@@ -4671,7 +4671,7 @@ int exp_mode() {
     static const int m = [] { const char* v = std::getenv("STRATA_EXP_MODE"); return v ? std::atoi(v) : -1; }();
     if (g_exp_mode >= 0) return g_exp_mode;
     if (m >= 0) return m;
-#if defined(STRATA_HIP_GFX906)
+#if defined(STRATA_GPU_WAVE64)
     return kExpModeDefault;
 #else
     // Volta (sm_70): mode 8, the grid and the group's activations in shared memory with SwiGLU + q8_1 fused
@@ -4798,7 +4798,7 @@ void native_expert_grouped(const NativeExpertLayout& L, const unsigned long long
     static const bool v2k = [] {
         const char* v = std::getenv("STRATA_EXPERT_V2K");
         if (v != nullptr && v[0] != '\0') return v[0] == '1';
-#if defined(__HIPCC__) && !defined(STRATA_HIP_GFX906)
+#if defined(__HIPCC__) && !defined(STRATA_GPU_WAVE64)
         int dev = 0;
         cudaDeviceProp p;
         const bool g12 = cudaGetDevice(&dev) == cudaSuccess && cudaGetDeviceProperties(&p, dev) == cudaSuccess &&
@@ -4840,7 +4840,7 @@ void native_expert_grouped(const NativeExpertLayout& L, const unsigned long long
                          gu_qk(L.gu_type) != 128 && L.gu_type != 12 && L.gu_type != 13) ? 16 : GU_ROWS;   // qk 128 (APR trellis): no sub-16 rows, see launch_gu
     const dim3 ggu((unsigned) ((2 * L.n_ff + gu_rows - 1) / gu_rows), (unsigned) gy);
 #if STRATA_EXP_LAYOUTS
-#if defined(STRATA_HIP_GFX906)
+#if defined(STRATA_GPU_WAVE64)
     const int em0 = exp_mode();
 #else
     // CUDA: the AMD layouts launch a block row per possible group, so a call that strides (a verify window's PCIe
@@ -4927,7 +4927,7 @@ void native_expert_grouped(const NativeExpertLayout& L, const unsigned long long
 #endif
     check("native_expert_grouped/gu");
     const long long nh = (long long) cap_entries * L.n_ff;
-#if defined(STRATA_HIP_GFX906)
+#if defined(STRATA_GPU_WAVE64)
     // gfx906: the separate SwiGLU and q8_1 passes stay the default (the A/B baseline); the RDNA one-pass
     // kernel (bitwise the same) with STRATA_HIP_SWIGLU_FUSED=1
     static const bool sw_fused = env_on("STRATA_HIP_SWIGLU_FUSED");

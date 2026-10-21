@@ -250,7 +250,7 @@ bool slot_copy_batchsync_env() {
 // Whether pin_blobs locks anything (AMD on Linux with STRATA_ARENA_MMAP=1): the callers only gather the swaps' spans
 // then - `blob()` is not free (it counts reads, and the file tier may assemble the blob), so the default runs skip it.
 bool pin_blobs_on() {
-#if (defined(STRATA_USE_HIP) || defined(STRATA_HIP_GFX906)) && !defined(_WIN32)
+#if (defined(STRATA_USE_HIP) || defined(STRATA_GPU_WAVE64)) && !defined(_WIN32)
     static const bool on = std::getenv("STRATA_ARENA_MMAP") && std::getenv("STRATA_ARENA_MMAP")[0] == '1';
     return on;
 #else
@@ -283,7 +283,7 @@ cudaError_t adapt_copy_h2d(void* dst, const void* src, size_t bytes, cudaStream_
 }
 int pin_blobs(std::vector<std::pair<uintptr_t, uintptr_t>> r, std::vector<void*>& live) {
     int failed = 0;   // ranges left pageable (a copy from them still works, through the driver's staging)
-#if (defined(STRATA_USE_HIP) || defined(STRATA_HIP_GFX906)) && !defined(_WIN32)
+#if (defined(STRATA_USE_HIP) || defined(STRATA_GPU_WAVE64)) && !defined(_WIN32)
     if (!pin_blobs_on() || r.empty()) return 0;
     for (auto& [a, e] : r) { a &= ~(uintptr_t) 4095; e = (e + 4095) & ~(uintptr_t) 4095; }
     std::sort(r.begin(), r.end());
@@ -1398,7 +1398,7 @@ void pl_diag_print(std::FILE* f) {
 // raises once cudaGraphLaunch has returned, and a blocking launch returns only when the graph has finished, so the
 // first window never ends (the batched prompt path has no such wait and runs).  HIP's own switches are not checked.
 bool launch_blocking() {
-#if defined(STRATA_USE_HIP) || defined(STRATA_HIP_GFX906)
+#if defined(STRATA_USE_HIP) || defined(STRATA_GPU_WAVE64)
     return false;
 #else
     const char* v = std::getenv("CUDA_LAUNCH_BLOCKING");
@@ -2211,7 +2211,7 @@ static double ple_direct_rows_per_s(strata::kernels::PleTable& t) {
     return el > 0 ? (double) done / el : -1.0;
 }
 
-#if defined(STRATA_USE_HIP) && !defined(STRATA_HIP_GFX906)
+#if defined(STRATA_USE_HIP) && !defined(STRATA_GPU_WAVE64)
 // The R9700 / RX 9000 "bimodal prompt speed" (0.2.0 known limit).  The runtime opens the process's hardware queues
 // lazily, as the first stream of each kind is used, and the kernel's scheduler (MES) puts a queue on one of the
 // card's compute pipes when the queue first gets work.  The loader threads reach their streams in a different order
@@ -2304,7 +2304,7 @@ int main(int argc, char** argv) {
             return 0;
         }
     }
-#if (defined(STRATA_USE_HIP) || defined(STRATA_HIP_GFX906)) && !defined(_WIN32)
+#if (defined(STRATA_USE_HIP) || defined(STRATA_GPU_WAVE64)) && !defined(_WIN32)
     // AMD, a file-backed arena (STRATA_ARENA_MMAP): ROCclr copies a pageable source of 1 MiB or more by locking its
     // pages in place (a GPU userptr), and keeps them - so every expert the VRAM fill copied from the mapped
     // experts.bin stayed resident, the release of the VRAM-held ones was undone by the driver at once, and a
@@ -2335,7 +2335,7 @@ int main(int argc, char** argv) {
         // The caller's own environment is overridden, so say so (a stale CUDA_VISIBLE_DEVICES from a launcher
         // would otherwise silently lose to the flag).
         const char* envname = "CUDA_VISIBLE_DEVICES";
-#if defined(STRATA_USE_HIP) || defined(STRATA_HIP_GFX906)
+#if defined(STRATA_USE_HIP) || defined(STRATA_GPU_WAVE64)
         envname = "HIP_VISIBLE_DEVICES";   // the AMD runtime ignores CUDA_VISIBLE_DEVICES (serve/server.py sets this one)
 #endif
         const char* prev = std::getenv(envname);
@@ -2367,7 +2367,7 @@ int main(int argc, char** argv) {
         break;
     }
 #endif
-#if defined(STRATA_USE_HIP) && !defined(STRATA_HIP_GFX906)
+#if defined(STRATA_USE_HIP) && !defined(STRATA_GPU_WAVE64)
     prime_hw_queues();
 #endif
     Options o;
@@ -2810,7 +2810,7 @@ int main(int argc, char** argv) {
         (void) cudaGetLastError();
     }
 #endif
-#if defined(STRATA_HIP_GFX906)
+#if defined(STRATA_GPU_WAVE64)
     {   // #1728: the gfx906 build's kernels assume 64-lane waves; on a wave32 card they would fault or give wrong
         // numbers, so say so before the first launch (the ready-made wave32 engine is the one for those cards)
         int n_dev = 0;
@@ -2818,7 +2818,7 @@ int main(int argc, char** argv) {
             for (int d = 0; d < n_dev; ++d) {
                 cudaDeviceProp wp{};
                 if (cudaGetDeviceProperties(&wp, d) == cudaSuccess && wp.warpSize != 64) {
-                    std::fprintf(stderr, "strata generate: this engine was built for gfx906 (wave64, STRATA_HIP_GFX906), but GPU %d "
+                    std::fprintf(stderr, "strata generate: this engine was built for gfx906 (wave64, STRATA_GPU_WAVE64), but GPU %d "
                                          "(%s) has %d-lane waves: use the ready-made engine for that card, or hide it "
                                          "(HIP_VISIBLE_DEVICES)\n", d, wp.name, wp.warpSize);
                     return 2;
@@ -3407,7 +3407,7 @@ int main(int argc, char** argv) {
         if (strata::kernels::cpu::hadamard_spec().any()) {
             std::fprintf(stderr, "strata generate: APR pack: Hadamard-folded experts (block %d)\n",
                          strata::kernels::cpu::hadamard_spec().block);
-#if defined(STRATA_USE_HIP) || defined(STRATA_HIP_GFX906)
+#if defined(STRATA_USE_HIP) || defined(STRATA_GPU_WAVE64)
             int dev = 0;
             cudaDeviceProp p{};
             if (cudaGetDevice(&dev) == cudaSuccess && cudaGetDeviceProperties(&p, dev) == cudaSuccess) {
@@ -3774,7 +3774,7 @@ int main(int argc, char** argv) {
         // #486: the arena is the first large allocation and its size does not depend on the context, so what is
         // missing is held by something else: say how much was free
         cudaGetLastError();
-#if (defined(STRATA_USE_HIP) || defined(STRATA_HIP_GFX906)) && !defined(_WIN32)
+#if (defined(STRATA_USE_HIP) || defined(STRATA_GPU_WAVE64)) && !defined(_WIN32)
         // HIP sees no device at all and /dev/kfd exists but this user cannot open it: the missing render / video group,
         // not another program holding the memory (0 MiB of 0 MiB would blame the wrong thing)
         {
@@ -5545,11 +5545,14 @@ int main(int argc, char** argv) {
             }
         }
 #endif
+#elif defined(STRATA_USE_DCU)
+        std::fprintf(stderr, "strata generate: Hygon DCU GPU %d: %s, native DTK, %s, wave%d\n",
+                     dev, name, p.gcnArchName, p.warpSize);
 #else
         std::fprintf(stderr, "strata generate: GPU %d: %s, compute capability %d.%d%s\n", dev, name,
                      strata::cc_major_of(p.major), strata::cc_minor_of(p.minor),
                      strata::emulated_cc() ? " (STRATA_EMULATE_CC: a test mode, the card is emulated)" : "");
-#if !defined(STRATA_HIP_GFX906) && !defined(STRATA_GPU_METAL)   // a CUDA toolkit mismatch; the gfx906 HIP build has no CUDART_VERSION
+#if !defined(STRATA_GPU_WAVE64) && !defined(STRATA_GPU_METAL)   // a CUDA toolkit mismatch; the gfx906 HIP build has no CUDART_VERSION
         {   // #542: a build whose libcudart is older than its headers (a CUDA 13 kit with a dangling libcudart.so that
             // CMake resolved to the system's CUDA 12 one) reads cudaDeviceProp shifted - silently, and slowly
             int rt = 0;
@@ -9204,7 +9207,9 @@ int main(int argc, char** argv) {
             if (!config_fp) {
                 strata::core::SessionConfig c;
                 c.engine_version = STRATA_VERSION;
-#if defined(STRATA_USE_HIP)
+#if defined(STRATA_USE_DCU)
+                c.backend = "dcu";
+#elif defined(STRATA_USE_HIP)
                 c.backend = "hip";
 #else
                 c.backend = "cuda";

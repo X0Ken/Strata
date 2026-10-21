@@ -20,7 +20,7 @@
 #pragma once
 
 #include <cstdint>
-#if defined(STRATA_HIP_GFX906)
+#if defined(STRATA_GPU_WAVE64)
 #include <cuda_runtime.h>   // gfx906: the compat layer (__forceinline__, __nanosleep, __dp4a)
 #endif
 

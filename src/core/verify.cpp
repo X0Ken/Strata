@@ -5,7 +5,7 @@
 #include "strata/kernels/gfx_arch.hpp"
 #include "strata/core/verify.hpp"
 #include "strata/core/pin_budget.hpp"
-#if !defined(STRATA_USE_HIP) && !defined(STRATA_HIP_GFX906)
+#if !defined(STRATA_USE_HIP) && !defined(STRATA_GPU_WAVE64)
 #include "strata/core/host_graph_launch.hpp"
 #endif
 #include "strata/core/remote_expert_opt.hpp"
@@ -882,7 +882,7 @@ bool Verifier::init(const WeightTable& wt, const ModelGeometry& g, SessionState&
     // STRATA_PIPED_CONCURRENT=1 (opt-in): a prompt can run on the same GPU while the batch windows run, so the windows'
     // streams get the device's highest priority (HIP: the default priority, as the drafter's)
     auto make_stream = [](cudaStream_t* s) -> cudaError_t {
-#if !defined(STRATA_USE_HIP) && !defined(STRATA_HIP_GFX906)
+#if !defined(STRATA_USE_HIP) && !defined(STRATA_GPU_WAVE64)
         static const bool hi = [] {   // (STRATA_PIPED_CONCURRENT_PRIO=0: the default priority)
             const char* v = std::getenv("STRATA_PIPED_CONCURRENT");
             const char* p = std::getenv("STRATA_PIPED_CONCURRENT_PRIO");
@@ -899,7 +899,7 @@ bool Verifier::init(const WeightTable& wt, const ModelGeometry& g, SessionState&
         return cudaStreamCreateWithFlags(s, cudaStreamNonBlocking);
     };
     bool copy_made = false;
-#if defined(STRATA_USE_HIP) && !defined(STRATA_HIP_GFX906)
+#if defined(STRATA_USE_HIP) && !defined(STRATA_GPU_WAVE64)
     // engine-latency, STRATA_COPY_HIP_PRIO=1 (opt-in): the copy stream at high priority, so it gets a hardware queue of
     // its own (ROCm hands queues out per priority).  Sharing one with the window's stream, --pcie-mode dma's copies and
     // their host function queue behind the window's graph, which spins on the flag they raise (a timeout at layer 1).
@@ -1865,7 +1865,7 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
                                           NE, n, cs);
                 native_router_top10_multi(logits_ + tb * NE, ids_ + tb * K, w_ + tb * K, n, cs);
             } catch (const std::exception& e) { err = "verify router: " + std::string(e.what()); return false; }
-#if defined(STRATA_HIP_GFX906)
+#if defined(STRATA_GPU_WAVE64)
         } else if (dec_batch) {
             // gfx906: the Coder's 256-expert router (the native router is 512 x 10 only) for the whole window in one
             // multi-column BF16 projection and one top-k, bitwise the per-token calls (route_window_parity); ~3 ms
@@ -2729,7 +2729,7 @@ bool Verifier::run(int T, const int32_t* tokens, int64_t pos0, PoolMultiFn pool,
             ss.ple.table->prefetch_rows(ple_rows + t * PLE_N_HEADS);
         }
     }
-#if !defined(STRATA_USE_HIP) && !defined(STRATA_HIP_GFX906)
+#if !defined(STRATA_USE_HIP) && !defined(STRATA_GPU_WAVE64)
     std::optional<HostGraphLaunch> launch_o;   // (not set when the previous stage launched this window already)
 #endif
     if (!pre) {
@@ -2743,7 +2743,7 @@ bool Verifier::run(int T, const int32_t* tokens, int64_t pos0, PoolMultiFn pool,
         // 0.1.43: with the all-resident graph the host serves no layer, so nothing can hold a layer back: every copy first
         if (adapt_gate_ != nullptr && adapt_gate_->active.load(std::memory_order_acquire) && ar_on() &&
             !adapt_gate_wait((int32_t) g.n_layers, err)) return false;
-#if !defined(STRATA_USE_HIP) && !defined(STRATA_HIP_GFX906)
+#if !defined(STRATA_USE_HIP) && !defined(STRATA_GPU_WAVE64)
         // A blocking instrumented launch cannot also serve the graph's CPU doorbells.
         static const bool threaded_launch = [] {
             const char* value = std::getenv("STRATA_VERIFY_ASYNC_LAUNCH");
@@ -2757,7 +2757,7 @@ bool Verifier::run(int T, const int32_t* tokens, int64_t pos0, PoolMultiFn pool,
 #endif
         trace_ev("LAUNCHED", -1, -1, (int64_t) le);
         if (le != cudaSuccess) { err = std::string("verify: launch: ") + cudaGetErrorString(le); return false; }
-#if !defined(STRATA_USE_HIP) && !defined(STRATA_HIP_GFX906)
+#if !defined(STRATA_USE_HIP) && !defined(STRATA_GPU_WAVE64)
         (void) launch_o->query();
 #else
         (void) cudaStreamQuery(cs_);
@@ -2820,7 +2820,7 @@ bool Verifier::run(int T, const int32_t* tokens, int64_t pos0, PoolMultiFn pool,
             const auto now = Clock::now();
             if (now - last_flush > std::chrono::microseconds(2000)) {
                 last_flush = now;
-#if !defined(STRATA_USE_HIP) && !defined(STRATA_HIP_GFX906)
+#if !defined(STRATA_USE_HIP) && !defined(STRATA_GPU_WAVE64)
                 const cudaError_t q = launch_o ? launch_o->query() : cudaStreamQuery(cs_);
 #else
                 const cudaError_t q = cudaStreamQuery(cs_);
@@ -2835,7 +2835,7 @@ bool Verifier::run(int T, const int32_t* tokens, int64_t pos0, PoolMultiFn pool,
             }
             if (now - a > std::chrono::seconds(20)) {
                 // #267: the caller ends the engine; no spin kernel may outlive it
-#if !defined(STRATA_USE_HIP) && !defined(STRATA_HIP_GFX906)
+#if !defined(STRATA_USE_HIP) && !defined(STRATA_GPU_WAVE64)
                 trace_ev("TIMEOUT", k, l, (int64_t) (launch_o ? launch_o->query() : cudaStreamQuery(cs_)));
 #else
                 trace_ev("TIMEOUT", k, l, (int64_t) cudaStreamQuery(cs_));
@@ -2937,7 +2937,7 @@ bool Verifier::run(int T, const int32_t* tokens, int64_t pos0, PoolMultiFn pool,
     // spin kernel outlives the process - the case that left Windows GPUs "lost" until a power cycle.  The wait
     // itself stays a blocking sync: a cudaStreamQuery poll here cost IQ3_S ~3% decode (a core calling the driver
     // beside the expert workers).
-#if !defined(STRATA_USE_HIP) && !defined(STRATA_HIP_GFX906)
+#if !defined(STRATA_USE_HIP) && !defined(STRATA_GPU_WAVE64)
     const cudaError_t launch_result = launch_o ? launch_o->finish() : cudaSuccess;
     if (launch_result != cudaSuccess) {
         err = std::string("verify: launch: ") + cudaGetErrorString(launch_result);

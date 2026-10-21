@@ -31,7 +31,7 @@ constexpr int HC = 4;           // streams
 constexpr int D = N * HC;       // 10240
 constexpr int LR = 320;         // hc_lr
 // the latency-hidden norm/up (gr_norm_fast_kernel / gr_up_fast_kernel, STRATA_GR_FAST): gfx906's, built for CUDA too
-#if defined(STRATA_HIP_GFX906) || !defined(__HIPCC__)
+#if defined(STRATA_GPU_WAVE64) || !defined(__HIPCC__)
 #define STRATA_GR_FAST_BUILD 1
 #else
 #define STRATA_GR_FAST_BUILD 0
@@ -1077,7 +1077,7 @@ int down_chunk(bool staged, int* tile_out) {
         // the down kernel's outputs (lo, inject_out) are strictly per-token, so the chunk boundaries are safe, and
         // the up kernel below still sees every token of the batch in one launch.
 #if defined(__HIPCC__)
-#if defined(STRATA_HIP_GFX906)
+#if defined(STRATA_GPU_WAVE64)
         const bool small_tile = false;  // gfx906: 64 KiB LDS, the 2560 tile as before (8 tokens slice into launches)
 #else
         const bool small_tile = true;   // all eight tokens fit gfx1100's 64 KiB LDS at this tile
@@ -1519,7 +1519,7 @@ __global__ void __launch_bounds__(THREADS) gr_up_fast_kernel(GrMulti m) {
 }
 #endif
 
-#if defined(STRATA_HIP_GFX906)
+#if defined(STRATA_GPU_WAVE64)
 // ---- AMD: `gr_down_multi` split along K.  The CUDA kernel is one warp per row of w_down (320 + 4 rows), 41
 // blocks: on a 60-CU gfx906 that left most of the card idle and read the 6.5 MB matrix at ~100 GB/s.  Here a block
 // is 8 wavefronts = 8 rows of one K-slice of 2048 (the slice of every token's xn staged in LDS once), 41 x 5
@@ -2299,7 +2299,7 @@ bool fused_gr_read_multi(const FusedGrArgs* a, int n_tok, float* xn_scratch, voi
         }
         return false;   // the v3 read: no q8_1 (the caller quantizes)
     }
-#if defined(STRATA_HIP_GFX906)
+#if defined(STRATA_GPU_WAVE64)
     // gfx906, opt-in STRATA_GR_SPLIT=1: the latency-hidden norm/up (STRATA_GR_FAST) with the K-split down (~3% faster
     // per verify window).  Its fixed-order finish sums the K slices in another order than the single-token
     // fused_gr_read, so the multi-token read is then no longer bitwise equal to T single-token calls (gr_parity's

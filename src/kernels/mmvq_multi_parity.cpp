@@ -238,7 +238,7 @@ int main() {
     }
     // THE NEGATIVE CONTROL, asserted where it can see something: past T = 4 the generic layout is a different one,
     // so if it still finds no difference the comparison cannot tell the layouts apart and the pass proves nothing.
-#if defined(STRATA_HIP_GFX906)
+#if defined(STRATA_GPU_WAVE64)
     // gfx906: the wave64 layout (one wavefront per row) is the same kernel for every column count, so multi_exact
     // has nothing to switch and the control cannot see a difference.  The control with power is the CUDA layout:
     // ctest's mmvq_multi_parity_cuda_layout runs this with STRATA_MMVQ_WAVE=0.

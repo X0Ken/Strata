@@ -652,7 +652,7 @@ bool file_tier_unbuffered(const std::vector<std::string>& paths, uint64_t arena_
     // backend keeps the old room >= read_bytes rule.  Other HIP cards (gfx1201 measured: not affected) keep the new
     // rule; STRATA_FILE_CACHE_OLD_RULE=1 / 0 forces the old rule on / off on any Linux build.
     bool old_rule = false;
-#if defined(STRATA_HIP_GFX906)
+#if defined(STRATA_GPU_WAVE64)
     old_rule = true;
 #endif
     if (const char* r = std::getenv("STRATA_FILE_CACHE_OLD_RULE"); r != nullptr && r[0] != '\0') old_rule = r[0] != '0';

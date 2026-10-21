@@ -1,4 +1,4 @@
-// strata_hip.h - the CUDA runtime/cuBLAS names Strata uses, mapped onto HIP/hipBLAS for AMD GPUs (gfx906).
+// strata_hip.h - the CUDA runtime/cuBLAS names Strata uses, mapped onto the installed HIP runtime for wave64 devices (gfx906).
 //
 // This directory is put FIRST on the include path of a STRATA_ENABLE_HIP build only; its `cuda_runtime.h`,
 // `cuda_fp16.h` and `cublas_v2.h` include this header instead of the NVIDIA ones, so the engine's sources stay
@@ -21,7 +21,7 @@
 #include <cstdint>
 #include <cstdlib>
 
-#define STRATA_HIP_GFX906 1
+#define STRATA_GPU_WAVE64 1
 
 // ---- runtime: types and constants ------------------------------------------------------------------------
 #define cudaError_t hipError_t
@@ -89,7 +89,7 @@
 // the plain per-block limit (64 KB of LDS on gfx906).
 inline hipError_t strata_device_get_attribute(int* v, hipDeviceAttribute_t a, int dev) {
     hipError_t e = hipDeviceGetAttribute(v, a, dev);
-    if (e == hipSuccess && a == hipDeviceAttributeSharedMemPerBlockOptin && *v <= 0)
+    if (a == hipDeviceAttributeSharedMemPerBlockOptin && (e != hipSuccess || *v <= 0))
         e = hipDeviceGetAttribute(v, hipDeviceAttributeMaxSharedMemoryPerBlock, dev);
     return e;
 }

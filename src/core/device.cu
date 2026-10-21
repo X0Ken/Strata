@@ -68,7 +68,9 @@ std::string arch_problem(const cudaDeviceProp& p, int ordinal) {
 }  // namespace
 
 const char* compiled_gpu_archs() {
-#if defined(STRATA_USE_HIP)
+#if defined(STRATA_USE_DCU)
+    return "gfx906";
+#elif defined(STRATA_USE_HIP)
     return STRATA_HIP_ARCHS;
 #else
     return "";
@@ -98,7 +100,10 @@ bool device_summary(int ordinal, std::string& name, std::string& detail) {
         return false;
     }
     char buf[160];
-#if defined(STRATA_USE_HIP)
+#if defined(STRATA_USE_DCU)
+    std::snprintf(buf, sizeof(buf), "Hygon DCU / DTK, arch %s, %.1f GiB, wave%d", p.gcnArchName,
+                  (double) p.totalGlobalMem / (1024.0 * 1024 * 1024), p.warpSize);
+#elif defined(STRATA_USE_HIP)
     std::snprintf(buf, sizeof(buf), "arch %s, %.1f GiB, wave%d", base_arch(p.gcnArchName).c_str(),
                   (double) p.totalGlobalMem / (1024.0 * 1024 * 1024), p.warpSize);
 #else
@@ -241,7 +246,7 @@ std::string gpu_arch_problem(int ordinal) {
 }
 
 std::string device_code_error() {
-#if defined(STRATA_USE_HIP) || defined(STRATA_HIP_GFX906) || defined(STRATA_GPU_METAL)
+#if defined(STRATA_USE_HIP) || defined(STRATA_GPU_WAVE64) || defined(STRATA_GPU_METAL)
     return "";   // gpu_arch_problem() checks the HIP architectures against STRATA_HIP_ARCHS, before this point
 #else
     // every .cu of the engine is compiled for the same CMAKE_CUDA_ARCHITECTURES, so this kernel stands for all
@@ -257,7 +262,9 @@ DeviceInfo device_info(int ordinal) {
     int count = 0;
     check(cudaGetDeviceCount(&count), "cudaGetDeviceCount");
     if (count == 0) {
-#if defined(STRATA_USE_HIP)
+#if defined(STRATA_USE_DCU)
+        throw CudaError("no Hygon DCU is visible through the installed DTK runtime", -1);
+#elif defined(STRATA_USE_HIP)
         throw CudaError(std::string("no HIP device is present; this engine was compiled for ") + STRATA_HIP_ARCHS, -1);
 #else
         throw CudaError("no CUDA device is present; Strata needs an NVIDIA GPU (RTX 20 series or newer)", -1);
@@ -292,8 +299,8 @@ DeviceInfo device_info(int ordinal) {
     // supported arch is enforced by CMake; RUNNING on an older card is caught here, because a binary can be carried
     // to a machine with an older card and would otherwise silently take whatever path the driver chose.  The HIP
     // backend checks the card against the architectures the binary was compiled for (and wave32).
-#if defined(STRATA_HIP_GFX906)
-    // AMD gfx906 (the STRATA_HIP_GFX906 compat build, not STRATA_USE_HIP): the build targets one gfx arch
+#if defined(STRATA_GPU_WAVE64)
+    // AMD gfx906 (the STRATA_GPU_WAVE64 compat build, not STRATA_USE_HIP): the build targets one gfx arch
     // (CMAKE_HIP_ARCHITECTURES, wave64); a card of another arch fails at the first kernel launch with
     // hipErrorInvalidDeviceFunction.  gcnArchName says which it is.
     {
@@ -301,6 +308,10 @@ DeviceInfo device_info(int ordinal) {
         if (const size_t colon = arch.find(':'); colon != std::string::npos) arch.resize(colon);
         d.arch = arch;
     }
+#if defined(STRATA_USE_DCU)
+    if (d.arch != "gfx906" || p.warpSize != 64)
+        throw CudaError("the DCU backend requires a gfx906 wave64 device", -1);
+#endif
     if (p.gcnArchName[0] != 0) d.name += std::string(" (") + p.gcnArchName + ")";
 #elif defined(STRATA_USE_HIP)
     d.arch = base_arch(p.gcnArchName);

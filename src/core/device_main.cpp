@@ -65,7 +65,9 @@ int main(int argc, char** argv) {
     try {
         const strata::core::DeviceInfo d = strata::core::device_info(0);
         std::printf("device %d: %s\n", d.ordinal, d.name.c_str());
-#if defined(STRATA_USE_HIP)
+#if defined(STRATA_USE_DCU)
+        std::printf("  Hygon DTK arch      %s wave64\n", d.arch.c_str());
+#elif defined(STRATA_USE_HIP)
         std::printf("  HIP arch            %s wave32 (compiled for %s)\n", d.arch.c_str(),
                     strata::core::compiled_gpu_archs());
 #else

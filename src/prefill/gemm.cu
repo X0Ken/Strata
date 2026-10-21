@@ -886,6 +886,9 @@ constexpr int64_t kRdna2SliceF32 = 32ll << 20;   // 128 MiB of FP32 activations 
 // runs its native GEMM, nothing was written)
 bool Gemm::rdna2_sgemm(const uint16_t* X, const uint16_t* W, float* Y, int64_t T, int64_t N, int64_t K, int64_t ldy,
                        float beta, bool bf16) {
+#if defined(STRATA_USE_DCU)
+    return false;
+#else
     if (K <= 0 || !rdna2_sgemm_on(N)) return false;
     const int64_t rows = std::max<int64_t>(1, std::min<int64_t>(T, kRdna2SliceF32 / K));
     // growing frees a buffer an earlier GEMM on this stream may still read (as the sm_60 FP32 route does)
@@ -904,6 +907,7 @@ bool Gemm::rdna2_sgemm(const uint16_t* X, const uint16_t* W, float* Y, int64_t T
            "hipblasSgemm (RDNA2)");
     }
     return true;
+#endif
 }
 #endif
 
