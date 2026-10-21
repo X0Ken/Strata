@@ -1,0 +1,18 @@
+[strata] starting the engine: reading the model's weights ...
+Traceback (most recent call last):
+  File "/root/code/strata-dcu/src/tools/dcu/tune.py", line 162, in <module>
+    main()
+  File "/root/code/strata-dcu/src/tools/dcu/tune.py", line 100, in main
+    engine = StrataEngine(str(pathlib.Path(options.engine).resolve()), args, cwd=str(ROOT),
+  File "/root/code/strata-dcu/src/serve/server.py", line 1094, in __init__
+    raise EngineDied(why + (f" (see {log})" if log else "") + note +
+serve.server.EngineDied: the engine exited before it was ready (see /root/code/strata-dcu/deep-cache-2048-w8-r4-fuse1-clean-1/engine.log)
+the engine process ended: exit code 1
+the engine log's last lines:
+  [strata] 2026-10-21 14:59:06 engine started: /root/code/strata-dcu/build-dcu/strata --serve --pack /root/code/strata-dcu/pack-ud-q3 --native /root/code/llama-dcu-validation/model-cache/Qwen3.8-Flash-Next-UD-Q3_K_XL-00001-of-00003.gguf --max-context 4096 --prefill 128 --pool-workers 8 --spec 2 --suffix-draft 0 --prompt-cache 0 --adapt-every 0 --pcie-frac 0 --aux-cpus off --stop-eos --eos-ids 248044,248046 --expert-profile /root/code/strata-dcu/src/data/expert-profile.bin --resident-budget-gib 24 --expert-cache auto --serve --vram-reserve-mib 2048 --layer-split 24 --split-device 1 --aux-cpus off
+  strata generate: memory guard: limit 62.8 GiB (source: meminfo), current 6.1 GiB, reclaimable cache credited 0.0 GiB; available 56.7 GiB (MemAvailable 56.7 GiB), floor 2560 MiB
+  strata generate: layer split across 2 GPUs: CUDA0, then CUDA1 (split 24)
+  strata generate: this CPU has no AVX-512: the expert kernels run on AVX-2 (multi-token for the i-quant gate/up rows)
+  strata generate: native pack: /root/code/strata-dcu/pack-ud-q3 experts (largest blob 3.48 MB), token embedding Q8_0 in mapped host memory (644 MiB, 3.4 s)
+  strata generate: 1416 MiB of weights loaded from /root/code/strata-dcu/pack-ud-q3 in 0.7 s (303 canonical tensors skipped: served natively)
+  strata generate: native dense projections: native dense upload blk.44.attn_qkv.weight: out of memory

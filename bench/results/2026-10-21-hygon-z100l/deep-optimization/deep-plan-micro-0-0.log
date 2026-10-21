@@ -1,0 +1,4 @@
+{"entries":10,"parallel":0,"iterations":512,"us":19.229000}
+{"entries":40,"parallel":0,"iterations":512,"us":142.906708}
+{"entries":80,"parallel":0,"iterations":512,"us":363.420227}
+PASS 128 resident/missing/duplicate/invalid-id plans, 1..8 rows, fixed/variable slot offsets

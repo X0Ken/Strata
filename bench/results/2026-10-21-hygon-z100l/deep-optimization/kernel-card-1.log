@@ -1,0 +1,39 @@
+Test project /root/code/strata-dcu/build-dcu
+      Start  1: dcu_blas_selftest
+ 1/17 Test  #1: dcu_blas_selftest ................   Passed    4.88 sec
+      Start  2: dcu_runtime_selftest
+ 2/17 Test  #2: dcu_runtime_selftest .............   Passed    0.20 sec
+      Start  3: dcu_prefill_selftest
+ 3/17 Test  #3: dcu_prefill_selftest .............   Passed    0.20 sec
+      Start 50: native_grouped_parity
+ 4/17 Test #50: native_grouped_parity ............   Passed    3.40 sec
+      Start 55: shared_expert_parity
+ 5/17 Test #55: shared_expert_parity .............   Passed    0.17 sec
+      Start 57: gr_parity
+ 6/17 Test #57: gr_parity ........................   Passed    2.10 sec
+      Start 58: gdn_parity
+ 7/17 Test #58: gdn_parity .......................   Passed    2.56 sec
+      Start 61: sampler_parity
+ 8/17 Test #61: sampler_parity ...................   Passed    4.07 sec
+      Start 70: router_top10_parity
+ 9/17 Test #70: router_top10_parity ..............   Passed    0.17 sec
+      Start 71: native_multi_parity
+10/17 Test #71: native_multi_parity ..............   Passed    1.05 sec
+      Start 72: kv_steps_parity
+11/17 Test #72: kv_steps_parity ..................   Passed    0.24 sec
+      Start 74: gr_multi_parity
+12/17 Test #74: gr_multi_parity ..................   Passed    1.99 sec
+      Start 77: s_gemv_parity
+13/17 Test #77: s_gemv_parity ....................   Passed    0.17 sec
+      Start 78: elementwise_parity
+14/17 Test #78: elementwise_parity ...............   Passed    0.17 sec
+      Start 79: bf16_gemv_parity
+15/17 Test #79: bf16_gemv_parity .................   Passed    2.33 sec
+      Start 82: qsa_parity
+16/17 Test #82: qsa_parity .......................   Passed    2.74 sec
+      Start 83: qsa_topk_parity
+17/17 Test #83: qsa_topk_parity ..................   Passed   14.30 sec
+
+100% tests passed, 0 tests failed out of 17
+
+Total Test time (real) =  40.75 sec

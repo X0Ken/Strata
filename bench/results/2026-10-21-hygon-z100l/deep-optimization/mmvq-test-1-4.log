@@ -1,0 +1,109 @@
+
+=== multi_exact ON (the default) ===
+type           T    outputs  bits diff    finite diff  nonfinite
+Q4_0           1        512          0              0          0  ok
+Q4_0           2       1024          0              0          0  ok
+Q4_0           3       1536          0              0          0  ok
+Q4_0           4       2048          0              0          0  ok
+Q4_0           5       2560          0              0          0  ok
+Q4_0           6       3072          0              0          0  ok
+Q4_0           8       4096          0              0          0  ok
+Q8_0           1        512          0              0          0  ok
+Q8_0           2       1024          0              0          0  ok
+Q8_0           3       1536          0              0          0  ok
+Q8_0           4       2048          0              0          0  ok
+Q8_0           5       2560          0              0          0  ok
+Q8_0           6       3072          0              0          0  ok
+Q8_0           8       4096          0              0          0  ok
+Q4_K           1        512          0              0          0  ok
+Q4_K           2       1024          0              0          0  ok
+Q4_K           3       1536          0              0          0  ok
+Q4_K           4       2048          0              0          0  ok
+Q4_K           5       2560          0              0          0  ok
+Q4_K           6       3072          0              0          0  ok
+Q4_K           8       4096          0              0          0  ok
+Q5_K           1        512          0              0          0  ok
+Q5_K           2       1024          0              0          0  ok
+Q5_K           3       1536          0              0          0  ok
+Q5_K           4       2048          0              0          0  ok
+Q5_K           5       2560          0              0          0  ok
+Q5_K           6       3072          0              0          0  ok
+Q5_K           8       4096          0              0          0  ok
+Q6_K           1        512          0              0          0  ok
+Q6_K           2       1024          0              0          0  ok
+Q6_K           3       1536          0              0          0  ok
+Q6_K           4       2048          0              0          0  ok
+Q6_K           5       2560          0              0          0  ok
+Q6_K           6       3072          0              0          0  ok
+Q6_K           8       4096          0              0          0  ok
+IQ4_XS         1        512          0              0          0  ok
+IQ4_XS         2       1024          0              0          0  ok
+IQ4_XS         3       1536          0              0          0  ok
+IQ4_XS         4       2048          0              0          0  ok
+IQ4_XS         5       2560          0              0          0  ok
+IQ4_XS         6       3072          0              0          0  ok
+IQ4_XS         8       4096          0              0          0  ok
+Q5_K wide      1       2048          0              0          0  ok
+Q5_K wide      2       4096          0              0          0  ok
+Q5_K wide      3       6144          0              0          0  ok
+Q5_K wide      4       8192          0              0          0  ok
+Q5_K wide      5      10240          0              0          0  ok
+Q5_K wide      6      12288          0              0          0  ok
+Q5_K wide      8      16384          0              0          0  ok
+
+=== multi_exact off (negative control) ===
+type           T    outputs  bits diff    finite diff  nonfinite
+Q4_0           1        512          0              0          0  layouts coincide here (NW = 4)
+Q4_0           2       1024          0              0          0  layouts coincide here (NW = 4)
+Q4_0           3       1536          0              0          0  layouts coincide here (NW = 4)
+Q4_0           4       2048          0              0          0  layouts coincide here (NW = 4)
+Q4_0           5       2560          0              0          0  no power at this T
+Q4_0           6       3072          0              0          0  no power at this T
+Q4_0           8       4096          0              0          0  no power at this T
+Q8_0           1        512          0              0          0  layouts coincide here (NW = 4)
+Q8_0           2       1024          0              0          0  layouts coincide here (NW = 4)
+Q8_0           3       1536          0              0          0  layouts coincide here (NW = 4)
+Q8_0           4       2048          0              0          0  layouts coincide here (NW = 4)
+Q8_0           5       2560          0              0          0  no power at this T
+Q8_0           6       3072          0              0          0  no power at this T
+Q8_0           8       4096          0              0          0  no power at this T
+Q4_K           1        512          0              0          0  layouts coincide here (NW = 4)
+Q4_K           2       1024          0              0          0  layouts coincide here (NW = 4)
+Q4_K           3       1536          0              0          0  layouts coincide here (NW = 4)
+Q4_K           4       2048          0              0          0  layouts coincide here (NW = 4)
+Q4_K           5       2560          0              0          0  no power at this T
+Q4_K           6       3072          0              0          0  no power at this T
+Q4_K           8       4096          0              0          0  no power at this T
+Q5_K           1        512          0              0          0  layouts coincide here (NW = 4)
+Q5_K           2       1024          0              0          0  layouts coincide here (NW = 4)
+Q5_K           3       1536          0              0          0  layouts coincide here (NW = 4)
+Q5_K           4       2048          0              0          0  layouts coincide here (NW = 4)
+Q5_K           5       2560          0              0          0  no power at this T
+Q5_K           6       3072          0              0          0  no power at this T
+Q5_K           8       4096          0              0          0  no power at this T
+Q6_K           1        512          0              0          0  layouts coincide here (NW = 4)
+Q6_K           2       1024          0              0          0  layouts coincide here (NW = 4)
+Q6_K           3       1536          0              0          0  layouts coincide here (NW = 4)
+Q6_K           4       2048          0              0          0  layouts coincide here (NW = 4)
+Q6_K           5       2560          0              0          0  no power at this T
+Q6_K           6       3072          0              0          0  no power at this T
+Q6_K           8       4096          0              0          0  no power at this T
+IQ4_XS         1        512          0              0          0  layouts coincide here (NW = 4)
+IQ4_XS         2       1024          0              0          0  layouts coincide here (NW = 4)
+IQ4_XS         3       1536          0              0          0  layouts coincide here (NW = 4)
+IQ4_XS         4       2048          0              0          0  layouts coincide here (NW = 4)
+IQ4_XS         5       2560          0              0          0  no power at this T
+IQ4_XS         6       3072          0              0          0  no power at this T
+IQ4_XS         8       4096          0              0          0  no power at this T
+Q5_K wide      1       2048          0              0          0  layouts coincide here (NW = 4)
+Q5_K wide      2       4096          0              0          0  layouts coincide here (NW = 4)
+Q5_K wide      3       6144          0              0          0  layouts coincide here (NW = 4)
+Q5_K wide      4       8192          0              0          0  layouts coincide here (NW = 4)
+Q5_K wide      5      10240          0              0          0  no power at this T
+Q5_K wide      6      12288          0              0          0  no power at this T
+Q5_K wide      8      16384          0              0          0  no power at this T
+
+multi_exact on:   148480 outputs compared, 0 differ bitwise, 0 non-finite
+multi_exact off:  148480 outputs compared, 0 differ bitwise (0 on finite outputs, 0 at T > 4)
+
+mmvq_multi_parity: ok (gfx906 wave64 layout: every column count runs the same exact kernel, so the negative control has no other layout to find; mmvq_multi_parity_cuda_layout checks it).

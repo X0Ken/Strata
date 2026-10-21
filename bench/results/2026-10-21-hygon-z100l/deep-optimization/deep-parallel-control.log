@@ -1,0 +1,14 @@
+MATCHED_BASELINE_DONE
+RUN deep-parallel-build 2026-10-21 16:05:15
+RUN deep-plan-micro-0-0 2026-10-21 16:05:31
+RUN deep-plan-micro-0-1 2026-10-21 16:05:33
+RUN deep-plan-micro-1-0 2026-10-21 16:05:35
+RUN deep-plan-micro-1-1 2026-10-21 16:05:37
+RUN deep-parallel-nomtp-control 2026-10-21 16:05:39
+RUN deep-parallel-mtp3-control 2026-10-21 16:10:26
+Traceback (most recent call last):
+  File "/root/code/strata-dcu/parallel-run.py", line 35, in <module>
+    run('deep-parallel-mtp3-control',['python3','-u',src/'tools/dcu/tune.py','--out',r/'deep-parallel-mtp3','--mtp',r/'mtp-rt-de4b8e4d','--drafts','3']+common,env)
+  File "/root/code/strata-dcu/parallel-run.py", line 25, in run
+    if p.returncode or dirty:raise RuntimeError(name+' failed or contaminated')
+RuntimeError: deep-parallel-mtp3-control failed or contaminated

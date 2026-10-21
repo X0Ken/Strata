@@ -1,0 +1,18 @@
+RESOURCE_IDLE 2026-10-21 15:03:11
+deep-cache-2560-w12-r4-fuse1-clean-2 PASS
+RESOURCE_IDLE 2026-10-21 15:06:47
+deep-cache-2048-w8-r4-fuse1-clean-2 PASS
+RESOURCE_IDLE 2026-10-21 15:10:16
+deep-cache-2048-w8-r4-fuse0-clean-1 PASS
+SELECTED {"name": "deep-cache-2048-w8-r4-fuse1-clean-2", "median": 21.15, "scores": [21.0, 21.4, 21.3, 21.0], "fuse": 1, "rows": 4, "reserve": 2048, "workers": 8, "free_mib": 1517}
+RUN deep-final-control
+RUN deep-old-control
+RUN deep-best-confirm
+RUN deep-best-profile
+RUN deep-http-control
+RUN deep-kernel-build
+RUN deep-extra-kernel-0
+RUN deep-extra-kernel-1
+RUN deep-combine-micro-0
+RUN deep-combine-micro-1
+DEEP_FINAL_DONE

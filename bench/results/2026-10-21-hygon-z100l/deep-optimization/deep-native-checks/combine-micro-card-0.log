@@ -1,0 +1,11 @@
+{"hits":0,"fused":0,"width":3072,"iterations":256,"us":141.751556}
+{"hits":0,"fused":1,"width":3072,"iterations":256,"us":80.042892}
+{"hits":2,"fused":0,"width":3072,"iterations":256,"us":167.743256}
+{"hits":2,"fused":1,"width":3072,"iterations":256,"us":52.129223}
+{"hits":5,"fused":0,"width":3072,"iterations":256,"us":159.185181}
+{"hits":5,"fused":1,"width":3072,"iterations":256,"us":63.932331}
+{"hits":8,"fused":0,"width":3072,"iterations":256,"us":54.539284}
+{"hits":8,"fused":1,"width":3072,"iterations":256,"us":11.884981}
+{"hits":10,"fused":0,"width":3072,"iterations":256,"us":137.787262}
+{"hits":10,"fused":1,"width":3072,"iterations":256,"us":47.254253}
+PASS 128 bitwise mapped-combine cases, 1..8 tokens, all/mixed/no hits, poisoned host hit rows
