@@ -18,6 +18,13 @@
 #include <cstring>
 
 namespace strata::prefill {
+#if defined(STRATA_USE_DCU)
+// DTK looks device symbols up by name; these need external linkage.
+__device__ int g_f16_range_on = 0;
+__device__ unsigned g_f16_range_max = 0;
+__device__ unsigned long long g_f16_range_over = 0;
+__device__ int g_act_f16 = 0;
+#endif
 namespace {
 
 constexpr int N = 2560, HC = 4, D = N * HC, LR = 320;
@@ -51,9 +58,11 @@ __device__ __forceinline__ uint16_t hf(float f) { return __half_as_ushort(__floa
 // Off, the cost is one flag read per value.  The max is kept as float bits (positive floats order as unsigned ints),
 // and a thread takes the atomic only when it beats the value it read, so the atomics stop once the max has settled.
 #if defined(__HIPCC__)   // HIP only: the CUDA kernels stay exactly as they were (no flag read in hf_sat)
+#if !defined(STRATA_USE_DCU)
 __device__ int g_f16_range_on = 0;
 __device__ unsigned g_f16_range_max = 0;
 __device__ unsigned long long g_f16_range_over = 0;
+#endif
 __device__ __forceinline__ void f16_range_note(float f) {
     const float a = fabsf(f);
     const unsigned bits = __float_as_uint(a);
@@ -79,7 +88,9 @@ __device__ __forceinline__ uint16_t bf_to_hf_conv(uint16_t b) {
 // The prompt path's 16-bit activation image for the BF16-weight GEMMs: BF16, or FP16 where the GEMM library is fast
 // only in FP16 (prompt_f16() in gemm.cu: rocBLAS on gfx103x).  Set once per device before the first prompt.
 #if defined(__HIPCC__)   // HIP only (#835): the CUDA kernels stay exactly as they were, they never read the flag
+#if !defined(STRATA_USE_DCU)
 __device__ int g_act_f16 = 0;
+#endif
 __device__ __forceinline__ uint16_t act16(float f) { return g_act_f16 ? hf_sat(f) : bf(f); }
 #else
 __device__ __forceinline__ uint16_t act16(float f) { return bf(f); }

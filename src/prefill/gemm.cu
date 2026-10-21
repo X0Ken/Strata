@@ -59,14 +59,23 @@
 #endif
 
 namespace strata::prefill {
+#if defined(STRATA_USE_DCU)
+// DTK looks device symbols up by name; these need external linkage.
+__device__ int g_f16_range_on_g = 0;
+__device__ unsigned g_f16_range_max_g[2] = {0, 0};
+__device__ unsigned long long g_f16_range_over_g[2] = {0, 0};
+__device__ unsigned long long g_f16_nonfinite = 0;
+#endif
 namespace {
 #if defined(__HIPCC__)
 // STRATA_F16_RANGE (gemm_set_f16_range): the largest |value| and the count beyond 65504 / non-finite, for the BF16
 // weights converted to FP16 (slot 0, bf16_to_f16_rows) and the FP16 GEMM outputs widened (slot 1, widen_rows_f16 -
 // an output rocBLAS wrote as FP16 is Inf there, not saturated).  As the activation counter in kernels.cu.
+#if !defined(STRATA_USE_DCU)
 __device__ int g_f16_range_on_g = 0;
 __device__ unsigned g_f16_range_max_g[2] = {0, 0};
 __device__ unsigned long long g_f16_range_over_g[2] = {0, 0};
+#endif
 __device__ __forceinline__ void f16_range_note_g(int k, float f) {
     const float a = fabsf(f);
     const unsigned bits = __float_as_uint(a);
@@ -77,7 +86,9 @@ __device__ __forceinline__ void f16_range_note_g(int k, float f) {
 // Float c overwrites halves 2c and 2c+1, so a row is walked from its end in blocks: a block's halves are read into
 // registers, the block syncs, then writes its floats - which only cover halves of blocks already read.
 // STRATA_DBG_NAN: the FP16 outputs that are not finite (an FP32-accumulated sum past 65504 becomes inf in FP16).
+#if !defined(STRATA_USE_DCU)
 __device__ unsigned long long g_f16_nonfinite = 0;
+#endif
 __global__ void widen_rows_f16(float* __restrict__ Y, int64_t n, int64_t ldy, int count_nonfinite) {
     float* y = Y + (int64_t) blockIdx.x * ldy;
     const __half* h = reinterpret_cast<const __half*>(y);
