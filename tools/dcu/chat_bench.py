@@ -6,7 +6,7 @@ import time
 from serve.server import request_timings
 
 
-def run_chat_bench(engine, tokenizer, template, record):
+def run_chat_bench(engine, tokenizer, template, record, allow_mtp=False):
     prompts = [
         ('python', 'Write a Python function that parses timestamped log lines, groups errors by hour, and returns the five most frequent messages. Explain edge cases and include tests.'),
         ('explanation', 'Explain how hash tables handle collisions, resizing, and adversarial input. Compare separate chaining with open addressing and give practical examples.'),
@@ -27,5 +27,5 @@ def run_chat_bench(engine, tokenizer, template, record):
                         input_sha256=hashlib.sha256(json.dumps(ids).encode()).hexdigest(),
                         output_sha256=hashlib.sha256(json.dumps(tokens).encode()).hexdigest(),
                         ttft_seconds=first, elapsed_seconds=time.monotonic()-start, timings=timing, engine=engine.last))
-            if len(tokens) != 256 or not timing or timing['cache_n'] or int(engine.last.get('drafts_offered') or 0):
+            if len(tokens) != 256 or not timing or timing['cache_n'] or (not allow_mtp and int(engine.last.get('drafts_offered') or 0)):
                 raise RuntimeError('chat benchmark length/cache/speculation check failed')

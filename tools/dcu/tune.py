@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Measure exact-route DCU CPU/PCIe expert splits with the validation inputs."""
+"""Measure DCU routing and optional MTP with fixed validation inputs."""
 import argparse
 import hashlib
 import json
@@ -42,6 +42,8 @@ def main():
     parser.add_argument('--repeats', type=int, choices=[1, 2, 3], default=3)
     parser.add_argument('--output-tokens', type=int, default=128)
     parser.add_argument('--aux-cpus', default='off', help='upstream auxiliary thread CPU placement')
+    parser.add_argument('--mtp', help='MTP runtime directory; omitted for non-speculative decode')
+    parser.add_argument('--drafts', type=int, default=3, help='MTP draft count; verification window = drafts + 1')
     parser.add_argument('--chat-bench', action='store_true', help='also measure code, English and Chinese prompts')
     parser.add_argument('--reserve-mib', type=int, help='override saved VRAM reserve')
     parser.add_argument('--warmup', action='store_true', help='record an untimed 128-token prompt before scoring')
@@ -58,6 +60,11 @@ def main():
     args = list(configuration['args'])
     args[args.index('--pool-workers') + 1] = str(options.workers)
     args += ['--aux-cpus', options.aux_cpus]
+    if options.mtp:
+        if not 1 <= options.drafts <= 7:
+            parser.error('drafts must be in [1,7]')
+        args[args.index('--spec') + 1] = str(options.drafts + 1)
+        args += ['--mtp', str(pathlib.Path(options.mtp).resolve()), '--mtp-max-t', str(options.drafts + 1), '--spec-min-p', '0', '--lookup-chain', '0']
     if options.reserve_mib is not None:
         if options.reserve_mib < 1024:
             parser.error('reserve-mib must be at least 1024')
@@ -92,7 +99,11 @@ def main():
 
     def record(row):
         row.update(gpus=options.gpus, workers=options.workers, profile=options.profile,
-                   aux_cpus=options.aux_cpus, mode=options.mode, shared_stream=options.shared_stream)
+                   aux_cpus=options.aux_cpus, mode=options.mode, shared_stream=options.shared_stream,
+                   mtp=bool(options.mtp), max_drafts=options.drafts if options.mtp else 0)
+        metrics = row.get('engine', {})
+        offered = int(metrics.get('drafts_offered') or 0)
+        row['draft_acceptance'] = int(metrics.get('drafts_accepted') or 0) / offered if offered else None
         with (out / 'requests.jsonl').open('a') as destination:
             destination.write(json.dumps(row, ensure_ascii=False) + '\n')
         print(json.dumps(row, ensure_ascii=False), flush=True)
@@ -148,11 +159,13 @@ def main():
                             'timings': timing, 'engine': engine.last})
                     if len(tokens) != options.output_tokens or not timing or timing['cache_n'] != 0:
                         raise RuntimeError('benchmark length or cold-prompt check failed')
-                    if int(engine.last.get('drafts_offered') or 0):
+                    if options.mtp and int(engine.last.get('drafts_offered') or 0) == 0:
+                        raise RuntimeError('MTP benchmark offered no drafts')
+                    if not options.mtp and int(engine.last.get('drafts_offered') or 0):
                         raise RuntimeError('unexpected speculative tokens')
         if options.chat_bench:
             from chat_bench import run_chat_bench
-            run_chat_bench(engine, tokenizer, template, record)
+            run_chat_bench(engine, tokenizer, template, record, allow_mtp=bool(options.mtp))
     finally:
         engine.close()
     (out / 'tuning.done').write_text(time.strftime('%F %T') + '\n')

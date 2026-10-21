@@ -30,11 +30,15 @@ def main():
     parser.add_argument("--pcie-frac", type=float, default=0)
     parser.add_argument("--workers", type=int, default=8)
     parser.add_argument("--aux-cpus", default="off")
+    parser.add_argument("--mtp", help="MTP runtime directory; omitted for non-speculative validation")
+    parser.add_argument("--drafts", type=int, default=3)
     parser.add_argument("--chat-bench", action="store_true")
     parser.add_argument("--reserve-mib", type=int, default=4096)
     options = parser.parse_args()
     if not 0 <= options.pcie_frac <= 1 or options.workers < 1 or options.reserve_mib < 1024:
         parser.error("pcie-frac must be in [0,1] and workers must be positive; reserve-mib must be >= 1024")
+    if options.mtp and not 1 <= options.drafts <= 7:
+        parser.error("drafts must be in [1,7]")
     out = pathlib.Path(options.out).resolve()
     out.mkdir(parents=True, exist_ok=True)
     tokenizer = Tokenizer.from_gguf(options.gguf)
@@ -62,6 +66,11 @@ def main():
     (out / "benchmark-inputs.json").write_text(json.dumps(inputs))
 
     def record(data):
+        data["mtp"] = bool(options.mtp)
+        data["max_drafts"] = options.drafts if options.mtp else 0
+        metrics = data.get("engine", {})
+        offered = int(metrics.get("drafts_offered") or 0)
+        data["draft_acceptance"] = int(metrics.get("drafts_accepted") or 0) / offered if offered else None
         data["layout"] = options.layout if data.get("gpus") == 2 else "single"
         with (out / "requests.jsonl").open("a") as destination:
             destination.write(json.dumps(data, ensure_ascii=False) + "\n")
@@ -80,6 +89,9 @@ def main():
                     "--expert-profile", str(ROOT / "data/expert-profile.bin"),
                     "--resident-budget-gib", "24", "--expert-cache", "auto", "--serve"]
             args += ["--vram-reserve-mib", str(options.reserve_mib)]
+            if options.mtp:
+                args[args.index("--spec") + 1] = str(options.drafts + 1)
+                args += ["--mtp", str(pathlib.Path(options.mtp).resolve()), "--mtp-max-t", str(options.drafts + 1), "--spec-min-p", "0", "--lookup-chain", "0"]
             if cards == 2:
                 if options.layout == "layer":
                     args += ["--layer-split", "24", "--split-device", "1"]
@@ -178,11 +190,13 @@ def main():
                             "timings": timing, "engine": engine.last})
                     if len(tokens) != 128 or not timing or timing["cache_n"] != 0:
                         raise RuntimeError("benchmark output length or cold-prompt gate failed")
-                    if int(engine.last.get("drafts_offered") or 0) != 0:
+                    if options.mtp and int(engine.last.get("drafts_offered") or 0) == 0:
+                        raise RuntimeError("MTP benchmark offered no drafts")
+                    if not options.mtp and int(engine.last.get("drafts_offered") or 0) != 0:
                         raise RuntimeError("unexpected speculative draft tokens in the baseline")
                 if options.chat_bench:
                     from chat_bench import run_chat_bench
-                    run_chat_bench(engine, tokenizer, template, lambda row: record(dict(row, gpus=cards)))
+                    run_chat_bench(engine, tokenizer, template, lambda row: record(dict(row, gpus=cards)), allow_mtp=bool(options.mtp))
             finally:
                 resource_stop.set()
                 monitor.join(timeout=3)
