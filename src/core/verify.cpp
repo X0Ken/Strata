@@ -858,6 +858,12 @@ bool Verifier::init(const WeightTable& wt, const ModelGeometry& g, SessionState&
         std::fprintf(stderr, "strata verify trace (#649): on\n");
 #endif
     }
+#if defined(STRATA_USE_DCU)
+    if (const char* path = std::getenv("STRATA_DCU_PROFILE_JSONL"); path != nullptr && path[0] != '\0') {
+        dcu_profile_path_ = path;
+        dcu_layer_timing_.resize((size_t) g.n_layers);
+    }
+#endif
     prof_on_ = std::getenv("STRATA_VERIFY_PROFILE") != nullptr;
     if (prof_on_) {
         const size_t np = (size_t) g.n_layers * kProfPer + 4;
@@ -980,6 +986,9 @@ bool Verifier::init(const WeightTable& wt, const ModelGeometry& g, SessionState&
         const char* v = std::getenv("STRATA_VERIFY_DEVICE_PLAN");
         // (not with set_always_publish: the device table may lag the host's while windows are in flight)
         device_plan_ = !all_resident_ && !always_publish_ && (v != nullptr && std::atoi(v) != 0);
+#if defined(STRATA_USE_DCU)
+        if (dcu_resident_overlap_) device_plan_ = false;
+#endif
     }
     // (halo's STRATA_VERIFY_RESIDENT=1 is this window's all_resident_ graph above, which 0.1.39 has on by default)
     if (g_qfuse() || g_qfuse_hc()) {   // S26: the HC read's q8_1 group counters, zeroed once (each launch leaves them zero)
@@ -990,7 +999,11 @@ bool Verifier::init(const WeightTable& wt, const ModelGeometry& g, SessionState&
             qcnt_ = nullptr;
         }
     }
-    if (all_resident_ || device_plan_) {
+    if (all_resident_ || device_plan_
+#if defined(STRATA_USE_DCU)
+        || dcu_resident_overlap_
+#endif
+    ) {
         bool ok2 = true;
         if (device_plan_)
             ok2 = cudaMalloc((void**) &skip_, 64) == cudaSuccess && cudaMemset(skip_, 0, 64) == cudaSuccess;
@@ -999,7 +1012,12 @@ bool Verifier::init(const WeightTable& wt, const ModelGeometry& g, SessionState&
                   cudaMemcpy(slot_off_d_, hits.slot_off, (size_t) hits.n_slots * sizeof(unsigned long long),
                              cudaMemcpyHostToDevice) == cudaSuccess;
         }
-        if (!ok2) { cudaGetLastError(); all_resident_ = false; device_plan_ = false; }
+        if (!ok2) {
+#if defined(STRATA_USE_DCU)
+            if (dcu_resident_overlap_) { err = "native DCU resident-plan slot offsets do not fit"; return false; }
+#endif
+            cudaGetLastError(); all_resident_ = false; device_plan_ = false;
+        }
     }
     std::fprintf(stderr, "strata verify: window up to %d tokens, %.1f MiB of device buffers%s\n", max_t,
                  (double) count.used / 1048576.0,
@@ -1900,6 +1918,12 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
                           hits_.cache_base, slot_off_d_, (long long) hits_.blob,
                           plan_ + (size_t) grp * (size_t) (plan_i32_ + 16), (long long) max_t_ * K, nullptr, 0, cs, m_plan_err_);
         } else {
+#if defined(STRATA_USE_DCU)
+            if (dcu_resident_overlap_)
+                resident_hits_plan(ids_ + tb * K, n * (int) K, (int) K, hits_.d_res + l * g.n_expert,
+                                   (int) g.n_expert, hits_.cache_base, slot_off_d_, (long long) hits_.blob,
+                                   plan_ + (size_t) grp * (size_t) (plan_i32_ + 16), (long long) max_t_ * K, cs);
+#endif
             if (device_plan_)   // E-6: every routed expert resident: this group's plan without the host
                 resident_plan(ids_ + tb * K, n * (int) K, (int) K, hits_.d_res + l * g.n_expert, (int) g.n_expert,
                               hits_.cache_base, slot_off_d_, (long long) hits_.blob,
@@ -2018,11 +2042,23 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
             }
         };
         bool hits_in_combine = false;
+        bool dcu_mapped_combine = false;
+#if defined(STRATA_USE_DCU)
+        static const bool dcu_fuse = [] { const char* v = std::getenv("STRATA_DCU_FUSE_COMBINE"); return v && std::atoi(v) != 0; }();
+        dcu_mapped_combine = dcu_fuse && dcu_resident_overlap_ && !ar_on() && !prof_on_ && !remote_opt_ && !sg_gated_[grp] &&
+            dec_batch && native_moe_combine_enabled() &&
+            native_moe_combine_hits_supported(m_ymiss_ + (size_t) tb * K * N, shared_ + tb * N, bo_ + tb * N, N, K, n);
+#endif
         if (ar_on()) {
             stamp(l, 19, grp);
             grouped(p_ptr, p_start, p_counts, 0, parts_out);
             stamp(l, 20, grp);
         } else {
+#if defined(STRATA_USE_DCU)
+            if (dcu_resident_overlap_) {
+                // The GPU's resident plan is ready: start hits while the host serves missing experts.
+            } else
+#endif
             if (device_plan_) {   // E-6: skipped when the device planned this group (all its experts resident)
                 wait_flag_ge_or(m_flagA_, ring, skip_ + grp, cs);
                 copy_i32_from_mapped_unless(pl, m_plan_ + (size_t) grp * (size_t) plan_i32_, plan_i32_, skip_ + grp, ring, cs);
@@ -2040,6 +2076,9 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
             stamp(l, 19, grp);
             grouped(p_ptr, p_start, p_counts, 0, hit_out);
             stamp(l, 20, grp);
+#if defined(STRATA_USE_DCU)
+            if (!dcu_resident_overlap_) {
+#endif
             if (device_plan_) wait_flag_ge_or(m_flagB_, ring, skip_ + grp, cs);
             else if (m_bal_ != nullptr)   // set_pcie_balance: the PCIe part starts
                 wait_flag_ge_stamped(m_flagB_, ring, m_bal_ + ((l - lb_) * 2 + grp) * 4 + 1, nullptr, cs);
@@ -2055,12 +2094,18 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
             // pcie_frac 0), so its launch is kPcieGroupRows block rows striding over the groups, not cap of them
             grouped(p_ptr2, p_start2, p_counts + 2, kPcieGroupRows, hit_out);
             stamp(l, 22, grp);
+#if defined(STRATA_USE_DCU)
+            } else {
+                stamp(l, 21, grp);
+                stamp(l, 22, grp);
+            }
+#endif
             if (device_plan_) {   // no CPU share when the device planned the group: its rows are zeros
                 wait_flag_ge_or(m_flag_, ring, skip_ + grp, cs);
                 copy_or_zero_from_mapped(parts_out, m_ymiss_ + (size_t) tb * K * N, (long long) n * K * N,
                                          skip_ + grp, ring, cs);
             } else {
-                const bool fuse_rows = fuse_rows_on() && !prof_on_ && !remote_opt_ && dec_batch && m_bal_ == nullptr;   // 143-amdk
+                const bool fuse_rows = !dcu_mapped_combine && fuse_rows_on() && !prof_on_ && !remote_opt_ && dec_batch && m_bal_ == nullptr;   // 143-amdk
                 if (!fuse_rows) {
                     if (m_bal_ != nullptr)   // set_pcie_balance: ... and ends as it waits for the CPU's rows
                         wait_flag_ge_stamped(m_flag_, ring, m_bal_ + ((l - lb_) * 2 + grp) * 4 + 2, nullptr, cs);
@@ -2068,7 +2113,8 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
                         wait_flag_ge(m_flag_, ring, cs);           // the CPU's share is in the mapped rows
                 }
                 stamp(l, 23, grp);
-                if (remote_opt_)   // #578: the helper's rows come back reduced; skip them as well
+                if (dcu_mapped_combine) { /* combine reads mapped CPU rows directly */ }
+                else if (remote_opt_)   // #578: the helper's rows come back reduced; skip them as well
                     remote_opt_->copy_rows(parts_out, m_ymiss_ + (size_t) tb * K * N, tb, n, p_dst, p_counts + 1, cs);
                 else if (fuse_rows)   // the wait folded into the copy's blocks
                     copy_rows_from_mapped_after(m_flag_, ring, parts_out, m_ymiss_ + (size_t) tb * K * N, (int64_t) n * K, N,
@@ -2083,13 +2129,21 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
             hits_in_combine = fuse_hits_on() && !prof_on_ && !remote_opt_ && !sg_gated_[grp] && dec_batch && n > 1 &&
                               native_moe_combine_enabled() && n <= 8 &&
                               native_moe_combine_hits_supported(parts_ + (size_t) tb * K * N, shared_ + tb * N, bo_ + tb * N, N, K, n);
-            if (!hits_in_combine) moe_hit_add(parts_out, hit_out, p_dst, p_counts + 1, cap, N, cs);
+            if (!hits_in_combine && !dcu_mapped_combine) moe_hit_add(parts_out, hit_out, p_dst, p_counts + 1, cap, N, cs);
         }
         // Same condition as `sh_fork` above, which is per group and out of scope here: wait only when the fork
         // actually ran (a wait on an event never recorded is a no-op, but saying it outright reads better).
         if (sh_stream_on() && !prof_on_ && sh_cs_ != nullptr && ev_fork_ != nullptr && ev_join_ != nullptr) {
             cudaStreamWaitEvent(cs, ev_join_, 0);
         }
+#if defined(STRATA_USE_DCU)
+        if (dcu_mapped_combine) {
+            try {
+                native_moe_combine_mapped(m_ymiss_ + (size_t) tb * K * N, hit_out, p_dst, p_counts + 1,
+                    w_ + tb * K, shared_ + tb * N, bo_ + tb * N, N, K, n, cs);
+            } catch (const std::exception& e) { err = "DCU mapped combine: " + std::string(e.what()); return false; }
+        } else
+#endif
         if (sg_gated_[grp]) {   // STRATA_LFUSE: the shared expert's gate was not applied: the combine applies it (all rows are hits)
             try {
                 native_moe_combine_multi_hits_gated(parts_out, w_ + tb * K, shared_ + tb * N, sh_g_ + tb, bo_ + tb * N, N, K, n, cs);
@@ -2244,7 +2298,46 @@ bool Verifier::record_window(int T, cudaStream_t cs, std::string& err) {
     return true;
 }
 
+#if defined(STRATA_USE_DCU)
+void Verifier::dcu_profile_host(int64_t layer, double wait_ms, double service_ms) {
+    auto& row = dcu_layer_timing_[(size_t) layer];
+    ++row.calls;
+    row.wait_ms += wait_ms;
+    row.service_ms += service_ms;
+    row.wait_max_ms = std::max(row.wait_max_ms, wait_ms);
+    row.service_max_ms = std::max(row.service_max_ms, service_ms);
+}
+
+void Verifier::dcu_profile_dump(const char* phase) {
+    if (dcu_profile_path_.empty() || g_ == nullptr) return;
+    std::FILE* f = std::fopen(dcu_profile_path_.c_str(), "a");
+    if (f == nullptr) {
+        std::fprintf(stderr, "DCU profile: cannot append to %s\n", dcu_profile_path_.c_str());
+        return;
+    }
+    for (int64_t l = lb_; l < le_; ++l) {
+        auto& row = dcu_layer_timing_[(size_t) l];
+        std::fprintf(f, "{\"phase\":\"%s\",\"device\":%d,\"layer\":%lld,\"kind\":\"%s\","
+                        "\"host_calls\":%llu,\"host_wait_ms\":%.9f,\"host_service_ms\":%.9f,"
+                        "\"host_wait_max_ms\":%.9f,\"host_service_max_ms\":%.9f,\"request\":%lld,"
+                        "\"gpu_windows\":%lld,\"gpu_segment_ns\":[",
+                     phase, device_, (long long) l, is_qsa_layer(*g_, l) ? "QSA" : "GDN",
+                     (unsigned long long) row.calls, row.wait_ms, row.service_ms, row.wait_max_ms, row.service_max_ms,
+                     (long long) dcu_profile_request_, (long long) dcu_gpu_windows_);
+        for (int i = 0; i < kProfPer; ++i) std::fprintf(f, "%s%.0f", i ? "," : "", row.gpu_ns[i]);
+        std::fprintf(f, "]}\n");
+        row = DcuLayerTiming{};
+    }
+    std::fclose(f);
+    dcu_gpu_windows_ = 0;
+    if (std::strcmp(phase, "decode") == 0) ++dcu_profile_request_;
+}
+#endif
+
 std::string Verifier::profile_report() {
+#if defined(STRATA_USE_DCU)
+    dcu_profile_dump("decode");
+#endif
     if (!prof_on_ || prof_windows_ == 0) return std::string();
     static const char* names[kProfPer] = {"-", "hc-read0", "q8+qkv/q-idx gemv", "conv", "ab", "z", "rec", "q8+kv-idx",
                                           "k/v+norm-rope", "kv+idx append", "q+q-idx", "scores+topk", "kv-resolve",
@@ -2606,6 +2699,9 @@ void Verifier::accumulate_profile(const unsigned long long* stamps) {
             const unsigned long long x = at(l, i);
             if (x == 0 || x < prev) continue;
             prof_sum_[kind][i] += (double) (x - prev);
+#if defined(STRATA_USE_DCU)
+            if (!dcu_profile_path_.empty()) dcu_layer_timing_[(size_t) l].gpu_ns[i] += (double) (x - prev);
+#endif
             prev = x;
         }
         {   // the FFN-side read split like hc-read0: norm 30, down 31, up 32; what is left of 17 is the router, plan, doorbell
@@ -2617,7 +2713,12 @@ void Verifier::accumulate_profile(const unsigned long long* stamps) {
                 prof_sum_[kind][17] -= gap(at(l, 32), at(l, 16));
             }
         }
-        if (l + 1 < le_) prof_sum_[kind][25] += gap(at(l + 1, 0), at(l, 24));
+        if (l + 1 < le_) {
+            prof_sum_[kind][25] += gap(at(l + 1, 0), at(l, 24));
+#if defined(STRATA_USE_DCU)
+            if (!dcu_profile_path_.empty()) dcu_layer_timing_[(size_t) l].gpu_ns[25] += gap(at(l + 1, 0), at(l, 24));
+#endif
+        }
         const double dn = gap(at(l, 27), at(l, 0)), dd = gap(at(l, 28), at(l, 27)), du = gap(at(l, 1), at(l, 28));
         if (dn > 0 && dd > 0 && du > 0) {   // the split exists: show it split, not twice
             prof_sum_[kind][27] += dn;      // hc-read0: norm
@@ -2626,8 +2727,16 @@ void Verifier::accumulate_profile(const unsigned long long* stamps) {
             prof_sum_[kind][1] -= gap(at(l, 1), at(l, 0));   // (hc-read0 shown split)
         }
     }
-    if (le_ == L) prof_sum_[0][26] += gap(at(L, 1), at(L, 0));
+    if (le_ == L) {
+        prof_sum_[0][26] += gap(at(L, 1), at(L, 0));
+#if defined(STRATA_USE_DCU)
+        if (!dcu_profile_path_.empty()) dcu_layer_timing_[(size_t) L - 1].gpu_ns[26] += gap(at(L, 1), at(L, 0));
+#endif
+    }
     ++prof_windows_;
+#if defined(STRATA_USE_DCU)
+    ++dcu_gpu_windows_;
+#endif
 }
 
 // 0.1.43 (STRATA_ADAPT_OVERLAP): hold the host until the adaptive tier's copies up to `layer` have landed.  The wait
@@ -2906,6 +3015,10 @@ bool Verifier::run(int T, const int32_t* tokens, int64_t pos0, PoolMultiFn pool,
         if (h_bal_ != nullptr) bal_p_[(size_t) ((k / G) * 2 + grp)] = ms_since(b);
         ms_wait += std::chrono::duration<double, std::milli>(b - a).count();
         ms_pool += ms_since(b);
+#if defined(STRATA_USE_DCU)
+        if (!dcu_profile_path_.empty())
+            dcu_profile_host(l, std::chrono::duration<double, std::milli>(b - a).count(), ms_since(b));
+#endif
     }
     // (#646 staged the next stage's inputs here; 0.1.39b keeps the layer split's order: each stage stages its own)
     if (chain) {
@@ -3675,6 +3788,10 @@ bool Verifier::run_slot_rows(const int* rows, int S, const int32_t* tokens, cons
         *flag = want;
         ms_wait += std::chrono::duration<double, std::milli>(b - a).count();
         ms_pool += ms_since(b);
+#if defined(STRATA_USE_DCU)
+        if (!dcu_profile_path_.empty())
+            dcu_profile_host(l, std::chrono::duration<double, std::milli>(b - a).count(), ms_since(b));
+#endif
     }
     const cudaError_t se = cudaStreamSynchronize(cs_);
     if (se != cudaSuccess) { err = std::string("verify batch: ") + cudaGetErrorString(se); return false; }

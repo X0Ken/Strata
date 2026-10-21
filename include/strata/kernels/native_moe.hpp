@@ -34,4 +34,11 @@ void native_moe_combine_multi_hits(const float* hits, const float* weights, cons
 void native_moe_combine_multi_hits_gated(const float* hits, const float* weights, const float* shared,
                                          const float* shared_gate, float* output, int64_t n_embd, int64_t k, int n_tok,
                                          void* stream);
+#if defined(STRATA_USE_DCU)
+// Call after the CPU completion flag is visible on the ordered stream. GPU hit rows in
+// mapped memory need not be initialized: the destination list selects device rows.
+void native_moe_combine_mapped(const float* mapped, const float* hits, const int32_t* dst, const int32_t* count,
+                             const float* weights, const float* shared, float* output, int64_t n_embd,
+                             int64_t k, int n_tok, void* stream);
+#endif
 }

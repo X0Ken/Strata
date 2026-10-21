@@ -1860,6 +1860,21 @@ template<typename F, int NCOLS>
 void wave_launch_n(const void* weights, const void* x_q8_1, float* y, int n_in, int n_out, cudaStream_t s) {
     const auto* w = static_cast<const typename F::Block*>(weights);
     const auto* x = static_cast<const Q81Block*>(x_q8_1);
+#if defined(STRATA_USE_DCU)
+    // Preserve each row's dot and reduction order; reuse an activation across 2/4 rows.
+    // Keep multi-column paths unchanged to avoid excessive register pressure.
+    if constexpr (NCOLS == 1 && std::is_same_v<F, SmallTraits<Q80Block, 8>>) {
+        static const int rows = [] { const char* v = std::getenv("STRATA_DCU_MMVQ_ROWS"); return v ? std::atoi(v) : 1; }();
+        if (rows == 2) {
+            native_mmvq_wave_kernel<F, NCOLS, 2><<<unsigned((std::size_t(n_out) + 7) / 8), 256, 0, s>>>(w, x, y, n_in, n_out);
+            return;
+        }
+        if (rows == 4) {
+            native_mmvq_wave_kernel<F, NCOLS, 4><<<unsigned((std::size_t(n_out) + 15) / 16), 256, 0, s>>>(w, x, y, n_in, n_out);
+            return;
+        }
+    }
+#endif
     constexpr int R = 1;
     const unsigned blocks = unsigned((std::size_t(n_out) + 4 * R - 1) / (4 * R));
     native_mmvq_wave_kernel<F, NCOLS, R><<<blocks, 256, 0, s>>>(w, x, y, n_in, n_out);

@@ -8800,6 +8800,23 @@ int main(int argc, char** argv) {
             if (st == 0) return par == 0 ? ver : ver_b;
             return par == 0 ? stages[(size_t) st - 1]->ver : stages[(size_t) st - 1]->ver_b;
         };
+#if defined(STRATA_USE_DCU)
+        const char* dcu_plan_env = std::getenv("STRATA_DCU_GPU_PLAN");
+        const bool dcu_gpu_plan = dcu_plan_env != nullptr && std::atoi(dcu_plan_env) != 0;
+        if (dcu_gpu_plan) {
+            const char* fs_env = std::getenv("STRATA_FS_SLOTS");
+            const char* tail_env = std::getenv("STRATA_ROUTE_TAIL_SKIP");
+            if (!native_pack || use_mtp || o.batch > 0 || pipe || o.adapt_every != 0 || o.pcie_frac != 0 ||
+                o.peer_device >= 0 || o.expert_cache_remote[0] > 0 ||
+                (fs_env && std::atoi(fs_env) != 0) || (tail_env && std::atoi(tail_env) != 0)) {
+                std::fprintf(stderr, "STRATA_DCU_GPU_PLAN requires a native pack, no drafts/batch/adaptation/helpers, "
+                                     "--pcie-frac 0 and full expert routes\n");
+                return 2;
+            }
+            for (int st = 0; st < n_stages; ++st) stage_ver(st).set_dcu_resident_overlap(true);
+            std::fprintf(stderr, "native DCU: resident plans on device, GPU hits overlap CPU misses\n");
+        }
+#endif
         if (pipe) {
             bool ok_p = true;
             ok_p = cudaStreamCreateWithFlags(&pl_stream[0], cudaStreamNonBlocking) == cudaSuccess;   // the current card
@@ -13721,6 +13738,13 @@ int main(int argc, char** argv) {
                     std::fprintf(stderr, "strata serve: aux cpus %s for this request%s\n", strata::aux_cpus::enabled() ? "ON" : "off",
                                  want && !strata::aux_cpus::enabled() ? " (asked for, but no CPU is spare: see the start-up line)" : "");
             }
+#if defined(STRATA_USE_DCU)
+            if (ver.dcu_resident_overlap() && req_pcie_frac != 0) {
+                std::printf("ERR native DCU device plans require pcie_frac=0\n");
+                std::fflush(stdout);
+                continue;
+            }
+#endif
             ver.pause_pcie_balance(req_pcie_set);   // the measured costs keep across requests
             drive.d.pcie_num = std::max(0, std::min(256, (int) (req_pcie_frac * 256.0 + 0.5)));
             // a layer split: CUDA0's share as asked; a later GPU keeps its own (its link) unless the request sets one
@@ -13954,9 +13978,16 @@ int main(int argc, char** argv) {
             consumed.reserve((size_t) (n + max_new + S));
             for (int64_t i = 0; i < p; ++i) consumed.push_back((int32_t) ids[(size_t) i]);
             const char* finish = "length";
+#if defined(STRATA_USE_DCU)
+            for (int st = 0; st < n_stages; ++st) stage_ver(st).dcu_profile_dump("prefill");
+#endif
             const Clock::time_point d0 = Clock::now();
             // STRATA_DECODE_TIMING=1: where a request's decode time goes (one line per request)
-            static const bool dec_timing = std::getenv("STRATA_DECODE_TIMING") != nullptr;
+            static const bool dec_timing = std::getenv("STRATA_DECODE_TIMING") != nullptr
+#if defined(STRATA_USE_DCU)
+                                           || std::getenv("STRATA_DCU_PROFILE_JSONL") != nullptr
+#endif
+                ;
             struct DecSnap {
                 double wait, pool, host, plan, actq, jobs, run;
                 int64_t misses, entries, hits, pcie;

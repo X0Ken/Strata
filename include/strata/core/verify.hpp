@@ -357,6 +357,12 @@ public:
     /// STRATA_VERIFY_PROFILE=1 - GPU stage times of the windows since the last call (ms per
     /// window), as one line; empty when off.
     std::string profile_report();
+#if defined(STRATA_USE_DCU)
+    // Opt-in per-layer host/GPU timings; no GPU timestamp kernels unless STRATA_VERIFY_PROFILE is set.
+    void dcu_profile_dump(const char* phase);
+    void set_dcu_resident_overlap(bool on) { dcu_resident_overlap_ = on; }
+    bool dcu_resident_overlap() const { return dcu_resident_overlap_; }
+#endif
 
 private:
     RemoteExpertOpt* remote_opt_ = nullptr;
@@ -506,6 +512,18 @@ private:
     std::vector<unsigned long long> prof_h_;
     double prof_sum_[2][kProfPer] = {};   // [GDN / QSA layers][stage]
     int64_t prof_windows_ = 0;
+#if defined(STRATA_USE_DCU)
+    struct DcuLayerTiming {
+        uint64_t calls = 0;
+        double wait_ms = 0, service_ms = 0, wait_max_ms = 0, service_max_ms = 0;
+        double gpu_ns[kProfPer] = {};
+    };
+    bool dcu_resident_overlap_ = false;
+    std::string dcu_profile_path_;
+    std::vector<DcuLayerTiming> dcu_layer_timing_;
+    int64_t dcu_gpu_windows_ = 0, dcu_profile_request_ = 0;
+    void dcu_profile_host(int64_t layer, double wait_ms, double service_ms);
+#endif
 
     const WeightTable* wt_ = nullptr;
     const ModelGeometry* g_ = nullptr;

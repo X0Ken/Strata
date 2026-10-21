@@ -1451,6 +1451,54 @@ void resident_plan(const int32_t* ids, int n_entries, int k, const int32_t* res_
                                                               blob, plan, capx, skip, ring, plan_err);
     check("resident_plan");
 }
+#if defined(STRATA_USE_DCU)
+namespace {
+// Decode usually routes ten entries. A single lane builds the small integer plan without a cross-wave scan.
+// Group order and destination order match ExpertDispatch exactly; no floating-point operation is changed.
+__global__ void resident_hits_plan_kernel(const int32_t* ids, int n, int k, const int32_t* res, int n_expert,
+                                         const uint8_t* cache_base, const unsigned long long* slot_off,
+                                         long long blob, int32_t* pl, long long capx) {
+    int32_t* start = pl + 4;
+    int32_t* dst = start + capx + 1;
+    int32_t* tok = dst + capx;
+    const long long ptr_off = ((4 + (capx + 1) + 2 * capx) + 1) & ~1ll;
+    auto* ptr = (unsigned long long*) (pl + ptr_off);
+    int32_t* start2 = pl + ptr_off + 4 * capx;
+    int groups = 0, entries = 0;
+    for (int i = 0; i < n; ++i) {
+        const int e = ids[i];
+        const int slot = e >= 0 && e < n_expert ? res[e] : -1;
+        if (slot < 0) continue;
+        bool first = true;
+        for (int j = 0; j < i; ++j) if (ids[j] == e) first = false;
+        if (!first) continue;
+        ptr[groups] = (unsigned long long) (cache_base + (slot_off ? slot_off[slot] : (size_t) slot * blob));
+        start[groups++] = entries;
+        for (int j = i; j < n; ++j) {
+            if (ids[j] != e) continue;
+            dst[entries] = j;
+            tok[entries++] = j / k;
+        }
+    }
+    start[groups] = entries;
+    start2[0] = entries;
+    pl[0] = groups;
+    pl[1] = entries;
+    pl[2] = 0;
+}
+}
+void resident_hits_plan(const int32_t* ids, int n_entries, int k, const int32_t* res_layer, int n_expert,
+                        const uint8_t* cache_base, const unsigned long long* slot_off, long long blob,
+                        int32_t* plan, long long capx, void* stream) {
+    if (n_entries < 1 || n_entries > kResidentPlanMax || n_entries > capx || k < 1) {
+        std::fprintf(stderr, "resident_hits_plan: invalid shape\n");
+        std::exit(1);
+    }
+    resident_hits_plan_kernel<<<1, 1, 0, (cudaStream_t) stream>>>(ids, n_entries, k, res_layer, n_expert,
+                                                              cache_base, slot_off, blob, plan, capx);
+    check("resident_hits_plan");
+}
+#endif
 void wait_flag_ge_or(const uint32_t* flag, uint32_t value, const uint32_t* skip, void* stream) {
     wait_flag_ge_or_kernel<<<1, 1, 0, (cudaStream_t) stream>>>(flag, value, skip);
     check("wait_flag_ge_or");

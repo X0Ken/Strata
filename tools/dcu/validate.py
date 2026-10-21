@@ -30,9 +30,11 @@ def main():
     parser.add_argument("--pcie-frac", type=float, default=0)
     parser.add_argument("--workers", type=int, default=8)
     parser.add_argument("--aux-cpus", default="off")
+    parser.add_argument("--chat-bench", action="store_true")
+    parser.add_argument("--reserve-mib", type=int, default=4096)
     options = parser.parse_args()
-    if not 0 <= options.pcie_frac <= 1 or options.workers < 1:
-        parser.error("pcie-frac must be in [0,1] and workers must be positive")
+    if not 0 <= options.pcie_frac <= 1 or options.workers < 1 or options.reserve_mib < 1024:
+        parser.error("pcie-frac must be in [0,1] and workers must be positive; reserve-mib must be >= 1024")
     out = pathlib.Path(options.out).resolve()
     out.mkdir(parents=True, exist_ok=True)
     tokenizer = Tokenizer.from_gguf(options.gguf)
@@ -77,7 +79,7 @@ def main():
                     "--stop-eos", "--eos-ids", ",".join(str(token) for token in eos_ids),
                     "--expert-profile", str(ROOT / "data/expert-profile.bin"),
                     "--resident-budget-gib", "24", "--expert-cache", "auto", "--serve"]
-            args += ["--vram-reserve-mib", "4096"]
+            args += ["--vram-reserve-mib", str(options.reserve_mib)]
             if cards == 2:
                 if options.layout == "layer":
                     args += ["--layer-split", "24", "--split-device", "1"]
@@ -99,7 +101,8 @@ def main():
                 raise RuntimeError("unexpected AMD or NVIDIA math/runtime library in DCU process")
             record({"kind": "configuration", "gpus": cards, "run": run, "args": args,
                     "startup_seconds": time.monotonic() - loading_started, "libraries": libraries,
-                    "environment": {key: child_env[key] for key in ["HIP_VISIBLE_DEVICES", "STRATA_ROUTE_TAIL_SKIP"]},
+                    "environment": {key: value for key, value in child_env.items() if key.startswith("STRATA_") or key == "HIP_VISIBLE_DEVICES"},
+                    "engine_sha256": hashlib.sha256(pathlib.Path(options.engine).read_bytes()).hexdigest(),
                     "engine_info": engine.info})
             resource_stop = threading.Event()
             resources = {"kind": "resources", "gpus": cards, "run": run, "rss_peak_bytes": 0,
@@ -177,6 +180,9 @@ def main():
                         raise RuntimeError("benchmark output length or cold-prompt gate failed")
                     if int(engine.last.get("drafts_offered") or 0) != 0:
                         raise RuntimeError("unexpected speculative draft tokens in the baseline")
+                if options.chat_bench:
+                    from chat_bench import run_chat_bench
+                    run_chat_bench(engine, tokenizer, template, lambda row: record(dict(row, gpus=cards)))
             finally:
                 resource_stop.set()
                 monitor.join(timeout=3)

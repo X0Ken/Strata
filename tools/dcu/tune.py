@@ -42,6 +42,9 @@ def main():
     parser.add_argument('--repeats', type=int, choices=[1, 2, 3], default=3)
     parser.add_argument('--output-tokens', type=int, default=128)
     parser.add_argument('--aux-cpus', default='off', help='upstream auxiliary thread CPU placement')
+    parser.add_argument('--chat-bench', action='store_true', help='also measure code, English and Chinese prompts')
+    parser.add_argument('--reserve-mib', type=int, help='override saved VRAM reserve')
+    parser.add_argument('--warmup', action='store_true', help='record an untimed 128-token prompt before scoring')
     parser.add_argument('--profile', action='store_true', help='diagnostic kernels change execution; not a speed score')
     options = parser.parse_args()
     fractions = [float(x) for x in options.fractions.split(',')]
@@ -55,6 +58,10 @@ def main():
     args = list(configuration['args'])
     args[args.index('--pool-workers') + 1] = str(options.workers)
     args += ['--aux-cpus', options.aux_cpus]
+    if options.reserve_mib is not None:
+        if options.reserve_mib < 1024:
+            parser.error('reserve-mib must be at least 1024')
+        args[args.index('--vram-reserve-mib') + 1] = str(options.reserve_mib)
     if options.mode != 'layer':
         if options.gpus != 2:
             parser.error('helper/peer modes require two visible GPUs')
@@ -95,7 +102,9 @@ def main():
     try:
         record({'kind': 'configuration', 'args': args, 'engine_info': engine.info,
                 'fractions': fractions, 'lengths': lengths, 'repeats': options.repeats,
-                'pid': engine.proc.pid, 'cpu_affinity': thread_affinity(engine.proc.pid)})
+                'pid': engine.proc.pid, 'cpu_affinity': thread_affinity(engine.proc.pid),
+                'optimization_env': {k: v for k, v in env.items() if k.startswith('STRATA_')},
+                'engine_sha256': hashlib.sha256(pathlib.Path(options.engine).read_bytes()).hexdigest()})
         # Check readable answers at every split before timing it; routed experts are never dropped.
         for fraction in fractions:
             for prompt, expected in [('What is 17 + 25? Reply only with the number.', '42'),
@@ -108,6 +117,11 @@ def main():
                 record({'kind': 'functional', 'pcie_frac': fraction, 'expected': expected, 'answer': answer, 'passed': passed})
                 if not passed:
                     raise RuntimeError('expert split failed answer check')
+        if options.warmup:
+            warm = next(x for x in json.loads((baseline / 'benchmark-inputs.json').read_text()) if x['prompt_tokens'] == 128)
+            ids = tokenizer.encode('Z') + warm['ids'][1:]
+            tokens = [token for token in engine.generate(ids, 16, {'temperature': 0, 'seed': 123, 'logit_bias': bias}, threading.Event()) if token is not None]
+            record({'kind': 'warmup', 'prompt_tokens': len(ids), 'output_tokens': len(tokens), 'engine': engine.last})
         # Rotate order between repeats so clock/cache drift does not always favor the same split.
         for repeat in range(1, options.repeats + 1):
             order = fractions[repeat - 1:] + fractions[:repeat - 1]
@@ -136,6 +150,9 @@ def main():
                         raise RuntimeError('benchmark length or cold-prompt check failed')
                     if int(engine.last.get('drafts_offered') or 0):
                         raise RuntimeError('unexpected speculative tokens')
+        if options.chat_bench:
+            from chat_bench import run_chat_bench
+            run_chat_bench(engine, tokenizer, template, record)
     finally:
         engine.close()
     (out / 'tuning.done').write_text(time.strftime('%F %T') + '\n')
