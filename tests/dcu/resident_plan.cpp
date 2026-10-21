@@ -12,7 +12,7 @@ static void check(cudaError_t status) {
     if (status != cudaSuccess) { std::fprintf(stderr, "%s\n", cudaGetErrorString(status)); std::exit(1); }
 }
 
-int main() {
+int main(int argc, char** argv) {
     constexpr int cap = 80, experts = 32, stride = 512, words = 1024;
     int32_t *ids_d = nullptr, *res_d = nullptr, *plan_d = nullptr;
     unsigned long long* offsets_d = nullptr;
@@ -65,6 +65,28 @@ int main() {
             std::memcpy(&pointer, got.data() + po + 2 * i, sizeof pointer);
             if (pointer != ptrs[i]) { std::fprintf(stderr, "plan pointer mismatch\n"); return 1; }
         }
+    }
+    if (argc == 2 && std::strcmp(argv[1], "--bench") == 0) {
+        cudaEvent_t begin, end;
+        check(cudaEventCreate(&begin)); check(cudaEventCreate(&end));
+        std::vector<int32_t> ids(cap), res(experts);
+        for (int i = 0; i < experts; ++i) res[i] = i % 5 ? i : -1;
+        for (int i = 0; i < cap; ++i) ids[i] = i % experts;
+        check(cudaMemcpy(ids_d, ids.data(), cap * sizeof(int32_t), cudaMemcpyHostToDevice));
+        check(cudaMemcpy(res_d, res.data(), experts * sizeof(int32_t), cudaMemcpyHostToDevice));
+        for (int n : {10, 40, 80}) {
+            auto launch = [&] { strata::kernels::resident_hits_plan(ids_d, n, 10, res_d, experts,
+                cache, offsets_d, stride, plan_d, cap, nullptr); };
+            for (int i = 0; i < 32; ++i) launch();
+            check(cudaEventRecord(begin, nullptr));
+            for (int i = 0; i < 512; ++i) launch();
+            check(cudaEventRecord(end, nullptr)); check(cudaEventSynchronize(end));
+            float ms = 0; check(cudaEventElapsedTime(&ms, begin, end));
+            const char* par = std::getenv("STRATA_DCU_PAR_PLAN");
+            std::printf("{\"entries\":%d,\"parallel\":%d,\"iterations\":512,\"us\":%.6f}\n",
+                n, par ? std::atoi(par) != 0 : 0, ms * 1000 / 512);
+        }
+        check(cudaEventDestroy(end)); check(cudaEventDestroy(begin));
     }
     check(cudaFree(cache)); check(cudaFree(offsets_d)); check(cudaFree(plan_d)); check(cudaFree(res_d)); check(cudaFree(ids_d));
     std::puts("PASS 128 resident/missing/duplicate/invalid-id plans, 1..8 rows, fixed/variable slot offsets");

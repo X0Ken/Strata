@@ -1486,6 +1486,59 @@ __global__ void resident_hits_plan_kernel(const int32_t* ids, int n, int k, cons
     pl[1] = entries;
     pl[2] = 0;
 }
+// One lane per routed entry. Shared scans preserve first-occurrence group order and
+// increasing destination order even when some entries are missing or invalid.
+__global__ void resident_hits_plan_parallel_kernel(const int32_t* ids, int n, int k, const int32_t* res,
+        int n_expert, const uint8_t* cache_base, const unsigned long long* slot_off,
+        long long blob, int32_t* pl, long long capx) {
+    __shared__ int s_id[kResidentPlanMax], s_slot[kResidentPlanMax];
+    __shared__ int s_first[kResidentPlanMax], s_size[kResidentPlanMax];
+    const int i = threadIdx.x;
+    int e = -1, slot = -1;
+    if (i < n) {
+        e = ids[i];
+        slot = e >= 0 && e < n_expert ? res[e] : -1;
+        s_id[i] = e;
+        s_slot[i] = slot;
+    }
+    __syncthreads();
+    int first = i, rank = 0, size = 0;
+    if (i < n && slot >= 0) {
+        for (int j = 0; j < n; ++j) {
+            const bool same = s_id[j] == e;
+            if (same && j < first) first = j;
+            rank += same && j < i;
+            size += same;
+        }
+    }
+    if (i < n) { s_first[i] = first; s_size[i] = size; }
+    __syncthreads();
+    int32_t* start = pl + 4;
+    int32_t* dst = start + capx + 1;
+    int32_t* tok = dst + capx;
+    const long long ptr_off = ((4 + (capx + 1) + 2 * capx) + 1) & ~1ll;
+    auto* ptr = (unsigned long long*) (pl + ptr_off);
+    int32_t* start2 = pl + ptr_off + 4 * capx;
+    if (i < n && slot >= 0) {
+        int group = 0, gstart = 0;
+        for (int j = 0; j < first; ++j)
+            if (s_slot[j] >= 0 && s_first[j] == j) { ++group; gstart += s_size[j]; }
+        if (i == first) {
+            ptr[group] = (unsigned long long) (cache_base + (slot_off ? slot_off[slot] : (size_t) slot * blob));
+            start[group] = gstart;
+        }
+        dst[gstart + rank] = i;
+        tok[gstart + rank] = i / k;
+    }
+    if (i == 0) {
+        int groups = 0, entries = 0;
+        for (int j = 0; j < n; ++j)
+            if (s_slot[j] >= 0 && s_first[j] == j) { ++groups; entries += s_size[j]; }
+        start[groups] = entries;
+        start2[0] = entries;
+        pl[0] = groups; pl[1] = entries; pl[2] = 0;
+    }
+}
 }
 void resident_hits_plan(const int32_t* ids, int n_entries, int k, const int32_t* res_layer, int n_expert,
                         const uint8_t* cache_base, const unsigned long long* slot_off, long long blob,
@@ -1494,8 +1547,13 @@ void resident_hits_plan(const int32_t* ids, int n_entries, int k, const int32_t*
         std::fprintf(stderr, "resident_hits_plan: invalid shape\n");
         std::exit(1);
     }
-    resident_hits_plan_kernel<<<1, 1, 0, (cudaStream_t) stream>>>(ids, n_entries, k, res_layer, n_expert,
-                                                              cache_base, slot_off, blob, plan, capx);
+    static const bool parallel = [] { const char* v = std::getenv("STRATA_DCU_PAR_PLAN"); return v && std::atoi(v) != 0; }();
+    if (parallel)
+        resident_hits_plan_parallel_kernel<<<1, kResidentPlanMax, 0, (cudaStream_t) stream>>>(
+            ids, n_entries, k, res_layer, n_expert, cache_base, slot_off, blob, plan, capx);
+    else
+        resident_hits_plan_kernel<<<1, 1, 0, (cudaStream_t) stream>>>(ids, n_entries, k, res_layer, n_expert,
+                                                                  cache_base, slot_off, blob, plan, capx);
     check("resident_hits_plan");
 }
 #endif
