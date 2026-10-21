@@ -1,0 +1,98 @@
+[
+  {
+    "engine": "Strata 单卡",
+    "prompt_tokens": 128,
+    "samples": 3,
+    "prefill_tps": 76.4,
+    "decode_tps": 10.9,
+    "ttft_seconds": 1.7628914937376976
+  },
+  {
+    "engine": "Strata 单卡",
+    "prompt_tokens": 512,
+    "samples": 3,
+    "prefill_tps": 75.3,
+    "decode_tps": 10.8,
+    "ttft_seconds": 6.8901273012161255
+  },
+  {
+    "engine": "Strata 单卡",
+    "prompt_tokens": 1024,
+    "samples": 3,
+    "prefill_tps": 72.6,
+    "decode_tps": 10.9,
+    "ttft_seconds": 14.196545571088791
+  },
+  {
+    "engine": "Strata 单卡",
+    "prompt_tokens": 2048,
+    "samples": 3,
+    "prefill_tps": 70.1,
+    "decode_tps": 11.1,
+    "ttft_seconds": 29.327893428504467
+  },
+  {
+    "engine": "Strata 双卡",
+    "prompt_tokens": 128,
+    "samples": 3,
+    "prefill_tps": 115.9,
+    "decode_tps": 17.2,
+    "ttft_seconds": 1.159976214170456
+  },
+  {
+    "engine": "Strata 双卡",
+    "prompt_tokens": 512,
+    "samples": 3,
+    "prefill_tps": 182.1,
+    "decode_tps": 17.1,
+    "ttft_seconds": 2.8738583773374557
+  },
+  {
+    "engine": "Strata 双卡",
+    "prompt_tokens": 1024,
+    "samples": 3,
+    "prefill_tps": 200.7,
+    "decode_tps": 17.1,
+    "ttft_seconds": 5.166446998715401
+  },
+  {
+    "engine": "Strata 双卡",
+    "prompt_tokens": 2048,
+    "samples": 3,
+    "prefill_tps": 210.2,
+    "decode_tps": 17.0,
+    "ttft_seconds": 9.808830805122852
+  },
+  {
+    "engine": "llama.cpp 双卡",
+    "prompt_tokens": 128,
+    "samples": 3,
+    "prefill_tps": 55.07430082529701,
+    "decode_tps": 17.862065473611963,
+    "ttft_seconds": 2.4832218810915947
+  },
+  {
+    "engine": "llama.cpp 双卡",
+    "prompt_tokens": 512,
+    "samples": 3,
+    "prefill_tps": 77.43945240627217,
+    "decode_tps": 18.130577561682866,
+    "ttft_seconds": 6.852094955742359
+  },
+  {
+    "engine": "llama.cpp 双卡",
+    "prompt_tokens": 1024,
+    "samples": 3,
+    "prefill_tps": 82.5748049916147,
+    "decode_tps": 17.55457572456511,
+    "ttft_seconds": 12.657740540802479
+  },
+  {
+    "engine": "llama.cpp 双卡",
+    "prompt_tokens": 2048,
+    "samples": 3,
+    "prefill_tps": 83.78837347947423,
+    "decode_tps": 17.78064010304371,
+    "ttft_seconds": 24.6927435323596
+  }
+]

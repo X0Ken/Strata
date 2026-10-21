@@ -1,6 +1,30 @@
-> **Hygon Z100L / 海光 DCU fork:** 原生 DTK 25.04 + rocBLAS 后端已在单卡、双卡验证。
-> 构建、限制及当前实测性能见 [DCU 文档](docs/DCU.md)，原始数据见
-> [Z100L 测试记录](bench/results/2026-10-21-hygon-z100l/)。DCU 请手动构建；下面的上游安装包尚未适配 DCU。
+# Strata for Hygon Z100L
+
+本 fork 提供 **海光 DTK 25.04 原生后端**：`STRATA_ENABLE_DCU=ON`，直接使用 `libgalaxyhip` 和 rocBLAS。
+复用 HIP 源码接口与 wave64 内核，不依赖 AMD ROCm 运行库、hipBLAS 或设备型号伪装。
+DCU 目前通过源码手动构建；下面保留的上游桌面安装包和一键安装器尚未适配 DCU。
+
+2026-10-21 实测：Hygon Z100L 32 GiB × 2，16 vCPU / 62.8 GiB RAM 的 KVM 节点，
+Qwen3.8-Flash-Next **UD-Q3_K_XL**，4096 上下文、prefill 128，无推测解码，完整专家路由。
+单卡数据来自同一节点限制可见卡。每项取三次中位数，每次输出 128 token，输入无前缀缓存复用。
+
+| 方案 | 卡数 | 2048 token 预填充 token/s | 512 token 输入后的生成 token/s |
+| --- | ---: | ---: | ---: |
+| Strata 单卡 | 1 | 70.1 | 10.8 |
+| Strata 双卡 | 2 | 210.2 | 17.1 |
+| llama.cpp 双卡 | 2 | 83.8 | 18.1 |
+
+主要瓶颈是共享专家的逐层跨流事件同步。关闭该分支后，同批对照的双卡生成从约 10.2 提升到 16.5–17.5 token/s；
+新默认配置完整复测为 **17.0–17.2 token/s**。相比本次 llama.cpp 对照，预填充更快，生成仍略慢。
+两种方案的模型打包不同，Strata 的兼容打包存在部分 BF16 舍入，不能视为位级相同模型的纯调度消融。
+
+当前代码通过两张卡各 17 项选定算子测试、42 次功能请求和重复/重启检查，以及 2 次 HTTP 请求（含 2435 token 输入）。
+这不代表完整质量评测或长期压力测试。构建、运行参数、限制与全部长度的跑分见 **[DCU 文档](docs/DCU.md)**；
+原始记录见 [测试数据](bench/results/2026-10-21-hygon-z100l/optimization/)。代码与记录均在本 fork 的 `main`。
+
+---
+
+以下为上游项目介绍。
 
 <p align="center">
   <picture>

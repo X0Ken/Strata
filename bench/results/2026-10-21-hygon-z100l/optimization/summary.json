@@ -1,0 +1,359 @@
+{
+  "date": "2026-10-21",
+  "sweep_runtime_commit": "bbff78956a08ce218e84b8d44fe2adee2acfe901",
+  "scheduling_fix_commit": "06e3213a",
+  "updated_validation_tools_commit": "1dad29d5024eb441a70f2862af55efc145f51590",
+  "final_binary_sha256": "b2aa6a034d2a7e0b593487194a311adc63ba12cfeedd8b4c2116d8868d5e21be",
+  "unprofiled_sweep_samples": 88,
+  "diagnostic_samples": 2,
+  "functional_requests": 36,
+  "unprofiled_output_sha256": "d819212e973ff046f2eb15a1327f876a89d20d2106fa165962a36af5318385ee",
+  "notes": [
+    "All sweeps used the previous binary with explicit environment scheduling overrides, then the default was fixed in source.",
+    "First sweep had shared stream enabled by its old default; new tune.py can reproduce it with --shared-stream 1.",
+    "Profiles disable the shared stream and add timestamp kernels; do not use profile throughput as a speed result.",
+    "All routed experts computed, no speculative drafts, cache_n=0, 128 output tokens except diagnostic 32-token samples.",
+    "Each non-profiled sample across all non-profiled variants has the same output token hash for this repetitive synthetic corpus; this is not a general quality proof.",
+    "Automatic expert cache sizes can vary slightly between process starts; complete actual sizes are recorded in configuration rows."
+  ],
+  "summary": [
+    {
+      "variant": "tune-helper-w8-aux",
+      "pcie_frac": 0.0,
+      "prompt_tokens": 128,
+      "samples": 2,
+      "median_prefill_tps": 46.400000000000006,
+      "median_decode_tps": 14.8,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-helper-w8-aux",
+      "pcie_frac": 0.0,
+      "prompt_tokens": 2048,
+      "samples": 2,
+      "median_prefill_tps": 65.85,
+      "median_decode_tps": 14.9,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-helper-w8-aux",
+      "pcie_frac": 1.0,
+      "prompt_tokens": 128,
+      "samples": 2,
+      "median_prefill_tps": 71.75,
+      "median_decode_tps": 14.65,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-helper-w8-aux",
+      "pcie_frac": 1.0,
+      "prompt_tokens": 2048,
+      "samples": 2,
+      "median_prefill_tps": 66.80000000000001,
+      "median_decode_tps": 14.5,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-pcie-w8",
+      "pcie_frac": 0.0,
+      "prompt_tokens": 128,
+      "samples": 3,
+      "median_prefill_tps": 105.4,
+      "median_decode_tps": 10.2,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-pcie-w8",
+      "pcie_frac": 0.0,
+      "prompt_tokens": 2048,
+      "samples": 3,
+      "median_prefill_tps": 185.4,
+      "median_decode_tps": 10.2,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-pcie-w8",
+      "pcie_frac": 0.25,
+      "prompt_tokens": 128,
+      "samples": 3,
+      "median_prefill_tps": 107.4,
+      "median_decode_tps": 10.2,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-pcie-w8",
+      "pcie_frac": 0.25,
+      "prompt_tokens": 2048,
+      "samples": 3,
+      "median_prefill_tps": 183.1,
+      "median_decode_tps": 10.0,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-pcie-w8",
+      "pcie_frac": 0.55,
+      "prompt_tokens": 128,
+      "samples": 3,
+      "median_prefill_tps": 106.9,
+      "median_decode_tps": 9.8,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-pcie-w8",
+      "pcie_frac": 0.55,
+      "prompt_tokens": 2048,
+      "samples": 3,
+      "median_prefill_tps": 184.6,
+      "median_decode_tps": 9.7,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-pcie-w8",
+      "pcie_frac": 1.0,
+      "prompt_tokens": 128,
+      "samples": 3,
+      "median_prefill_tps": 106.0,
+      "median_decode_tps": 9.2,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-pcie-w8",
+      "pcie_frac": 1.0,
+      "prompt_tokens": 2048,
+      "samples": 3,
+      "median_prefill_tps": 185.2,
+      "median_decode_tps": 9.2,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-pcie-w8-aux",
+      "pcie_frac": 0.0,
+      "prompt_tokens": 128,
+      "samples": 3,
+      "median_prefill_tps": 106.1,
+      "median_decode_tps": 10.0,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-pcie-w8-aux",
+      "pcie_frac": 0.0,
+      "prompt_tokens": 2048,
+      "samples": 3,
+      "median_prefill_tps": 186.6,
+      "median_decode_tps": 10.1,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-pcie-w8-aux",
+      "pcie_frac": 0.25,
+      "prompt_tokens": 128,
+      "samples": 3,
+      "median_prefill_tps": 107.7,
+      "median_decode_tps": 10.0,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-pcie-w8-aux",
+      "pcie_frac": 0.25,
+      "prompt_tokens": 2048,
+      "samples": 3,
+      "median_prefill_tps": 184.8,
+      "median_decode_tps": 10.1,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-pcie-w8-aux",
+      "pcie_frac": 0.55,
+      "prompt_tokens": 128,
+      "samples": 3,
+      "median_prefill_tps": 106.8,
+      "median_decode_tps": 9.9,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-pcie-w8-aux",
+      "pcie_frac": 0.55,
+      "prompt_tokens": 2048,
+      "samples": 3,
+      "median_prefill_tps": 185.4,
+      "median_decode_tps": 10.0,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-pcie-w8-aux",
+      "pcie_frac": 1.0,
+      "prompt_tokens": 128,
+      "samples": 3,
+      "median_prefill_tps": 107.5,
+      "median_decode_tps": 9.2,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-pcie-w8-aux",
+      "pcie_frac": 1.0,
+      "prompt_tokens": 2048,
+      "samples": 3,
+      "median_prefill_tps": 184.8,
+      "median_decode_tps": 9.2,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-peer-w8-aux",
+      "pcie_frac": 0.0,
+      "prompt_tokens": 128,
+      "samples": 2,
+      "median_prefill_tps": 81.5,
+      "median_decode_tps": 15.600000000000001,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-peer-w8-aux",
+      "pcie_frac": 0.0,
+      "prompt_tokens": 2048,
+      "samples": 2,
+      "median_prefill_tps": 126.55,
+      "median_decode_tps": 15.75,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-peer-w8-aux",
+      "pcie_frac": 1.0,
+      "prompt_tokens": 128,
+      "samples": 2,
+      "median_prefill_tps": 122.30000000000001,
+      "median_decode_tps": 15.950000000000001,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-peer-w8-aux",
+      "pcie_frac": 1.0,
+      "prompt_tokens": 2048,
+      "samples": 2,
+      "median_prefill_tps": 128.65,
+      "median_decode_tps": 15.9,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-profile-w8-aux",
+      "pcie_frac": 0.0,
+      "prompt_tokens": 128,
+      "samples": 1,
+      "median_prefill_tps": 25.7,
+      "median_decode_tps": 14.1,
+      "diagnostic_only": true
+    },
+    {
+      "variant": "tune-profile-w8-aux",
+      "pcie_frac": 1.0,
+      "prompt_tokens": 128,
+      "samples": 1,
+      "median_prefill_tps": 112.0,
+      "median_decode_tps": 13.7,
+      "diagnostic_only": true
+    },
+    {
+      "variant": "tune-shoff-w8",
+      "pcie_frac": 0.0,
+      "prompt_tokens": 128,
+      "samples": 3,
+      "median_prefill_tps": 115.5,
+      "median_decode_tps": 17.5,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-shoff-w8",
+      "pcie_frac": 0.0,
+      "prompt_tokens": 2048,
+      "samples": 3,
+      "median_prefill_tps": 209.1,
+      "median_decode_tps": 16.5,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-shoff-w8",
+      "pcie_frac": 1.0,
+      "prompt_tokens": 128,
+      "samples": 3,
+      "median_prefill_tps": 116.3,
+      "median_decode_tps": 16.2,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-shoff-w8",
+      "pcie_frac": 1.0,
+      "prompt_tokens": 2048,
+      "samples": 3,
+      "median_prefill_tps": 209.3,
+      "median_decode_tps": 16.6,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-shoff-w8-aux",
+      "pcie_frac": 0.0,
+      "prompt_tokens": 128,
+      "samples": 3,
+      "median_prefill_tps": 115.6,
+      "median_decode_tps": 17.5,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-shoff-w8-aux",
+      "pcie_frac": 0.0,
+      "prompt_tokens": 2048,
+      "samples": 3,
+      "median_prefill_tps": 210.8,
+      "median_decode_tps": 17.6,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-shoff-w8-aux",
+      "pcie_frac": 1.0,
+      "prompt_tokens": 128,
+      "samples": 3,
+      "median_prefill_tps": 115.9,
+      "median_decode_tps": 16.0,
+      "diagnostic_only": false
+    },
+    {
+      "variant": "tune-shoff-w8-aux",
+      "pcie_frac": 1.0,
+      "prompt_tokens": 2048,
+      "samples": 3,
+      "median_prefill_tps": 210.6,
+      "median_decode_tps": 16.2,
+      "diagnostic_only": false
+    }
+  ],
+  "timing_medians_ms": {
+    "tune-helper-w8-aux": {
+      "window": 67.155,
+      "gpu_reach_wait_first_stage": 23.505000000000003,
+      "cpu_first_stage": 9.83
+    },
+    "tune-pcie-w8": {
+      "window": 98.145,
+      "gpu_reach_wait_first_stage": 33.025000000000006,
+      "cpu_first_stage": 10.275
+    },
+    "tune-pcie-w8-aux": {
+      "window": 99.23,
+      "gpu_reach_wait_first_stage": 34.67,
+      "cpu_first_stage": 10.335
+    },
+    "tune-peer-w8-aux": {
+      "window": 63.519999999999996,
+      "gpu_reach_wait_first_stage": 23.450000000000003,
+      "cpu_first_stage": 6.9399999999999995
+    },
+    "tune-shoff-w8": {
+      "window": 58.195,
+      "gpu_reach_wait_first_stage": 12.145,
+      "cpu_first_stage": 10.02
+    },
+    "tune-shoff-w8-aux": {
+      "window": 57.065,
+      "gpu_reach_wait_first_stage": 12.215,
+      "cpu_first_stage": 10.145
+    }
+  }
+}
